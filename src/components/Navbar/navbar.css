@@ -1,15 +1,14 @@
 nav {
-  background: rgba(0, 0, 0, 0.2);
-  width: 90%;
+  background: rgba(35, 35, 35, 0.4);
+  width: 100%;
   padding: 0.7rem 1.7rem;
   z-index: 2;
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: 1rem;
+  top: 0rem;
   display: flex;
   gap: 0.8rem;
-  border-radius: 0.5rem;
   backdrop-filter: blur(15px);
   justify-content: space-between;
 }
@@ -23,20 +22,25 @@ nav {
 .link {
   background: transparent;
 
+  color: var(--color-lighter);
   border-radius: 50%;
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--color-light);
+
   font-size: 1.2rem;
 }
 
 .link:hover {
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 .active {
-  color: var(--color-black);
+  color: var(--color-withe);
+}
+
+.logo {
+  width: 10rem;
 }
 
 /* ================ MEDIA QUERIES (MEDIUM DEVICES) ================= */
@@ -50,6 +54,10 @@ nav {
 @media screen and (max-width: 600px) {
   .links {
     gap: 1rem;
+  }
+
+  .logo {
+    display: none;
   }
 
   .navLogo {

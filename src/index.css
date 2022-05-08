@@ -14,10 +14,11 @@
   --color-bg: #ffffff;
   --color-bg-variant: #282828;
   --color-primary: rgba(42, 46, 51, 0.875);
-  --color-primary-variant: rgba(18, 19, 20, 0.4);
-  --color-white: #fff;
-  --color-black: "black";
-  --color-light: rgba(73, 72, 72, 0.6);
+  --color-primary-variant: rgba(47, 53, 58, 0.875);
+  --color-withe: #fff;
+  --color-black: rgb(0, 0, 0);
+  --color-light: rgba(103, 110, 117, 0.875);
+  --color-lighter: rgb(200, 206, 214);
 
   --transition: all 400ms ease;
 
@@ -60,7 +61,7 @@ h1 {
 }
 
 section {
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 a {
@@ -72,12 +73,6 @@ a:hover {
   color: var(--color-white);
 }
 
-img {
-  display: block;
-  width: 100%;
-  object-fit: cover;
-}
-
 /* ================ MEDIA QUERIES (MEDIUM DEVICES) ================= */
 @media screen and (max-width: 1024px) {
   .container {
@@ -85,7 +80,7 @@ img {
   }
 
   section {
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
 }
 
@@ -97,5 +92,8 @@ img {
 
   section > h2 {
     margin-bottom: 2rem;
+  }
+  section {
+    margin-top: 3.5rem;
   }
 }
