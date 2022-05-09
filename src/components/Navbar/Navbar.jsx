@@ -8,7 +8,7 @@ import { AuthContext } from "../../AuthProvider";
 import Logo from "../../assets/logo_all-in-qr-livetag-withe.svg";
 
 export default function Navbar() {
-  const { logged, setLogged } = useContext(AuthContext);
+  const { logged, setLogged, disconnect } = useContext(AuthContext);
   const [activeNav, setActiveNav] = useState("#home");
   return (
     <nav>
@@ -41,8 +41,22 @@ export default function Navbar() {
           </Link>
         </div>
       )}
-      {!logged && <Button variant="contained">Login</Button>}
-      {logged && <Button variant="outlined">Logout</Button>}
+      {!logged && (
+        <Link to="/login">
+          <Button variant="contained">Login</Button>
+        </Link>
+      )}
+      {logged && (
+        <Link
+          to="/"
+          onClick={() => {
+            disconnect();
+            setActiveNav("#");
+          }}
+        >
+          <Button variant="outlined">Logout</Button>
+        </Link>
+      )}
     </nav>
   );
 }
