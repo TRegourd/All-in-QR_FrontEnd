@@ -7,7 +7,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
+
 import EventDetails from "./pages/EventDetails/EventDetails";
+
+import Signin from "./pages/Signin/Signin";
+
 
 function App() {
   const { logged, setLogged } = useContext(AuthContext);
@@ -20,7 +24,11 @@ function App() {
         <Route element={<Dashboard />} path="/dashboard" exact />
         <Route element={<Profile />} path="/profile" exact />
         <Route element={<Login />} path="/login" exact />
+
         <Route element={<EventDetails />} path="/:eventID" />
+
+        <Route element={<Signin />} path="/signin" exact />
+
       </Routes>
     </>
   );
