@@ -21,9 +21,7 @@ export default function Reset() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(body);
     const id = props.id;
-    console.log(id);
     authServices
       .reset(body, id)
       .then((result) => {
