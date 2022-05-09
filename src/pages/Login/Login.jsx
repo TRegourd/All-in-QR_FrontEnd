@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
 import styled, { css } from "styled-components";
+import authServices from "../../services/auth";
 
 export default function Login() {
   const { logged, setLogged } = useContext(AuthContext);
@@ -18,20 +19,20 @@ export default function Login() {
 
   function handleSubmit(e) {
     console.log(body);
-    //   e.preventDefault();
-    //   services
-    //     .login(body)
-    //     .then((result) => {
-    //       const { jwt } = result.data;
-    //       localStorage.setItem("jwt", jwt);
-    //       setLogged(true);
-    //       alert("successfully logged");
-    //       navigate("/");
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       alert("incorrect login");
-    //     });
+    e.preventDefault();
+    authServices
+      .login(body)
+      .then((result) => {
+        const { jwt } = result.data;
+        localStorage.setItem("jwt", jwt);
+        setLogged(true);
+        alert("successfully logged");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("incorrect login");
+      });
   }
 
   function updateBody(key, value) {
