@@ -3,35 +3,33 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import authServices from "../../services/auth";
 
-export default function Login() {
+export default function Reset() {
   const { logged, setLogged } = useContext(AuthContext);
   const [body, setBody] = useState({
-    email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const navigate = useNavigate();
+  const props = useParams();
+  console.log(props);
 
   function handleSubmit(e) {
-    console.log(body);
     e.preventDefault();
+    const id = props.id;
     authServices
-      .login(body)
+      .reset(body, id)
       .then((result) => {
-        const { jwt } = result.data;
-        localStorage.setItem("jwt", jwt);
-        setLogged(true);
-        alert("successfully logged");
-        navigate("/");
+        console.log(result);
       })
       .catch((err) => {
         console.log(err);
-        alert("incorrect login");
+        alert("incorrect");
       });
   }
 
@@ -57,15 +55,8 @@ export default function Login() {
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
-        <h1>Login</h1>
+        <h1>Forget Password</h1>
         <div>
-          <TextField
-            required
-            id="outlined-email-required"
-            label="Email"
-            type="email"
-            name="email"
-          />
           <TextField
             id="outlined-password-input"
             label="Password"
@@ -73,17 +64,20 @@ export default function Login() {
             autoComplete="current-password"
             name="password"
           />
+          <TextField
+            id="outlined-confirmPassword-input"
+            label="Confirm Password"
+            type="password"
+            autoComplete="current-password"
+            name="confirmPassword"
+          />
         </div>
         <Button type="submit" variant="outlined">
-          Login
+          Reset Password
         </Button>
         <br />
         <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
-          Dont' have account yet ? <Link to="/signin">{"Sign in"}</Link>
-        </div>
-        <br />
-        <div className="signinToLoginLink">
-          Forgot your passwrod ? <Link to="/forgot">{"Reset Password"}</Link>
+          Go back to <Link to="/login">{"Log in"}</Link>
         </div>
       </Box>
     </Container>

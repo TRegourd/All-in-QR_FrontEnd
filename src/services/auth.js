@@ -13,6 +13,15 @@ const authServices = {
   signin(body) {
     return base.post("/auth/signin", body);
   },
+
+  forgot(body) {
+    return base.post("/auth/forgot", body);
+  },
+
+  reset(body, id) {
+    console.log(id);
+    return base.put(`/auth/reset/${id}`, body);
+  },
 };
 
 export default authServices;
