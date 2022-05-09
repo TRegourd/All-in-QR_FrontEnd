@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = "http://localhost:1337";
 
 const base = axios.create({ baseURL });
 
@@ -12,6 +12,11 @@ const authServices = {
 
   signin(body) {
     return base.post("/auth/signin", body);
+  },
+
+  createEvent(body) {
+    console.log(baseURL);
+    return base.post("/events", body);
   },
 };
 
