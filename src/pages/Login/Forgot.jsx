@@ -5,33 +5,27 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import authServices from "../../services/auth";
 
-export default function Login() {
+export default function Forgot() {
   const { logged, setLogged } = useContext(AuthContext);
   const [body, setBody] = useState({
     email: "",
-    password: "",
   });
 
   const navigate = useNavigate();
 
   function handleSubmit(e) {
-    console.log(body);
     e.preventDefault();
     authServices
-      .login(body)
+      .forgot(body)
       .then((result) => {
-        const { jwt } = result.data;
-        localStorage.setItem("jwt", jwt);
-        setLogged(true);
-        alert("successfully logged");
-        navigate("/");
+        console.log(result);
       })
       .catch((err) => {
         console.log(err);
-        alert("incorrect login");
+        alert("incorrect email");
       });
   }
 
@@ -57,7 +51,7 @@ export default function Login() {
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
-        <h1>Login</h1>
+        <h1>Forget Password</h1>
         <div>
           <TextField
             required
@@ -66,24 +60,13 @@ export default function Login() {
             type="email"
             name="email"
           />
-          <TextField
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            name="password"
-          />
         </div>
         <Button type="submit" variant="outlined">
-          Login
+          Send Reset Link
         </Button>
         <br />
         <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
-          Dont' have account yet ? <Link to="/signin">{"Sign in"}</Link>
-        </div>
-        <br />
-        <div className="signinToLoginLink">
-          Forgot your passwrod ? <Link to="/forgot">{"Reset Password"}</Link>
+          Go back to <Link to="/login">{"Log in"}</Link>
         </div>
       </Box>
     </Container>
