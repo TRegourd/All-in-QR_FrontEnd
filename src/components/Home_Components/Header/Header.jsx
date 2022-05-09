@@ -2,11 +2,12 @@ import { Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../../assets/logo_all-in-qr-livetag.svg";
+import Logo from "../../../assets/logo_all-in-qr-livetag.svg";
 
 const Container = styled.div`
   display: flex;
-  padding: 0 1rem;
+  align-content: center;
+  padding: 25vh 1rem;
   @media only screen and (max-width: 480px) {
     flex-direction: column;
   }

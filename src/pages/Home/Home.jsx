@@ -1,6 +1,7 @@
 import React from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/Home_Components/Header/Header";
 import styled, { css } from "styled-components";
+import About from "../../components/Home_Components/About/About";
 
 export default function Home() {
   const Container = styled.div`
@@ -18,9 +19,18 @@ export default function Home() {
     z-index: -1;
   `;
 
-  const IntoShape = styled.div`
+  const HeaderShape = styled.div`
     ${Shape}
     clip-path: polygon(0% 0%, 55% 0%, 65% 100%, 0% 100%);
+    background-color: var(--color-primary);
+    @media only screen and (max-width: 1024px) {
+      display: none;
+    }
+  `;
+
+  const AboutShape = styled.div`
+    ${Shape}
+    clip-path: polygon(65% 0%, 100% 0%, 100% 100%, 65% 100%);
     background-color: var(--color-primary);
     @media only screen and (max-width: 1024px) {
       display: none;
@@ -31,7 +41,11 @@ export default function Home() {
     <section>
       <Container>
         <Header />
-        <IntoShape></IntoShape>
+        <HeaderShape></HeaderShape>
+      </Container>
+      <Container>
+        <About />
+        <AboutShape></AboutShape>
       </Container>
     </section>
   );
