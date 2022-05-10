@@ -10,31 +10,10 @@ import authServices from "../../services/auth";
 import LoginSnackbar from "../../components/Log_Components/LoginSnackbar";
 
 export default function Login() {
-  const { logged, setLogged } = useContext(AuthContext);
   const [body, setBody] = useState({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate();
-
-  // function handleSubmit(e) {
-  //   console.log(body);
-  //   e.preventDefault();
-  //   authServices
-  //     .login(body)
-  //     .then((result) => {
-  //       const { jwt } = result.data;
-  //       localStorage.setItem("jwt", jwt);
-  //       setLogged(true);
-  //       alert("successfully logged");
-  //       navigate("/");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert("incorrect login");
-  //     });
-  // }
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -54,7 +33,6 @@ export default function Login() {
         }}
         noValidate
         autoComplete="off"
-        // onSubmit={handleSubmit}
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
