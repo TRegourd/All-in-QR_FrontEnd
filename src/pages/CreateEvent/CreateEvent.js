@@ -17,8 +17,8 @@ export default function CreateEvent() {
     e.preventDefault();
     const elements = e.target.elements;
     const name = getFormValue(elements, "name");
-    const startDate = getFormValue(elements, "start_date");
-    const endDate = getFormValue(elements, "end_date");
+    const start_date = getFormValue(elements, "start_date");
+    const end_date = getFormValue(elements, "end_date");
     const place = getFormValue(elements, "place");
     const desc = getFormValue(elements, "desc");
 
@@ -26,11 +26,11 @@ export default function CreateEvent() {
       alert("Ajouter un nom.");
       return;
     }
-    if (!startDate) {
+    if (!start_date) {
       alert("Ajouter une date");
       return;
     }
-    if (!endDate) {
+    if (!end_date) {
       alert("Ajouter une date.");
       return;
     }
@@ -43,15 +43,13 @@ export default function CreateEvent() {
       return;
     }
 
-    const newEvent = { name, startDate, endDate, place, desc };
+    const newEvent = { name, start_date, end_date, place, desc };
 
     console.log(newEvent);
+
     authServices
-      .createEvent(newEvent)
-      .then(() => {
-        alert("Event created");
-        navigate("/");
-      })
+      .createEvent({ name, start_date, end_date, place, desc })
+      .then(() => alert("Event created"))
       .catch((err) => {
         console.log(err);
         alert("marche pas");
