@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import styled from "styled-components";
 import authServices from "../../services/auth";
-import { useNavigate } from "react-router-dom";
 
 function getFormValue(elements, name) {
   return elements[name]?.value;
 }
 
 export default function CreateEvent() {
-  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState();
+
+  function fetchAndSetUserList() {
+    authServices
+      .getCurrentUser()
+      .then((user) => {
+        setCurrentUser(user);
+      })
+      .catch(() => alert("erreur"));
+  }
+
+  useEffect(() => {
+    fetchAndSetUserList();
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,6 +33,7 @@ export default function CreateEvent() {
     const end_date = getFormValue(elements, "end_date");
     const place = getFormValue(elements, "place");
     const desc = getFormValue(elements, "desc");
+    const admin = currentUser._id;
 
     if (!name) {
       alert("Ajouter un nom.");
@@ -45,14 +58,14 @@ export default function CreateEvent() {
 
     const newEvent = { name, start_date, end_date, place, desc };
 
-    console.log(newEvent);
+    console.log(currentUser);
 
     authServices
-      .createEvent({ name, start_date, end_date, place, desc })
+      .createEvent({ name, start_date, end_date, place, desc, admin })
       .then(() => alert("Event created"))
       .catch((err) => {
         console.log(err);
-        alert("marche pas");
+        alert("Can't create event");
       });
   }
 
