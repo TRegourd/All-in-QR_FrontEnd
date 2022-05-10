@@ -4,23 +4,25 @@ import AttendeesServices from "../../services/attendees";
 import Attendee from "../Attendee/Attendee";
 
 function AttendeeList() {
+  let params = useParams();
+
   const [attendees, setAttendees] = useState([]);
 
-  function fetchAndSetAttendees() {
-    AttendeesServices.getAttendeesList()
+  function fetchAndSetAttendees(eventID) {
+    AttendeesServices.getAttendeesList(eventID)
       .then((result) => setAttendees(result))
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    fetchAndSetAttendees();
+    fetchAndSetAttendees(params.eventID);
   }, []);
 
   return (
     <section>
       <h2>Liste des participants</h2>
       <div>
-        {attendees.data?.map((result) => {
+        {attendees?.map((result) => {
           return (
             <div>
               <Attendee attendeeInfo={result} key={result._id} />

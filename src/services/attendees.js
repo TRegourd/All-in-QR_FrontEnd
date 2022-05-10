@@ -17,8 +17,8 @@ const AttendeesServices = {
     return base.post("/attendees", body);
   },
 
-  getAttendeesList() {
-    return base.get("/attendees");
+  getAttendeesList(id) {
+    return base.get("/attendees/" + id).then((res) => res.data);
   },
 };
 
