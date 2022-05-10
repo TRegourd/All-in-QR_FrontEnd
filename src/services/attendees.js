@@ -16,6 +16,10 @@ const AttendeesServices = {
   createAttendees(body) {
     return base.post("/attendees", body);
   },
+
+  getAttendeesList() {
+    return base.get("/attendees");
+  },
 };
 
 export default AttendeesServices;
