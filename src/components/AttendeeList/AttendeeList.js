@@ -25,7 +25,11 @@ function AttendeeList() {
         {attendees?.map((result) => {
           return (
             <div>
-              <Attendee attendeeInfo={result} key={result._id} />
+              <Attendee
+                attendeeInfo={result}
+                eventId={params.eventID}
+                key={result._id}
+              />
             </div>
           );
         })}

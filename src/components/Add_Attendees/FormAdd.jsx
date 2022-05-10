@@ -56,9 +56,7 @@ export default function FormAdd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    AttendeesServices.createAttendees(body).then((result) =>
-      console.log(result.data)
-    );
+    AttendeesServices.createAttendees(body);
   };
 
   const updateBody = (key, value) => {
@@ -166,7 +164,11 @@ export default function FormAdd() {
               name="role"
             >
               {allRole.map((value) => {
-                return <MenuItem value={value._id}>{value.name}</MenuItem>;
+                return (
+                  <MenuItem key={value._id} value={value._id}>
+                    {value.name}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>
