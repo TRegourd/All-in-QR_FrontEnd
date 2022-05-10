@@ -3,6 +3,7 @@ import Event from "../../components/Event/Event";
 import eventServices from "../../services/Event";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import CreateEvent from "../CreateEvent/CreateEvent";
 
 function Dashboard() {
   const [events, setEvents] = useState([]);
@@ -25,6 +26,7 @@ function Dashboard() {
       <div>
         <EventTitle>Mes évènements</EventTitle>
       </div>
+      <CreateEvent></CreateEvent>
       <EventsContainer>
         {events.map((event) => {
           return (

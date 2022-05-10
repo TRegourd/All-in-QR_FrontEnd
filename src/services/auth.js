@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = "http://localhost:1337";
 
 const base = axios.create({ baseURL });
 
@@ -14,6 +14,9 @@ const authServices = {
     return base.post("/auth/signin", body);
   },
 
+  createEvent(body) {
+    return base.post("/events", body);
+  },
   forgot(body) {
     return base.post("/auth/forgot", body);
   },
@@ -23,5 +26,4 @@ const authServices = {
     return base.put(`/auth/reset/${id}`, body);
   },
 };
-
 export default authServices;
