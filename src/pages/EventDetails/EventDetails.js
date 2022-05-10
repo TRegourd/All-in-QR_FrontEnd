@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import eventServices from "../../services/Event";
 import FormAdd from "../../components/Add_Attendees/FormAdd";
 import AttendeeList from "../../components/AttendeeList/AttendeeList";
+import AttendeesServices from "../../services/attendees";
 
 function EventDetails() {
   let params = useParams();
@@ -19,11 +20,23 @@ function EventDetails() {
     fetchAndSetOneEvent(params.eventID);
   }, []);
 
+  const [attendees, setAttendees] = useState([]);
+
+  function fetchAndSetAttendees(eventID) {
+    AttendeesServices.getAttendeesList(eventID)
+      .then((result) => setAttendees(result))
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchAndSetAttendees(params.eventID);
+  }, []);
+
   return (
     <section>
       <div>{eventData.name}</div>
-      <FormAdd />
-      <AttendeeList />
+      <FormAdd fetchAndSetAttendees={fetchAndSetAttendees} />
+      <AttendeeList attendees={attendees} />
     </section>
   );
 }

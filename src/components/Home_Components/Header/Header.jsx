@@ -1,8 +1,37 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../../assets/logo_all-in-qr-livetag.svg";
+import { AuthContext } from "../../../AuthProvider";
+
+const Header = () => {
+  const { logged } = useContext(AuthContext);
+  return (
+    <Container>
+      <Left>
+        <Title>Make your events managment easier</Title>
+        <Desc>
+          Manage your events on our web application and set up a quick and easy
+          to control check-in through our mobile application.
+        </Desc>
+        <Buttons>
+          {!logged && (
+            <Link to="/login">
+              <Button variant="contained">GET STARTED</Button>
+            </Link>
+          )}
+          <Button variant="outlined">CONTACT US</Button>
+        </Buttons>
+      </Left>
+      <Right>
+        <Image src={Logo} />
+      </Right>
+    </Container>
+  );
+};
+
+export default Header;
 
 const Container = styled.div`
   display: flex;
@@ -75,28 +104,3 @@ const Right = styled.div`
 const Image = styled.img`
   width: 100%;
 `;
-
-const Header = () => {
-  return (
-    <Container>
-      <Left>
-        <Title>Make your events managment easier</Title>
-        <Desc>
-          Manage your events on our web application and set up a quick and easy
-          to control check-in through our mobile application.
-        </Desc>
-        <Buttons>
-          <Link to="/login">
-            <Button variant="contained">GET STARTED</Button>
-          </Link>
-          <Button variant="outlined">CONTACT US</Button>
-        </Buttons>
-      </Left>
-      <Right>
-        <Image src={Logo} />
-      </Right>
-    </Container>
-  );
-};
-
-export default Header;
