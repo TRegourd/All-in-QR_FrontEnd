@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import { BiHomeCircle, BiUser } from "react-icons/bi";
@@ -8,8 +8,15 @@ import { AuthContext } from "../../AuthProvider";
 import Logo from "../../assets/logo_all-in-qr-livetag-withe.svg";
 
 export default function Navbar() {
-  const { logged, setLogged, disconnect } = useContext(AuthContext);
+  const { logged } = useContext(AuthContext);
   const [activeNav, setActiveNav] = useState("#home");
+
+  useEffect(() => {
+    if (!logged) {
+      setActiveNav("#home");
+    }
+  }, [logged]);
+
   return (
     <nav>
       <img className="logo" src={Logo} alt="Logo All-in-QR" />
@@ -44,17 +51,6 @@ export default function Navbar() {
       {!logged && (
         <Link to="/login">
           <Button variant="contained">Login</Button>
-        </Link>
-      )}
-      {logged && (
-        <Link
-          to="/"
-          onClick={() => {
-            disconnect();
-            setActiveNav("#");
-          }}
-        >
-          <Button variant="outlined">Logout</Button>
         </Link>
       )}
     </nav>

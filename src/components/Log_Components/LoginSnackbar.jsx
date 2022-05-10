@@ -41,7 +41,7 @@ export default function LogOutSnackbar() {
         LogOut
       </Button>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="info" sx={{ width: "100%" }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Successfully Logged Out !
         </Alert>
       </Snackbar>
