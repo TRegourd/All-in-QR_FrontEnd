@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
   const [logged, setLogged] = useState(false);
+  const baseURL = process.env.REACT_APP_API_URL;
+  const base = axios.create({ baseURL });
 
   const navigate = useNavigate();
 
