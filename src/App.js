@@ -5,7 +5,9 @@ import { AuthContext } from "./AuthProvider";
 import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Home from "./pages/Home/Home";
+import Forgot from "./pages/Login/Forgot";
 import Login from "./pages/Login/Login";
+import Reset from "./pages/Login/Reset";
 import Profile from "./pages/Profile/Profile";
 
 import EventDetails from "./pages/EventDetails/EventDetails";
@@ -28,6 +30,8 @@ function App() {
         <Route element={<EventDetails />} path="/:eventID" />
 
         <Route element={<Signin />} path="/signin" exact />
+        <Route element={<Forgot />} path="/forgot" exact />
+        <Route element={<Reset />} path="/reset/:id" exact />
 
       </Routes>
     </>
