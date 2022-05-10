@@ -6,7 +6,10 @@ const base = axios.create({ baseURL });
 
 const eventServices = {
   getEventList() {
-    return base.get("/events").then((res) => res.data);
+    const token = localStorage.getItem("jwt");
+    return base
+      .get("/events", { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => res.data);
   },
 
   getOneEvent(id) {
