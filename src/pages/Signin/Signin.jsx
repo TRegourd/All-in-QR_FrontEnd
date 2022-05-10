@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import authServices from "../../services/auth";
+import SigninSnackbar from "../../components/Log_Components/SigninSnackbar";
 
 export default function Signin() {
   const [body, setBody] = useState({
@@ -85,9 +86,7 @@ export default function Signin() {
             name="confirmPassword"
           />
         </div>
-        <Button type="submit" variant="outlined">
-          Sign In
-        </Button>
+        <SigninSnackbar body={body}></SigninSnackbar>
         <br />
         <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
           Already have an account ? <Link to="/login">{"LogIn"}</Link>
