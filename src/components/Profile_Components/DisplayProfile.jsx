@@ -1,12 +1,13 @@
 import { Grid, Button } from "@mui/material";
 import React from "react";
+import EditProfile from "./EditProfile";
 import { Item } from "./Item";
 
-export default function DisplayProfile({ currentUser, edit, setEdit }) {
-  function handleClick() {
-    setEdit(true);
-  }
-
+export default function DisplayProfile({
+  currentUser,
+  setCurrentUser,
+  fetchAndSetCurrentUser,
+}) {
   return (
     <div>
       <Grid container direction="row" spacing={2} justifyContent="center">
@@ -26,12 +27,10 @@ export default function DisplayProfile({ currentUser, edit, setEdit }) {
         justifyContent="center"
         marginTop={2}
       >
-        <Button
-          //onClick={handleClick}
-          variant="contained"
-        >
-          Edit Profile
-        </Button>
+        <EditProfile
+          currentUser={currentUser}
+          fetchAndSetCurrentUser={fetchAndSetCurrentUser}
+        />
       </Grid>
     </div>
   );

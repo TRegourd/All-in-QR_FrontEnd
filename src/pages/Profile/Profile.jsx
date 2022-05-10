@@ -9,7 +9,7 @@ export default function Profile() {
   const [currentUser, setCurrentUser] = useState();
   const { disconnect } = useContext(AuthContext);
 
-  function fetchAndSetUserList() {
+  function fetchAndSetCurrentUser() {
     authServices
       .getCurrentUser()
       .then((user) => {
@@ -19,7 +19,7 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    fetchAndSetUserList();
+    fetchAndSetCurrentUser();
   }, []);
 
   return (
@@ -29,8 +29,7 @@ export default function Profile() {
           <Grid container spacing={1} marginTop={2} justifyContent="center">
             <DisplayProfile
               currentUser={currentUser}
-              //edit={edit}
-              //setEdit={setEdit}
+              fetchAndSetCurrentUser={fetchAndSetCurrentUser}
             ></DisplayProfile>
 
             <Grid

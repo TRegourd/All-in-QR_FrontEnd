@@ -32,5 +32,12 @@ const authServices = {
       .get(`/admins`, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => res.data);
   },
+
+  editCurrentUser(body) {
+    const token = localStorage.getItem("jwt");
+    return base.put(`/admins`, body, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
 };
 export default authServices;
