@@ -20,7 +20,6 @@ export default function Profile() {
 
   useEffect(() => {
     fetchAndSetUserList();
-    console.log(currentUser);
   }, []);
 
   return (
