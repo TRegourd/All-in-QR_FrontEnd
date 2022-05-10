@@ -25,14 +25,13 @@ export default function LoginSnackbar({ body }) {
   };
 
   async function handleClick() {
-    console.log(body);
     authServices
       .login(body)
       .then((result) => {
         const { jwt } = result.data;
         localStorage.setItem("jwt", jwt);
         setLogged(true);
-        test();
+        snackBarTrue();
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +39,7 @@ export default function LoginSnackbar({ body }) {
       });
   }
 
-  async function test() {
+  async function snackBarTrue() {
     setOpen(true);
     await wait();
     navigate("/");

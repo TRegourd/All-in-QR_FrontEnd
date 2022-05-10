@@ -24,12 +24,11 @@ export default function SigninSnackbar({ body }) {
   };
 
   async function handleClick() {
-    console.log(body);
     authServices
       .signin(body)
       .then(() => {
         setSigned(true);
-        test();
+        snackBarTrue();
       })
       .catch((err) => {
         console.log(err);
@@ -37,7 +36,7 @@ export default function SigninSnackbar({ body }) {
       });
   }
 
-  async function test() {
+  async function snackBarTrue() {
     setOpen(true);
     await wait();
     navigate("/login");
