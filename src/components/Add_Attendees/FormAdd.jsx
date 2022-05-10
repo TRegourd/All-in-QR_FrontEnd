@@ -24,7 +24,7 @@ const MenuProps = {
   },
 };
 
-export default function FormAdd() {
+export default function FormAdd({ fetchAndSetEvents }) {
   let params = useParams();
 
   const [checkedActivities, setCheckedActivities] = useState([]);
@@ -57,7 +57,7 @@ export default function FormAdd() {
   const handleSubmit = (e) => {
     e.preventDefault();
     AttendeesServices.createAttendees(body).then((result) =>
-      console.log(result.data)
+      fetchAndSetEvents()
     );
   };
 

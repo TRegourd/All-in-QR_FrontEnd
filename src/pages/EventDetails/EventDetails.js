@@ -22,7 +22,7 @@ function EventDetails() {
   return (
     <section>
       <div>{eventData.name}</div>
-      <FormAdd />
+      <FormAdd fetchAndSetOneEvent={fetchAndSetOneEvent} />
       <AttendeeList />
     </section>
   );
