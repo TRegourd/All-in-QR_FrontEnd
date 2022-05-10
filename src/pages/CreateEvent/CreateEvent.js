@@ -9,7 +9,7 @@ function getFormValue(elements, name) {
   return elements[name]?.value;
 }
 
-export default function CreateEvent() {
+export default function CreateEvent({ fetchAndSetEvents }) {
   const [currentUser, setCurrentUser] = useState();
 
   function fetchAndSetUserList() {
@@ -62,7 +62,10 @@ export default function CreateEvent() {
 
     authServices
       .createEvent({ name, start_date, end_date, place, desc, admin })
-      .then(() => alert("Event created"))
+      .then(() => {
+        fetchAndSetEvents();
+        alert("Event created");
+      })
       .catch((err) => {
         console.log(err);
         alert("Can't create event");
