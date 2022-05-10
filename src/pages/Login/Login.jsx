@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
 import styled, { css } from "styled-components";
 import authServices from "../../services/auth";
+import LoginSnackbar from "../../components/Log_Components/LoginSnackbar";
 
 export default function Login() {
   const { logged, setLogged } = useContext(AuthContext);
@@ -17,23 +18,23 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    console.log(body);
-    e.preventDefault();
-    authServices
-      .login(body)
-      .then((result) => {
-        const { jwt } = result.data;
-        localStorage.setItem("jwt", jwt);
-        setLogged(true);
-        alert("successfully logged");
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("incorrect login");
-      });
-  }
+  // function handleSubmit(e) {
+  //   console.log(body);
+  //   e.preventDefault();
+  //   authServices
+  //     .login(body)
+  //     .then((result) => {
+  //       const { jwt } = result.data;
+  //       localStorage.setItem("jwt", jwt);
+  //       setLogged(true);
+  //       alert("successfully logged");
+  //       navigate("/");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert("incorrect login");
+  //     });
+  // }
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -53,7 +54,7 @@ export default function Login() {
         }}
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
@@ -74,9 +75,7 @@ export default function Login() {
             name="password"
           />
         </div>
-        <Button type="submit" variant="outlined">
-          Login
-        </Button>
+        <LoginSnackbar body={body}></LoginSnackbar>
         <br />
         <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
           Dont' have account yet ? <Link to="/signin">{"Sign in"}</Link>
