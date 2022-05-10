@@ -15,7 +15,6 @@ const authServices = {
   },
 
   createEvent(body) {
-    console.log(baseURL);
     return base.post("/events", body);
   },
 };

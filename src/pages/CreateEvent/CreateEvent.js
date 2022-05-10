@@ -69,6 +69,7 @@ export default function CreateEvent() {
         autoComplete="off"
         onSubmit={handleSubmit}
         style={{ marginTop: "100px" }}
+        method="POST"
       >
         <h1>Create an Event</h1>
         <div>
