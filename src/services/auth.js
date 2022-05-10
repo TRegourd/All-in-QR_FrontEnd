@@ -22,6 +22,13 @@ const authServices = {
     console.log(id);
     return base.put(`/auth/reset/${id}`, body);
   },
+
+  getCurrentUser() {
+    const token = localStorage.getItem("jwt");
+    return base
+      .get(`/admins`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => res.data);
+  },
 };
 
 export default authServices;
