@@ -5,16 +5,15 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 import authServices from "../../services/auth";
-import { AuthContext } from "../../AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function LoginSnackbar({ body }) {
+export default function SigninSnackbar({ body }) {
   const [open, setOpen] = React.useState(false);
-  const { logged, setLogged } = React.useContext(AuthContext);
+  const [signed, setSigned] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -26,11 +25,9 @@ export default function LoginSnackbar({ body }) {
 
   async function handleClick() {
     authServices
-      .login(body)
-      .then((result) => {
-        const { jwt } = result.data;
-        localStorage.setItem("jwt", jwt);
-        setLogged(true);
+      .signin(body)
+      .then(() => {
+        setSigned(true);
         snackBarTrue();
       })
       .catch((err) => {
@@ -42,7 +39,7 @@ export default function LoginSnackbar({ body }) {
   async function snackBarTrue() {
     setOpen(true);
     await wait();
-    navigate("/");
+    navigate("/login");
   }
 
   const handleClose = (event, reason) => {
@@ -61,21 +58,21 @@ export default function LoginSnackbar({ body }) {
       >
         Login
       </Button>
-      {logged && (
+      {signed && (
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
             severity="success"
             sx={{ width: "100%" }}
           >
-            Successfully Logged in !
+            Successfully Signed in !
           </Alert>
         </Snackbar>
       )}
-      {!logged && (
+      {!signed && (
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-            Incorrect Login !
+            Incorrect Entry !
           </Alert>
         </Snackbar>
       )}

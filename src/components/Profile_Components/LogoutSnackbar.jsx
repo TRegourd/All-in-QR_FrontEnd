@@ -22,7 +22,6 @@ export default function LogOutSnackbar() {
   };
 
   async function handleClick() {
-    console.log("loging out...");
     await wait();
     disconnect();
   }
