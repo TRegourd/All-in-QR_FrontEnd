@@ -135,14 +135,20 @@ export default function FormAdd() {
               MenuProps={MenuProps}
               name="extra_activities"
             >
-              {allActivities.map((value) => (
-                <MenuItem key={value._id} value={value._id}>
-                  <Checkbox
-                    checked={checkedActivities.indexOf(value._id) > -1}
-                  />
-                  {value.name}
-                </MenuItem>
-              ))}
+              {allActivities
+                .filter((value) => {
+                  return value.role !== selectedRole;
+                })
+                .map((value) => {
+                  return (
+                    <MenuItem key={value._id} value={value._id}>
+                      <Checkbox
+                        checked={checkedActivities.indexOf(value._id) > -1}
+                      />
+                      {value.name}
+                    </MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
 
