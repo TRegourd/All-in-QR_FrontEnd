@@ -4,15 +4,12 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import styled from "styled-components";
 import authServices from "../../services/auth";
-import { useNavigate } from "react-router-dom";
 
 function getFormValue(elements, name) {
   return elements[name]?.value;
 }
 
 export default function CreateEvent() {
-  const navigate = useNavigate();
-
   function handleSubmit(e) {
     e.preventDefault();
     const elements = e.target.elements;
