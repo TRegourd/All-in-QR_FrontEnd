@@ -1,23 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import AttendeesServices from "../../services/attendees";
 import Attendee from "../Attendee/Attendee";
 
-function AttendeeList() {
-  let params = useParams();
-
-  const [attendees, setAttendees] = useState([]);
-
-  function fetchAndSetAttendees(eventID) {
-    AttendeesServices.getAttendeesList(eventID)
-      .then((result) => setAttendees(result))
-      .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    fetchAndSetAttendees(params.eventID);
-  }, []);
-
+function AttendeeList({ attendees }) {
   return (
     <section>
       <h2>Liste des participants</h2>
