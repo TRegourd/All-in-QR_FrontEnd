@@ -20,6 +20,7 @@ function EventDetails() {
   return (
     <section>
       <div>{eventData.name}</div>
+      <div></div>
     </section>
   );
 }
