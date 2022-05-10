@@ -30,9 +30,9 @@ function Dashboard() {
       <EventsContainer>
         {events.map((event) => {
           return (
-            <div>
-              <Link to={`/${event._id}`} key={event._id}>
-                <Event event={event} key={event._id} />
+            <div key={event._id}>
+              <Link to={`/${event._id}`}>
+                <Event event={event} />
               </Link>
             </div>
           );
