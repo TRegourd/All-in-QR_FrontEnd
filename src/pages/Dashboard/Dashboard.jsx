@@ -50,6 +50,7 @@ const EventTitle = styled.div`
 const EventsContainer = styled.div`
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 `;
 
 export default Dashboard;
