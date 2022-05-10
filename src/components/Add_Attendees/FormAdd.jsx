@@ -140,6 +140,9 @@ export default function FormAdd() {
             >
               {allActivities
                 .filter((value) => {
+                  return value.event === body.event;
+                })
+                .filter((value) => {
                   return value.role !== selectedRole;
                 })
                 .map((value) => {
