@@ -49,7 +49,7 @@ export default function CreateEvent() {
       .then(() => alert("Event created"))
       .catch((err) => {
         console.log(err);
-        alert("marche pas");
+        alert("Can't create event");
       });
   }
 
