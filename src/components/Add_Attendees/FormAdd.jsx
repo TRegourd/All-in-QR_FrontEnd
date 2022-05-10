@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {
@@ -24,6 +25,8 @@ const MenuProps = {
 };
 
 export default function FormAdd() {
+  let params = useParams();
+
   const [checkedActivities, setCheckedActivities] = useState([]);
   const [allRole, setAllRole] = useState([]);
   const [selectedRole, setSelectedRole] = useState("");
@@ -35,7 +38,7 @@ export default function FormAdd() {
     phone: "",
     extra_activities: [],
     role: "",
-    event: "6278e72b410bb1df43653000",
+    event: params.eventID,
   });
 
   const handleRoleChange = (event) => {

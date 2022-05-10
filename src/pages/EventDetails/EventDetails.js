@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import eventServices from "../../services/Event";
+import FormAdd from "../../components/Add_Attendees/FormAdd";
 
 function EventDetails() {
   let params = useParams();
@@ -20,7 +21,7 @@ function EventDetails() {
   return (
     <section>
       <div>{eventData.name}</div>
-      <div></div>
+      <FormAdd />
     </section>
   );
 }

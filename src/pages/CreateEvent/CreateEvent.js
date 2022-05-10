@@ -118,7 +118,6 @@ export default function CreateEvent() {
 }
 
 const Container = styled.div`
-  height: 100vh;
   text-align: center;
   overflow: hidden;
   position: relative;
