@@ -166,7 +166,11 @@ export default function FormAdd({ fetchAndSetAttendees }) {
               name="role"
             >
               {allRole.map((value) => {
-                return <MenuItem value={value._id}>{value.name}</MenuItem>;
+                return (
+                  <MenuItem key={value._id} value={value._id}>
+                    {value.name}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>

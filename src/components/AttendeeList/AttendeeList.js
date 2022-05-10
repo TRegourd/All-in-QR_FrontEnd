@@ -1,7 +1,10 @@
 import AttendeesServices from "../../services/attendees";
 import Attendee from "../Attendee/Attendee";
+import { useParams } from "react-router-dom";
 
 function AttendeeList({ attendees }) {
+  let params = useParams();
+
   return (
     <section>
       <h2>Liste des participants</h2>
@@ -9,7 +12,11 @@ function AttendeeList({ attendees }) {
         {attendees?.map((result) => {
           return (
             <div>
-              <Attendee attendeeInfo={result} key={result._id} />
+              <Attendee
+                attendeeInfo={result}
+                eventId={params.eventID}
+                key={result._id}
+              />
             </div>
           );
         })}

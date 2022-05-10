@@ -1,9 +1,8 @@
 import React from "react";
 import Styled from "styled-components";
+import EditAttendee from "../EditAttendee/EditAttendee";
 
-function Attendee({ attendeeInfo }) {
-  console.log(attendeeInfo);
-
+function Attendee({ attendeeInfo, eventId }) {
   return (
     <div>
       <AttendeeStyle>
@@ -12,6 +11,9 @@ function Attendee({ attendeeInfo }) {
         <div>{attendeeInfo.role.name}</div>
         <div>{attendeeInfo.phone}</div>
         <div>{attendeeInfo.email}</div>
+        <div>
+          <EditAttendee result={attendeeInfo} eventID={eventId} />
+        </div>
         <div>
           <button>Envoyer le QR code</button>
         </div>
