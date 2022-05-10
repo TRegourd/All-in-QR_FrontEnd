@@ -55,7 +55,6 @@ export default function FormAdd() {
   };
 
   const handleSubmit = (e) => {
-    console.log(body);
     e.preventDefault();
     AttendeesServices.createAttendees(body).then((result) =>
       console.log(result.data)
@@ -82,8 +81,6 @@ export default function FormAdd() {
       setAllActivities(result.data);
     });
   }, []);
-
-  console.log(body);
 
   return (
     <Box
