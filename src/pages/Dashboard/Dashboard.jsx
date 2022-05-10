@@ -23,10 +23,10 @@ function Dashboard() {
 
   return (
     <section>
+      <CreateEvent></CreateEvent>
       <div>
         <EventTitle>Mes évènements</EventTitle>
       </div>
-      <CreateEvent></CreateEvent>
       <EventsContainer>
         {events.map((event) => {
           return (

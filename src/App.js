@@ -15,7 +15,6 @@ import EventDetails from "./pages/EventDetails/EventDetails";
 
 import Signin from "./pages/Signin/Signin";
 
-
 function App() {
   const { logged, setLogged } = useContext(AuthContext);
 
@@ -27,13 +26,10 @@ function App() {
         <Route element={<Dashboard />} path="/dashboard" exact />
         <Route element={<Profile />} path="/profile" exact />
         <Route element={<Login />} path="/login" exact />
-
         <Route element={<EventDetails />} path="/:eventID" />
-
         <Route element={<Signin />} path="/signin" exact />
         <Route element={<Forgot />} path="/forgot" exact />
         <Route element={<Reset />} path="/reset/:id" exact />
-
       </Routes>
     </>
   );
