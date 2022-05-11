@@ -2,7 +2,7 @@ import AttendeesServices from "../../services/attendees";
 import Attendee from "../Attendee/Attendee";
 import { useParams } from "react-router-dom";
 
-function AttendeeList({ attendees }) {
+function AttendeeList({ attendees, fetchAndSetAttendees }) {
   let params = useParams();
 
   return (
@@ -16,6 +16,7 @@ function AttendeeList({ attendees }) {
                 attendeeInfo={result}
                 eventId={params.eventID}
                 key={result._id}
+                fetchAndSetAttendees={fetchAndSetAttendees}
               />
             </div>
           );
