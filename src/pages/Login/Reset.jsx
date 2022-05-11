@@ -1,36 +1,39 @@
-import React, { useContext } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider";
 import styled from "styled-components";
 import authServices from "../../services/auth";
 
 export default function Reset() {
-  const { logged, setLogged } = useContext(AuthContext);
   const [body, setBody] = useState({
+    email: "",
     password: "",
     confirmPassword: "",
   });
 
   const navigate = useNavigate();
   const props = useParams();
-  console.log(props);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const id = props.id;
-    authServices
-      .reset(body, id)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("incorrect");
-      });
+    if (body.password === body.confirmPassword) {
+      const id = props.id;
+      authServices
+        .reset(body, id)
+        .then(() => {
+          alert("password successfully reset");
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("incorrect");
+        });
+    } else {
+      alert("Passwords does not match");
+    }
   }
 
   function updateBody(key, value) {
@@ -58,15 +61,22 @@ export default function Reset() {
         <h1>Forget Password</h1>
         <div>
           <TextField
+            id="outlined-email-input"
+            label="Email"
+            type="email"
+            autoComplete="current-email"
+            name="email"
+          />
+          <TextField
             id="outlined-password-input"
-            label="Password"
+            label="New Password"
             type="password"
             autoComplete="current-password"
             name="password"
           />
           <TextField
             id="outlined-confirmPassword-input"
-            label="Confirm Password"
+            label="Confirm New Password"
             type="password"
             autoComplete="current-password"
             name="confirmPassword"
