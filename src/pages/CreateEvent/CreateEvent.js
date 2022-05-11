@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import styled from "styled-components";
 import authServices from "../../services/auth";
 
@@ -11,6 +17,11 @@ function getFormValue(elements, name) {
 
 export default function CreateEvent({ fetchAndSetEvents }) {
   const [currentUser, setCurrentUser] = useState();
+  const [type, setType] = useState("concert");
+
+  function handleChangeSelect(e) {
+    setType(e.target.value);
+  }
 
   function fetchAndSetUserList() {
     authServices
@@ -56,12 +67,10 @@ export default function CreateEvent({ fetchAndSetEvents }) {
       return;
     }
 
-    const newEvent = { name, start_date, end_date, place, desc };
-
-    console.log(currentUser);
+    const newEvent = { name, start_date, end_date, place, desc, type };
 
     authServices
-      .createEvent({ name, start_date, end_date, place, desc, admin })
+      .createEvent({ name, start_date, end_date, place, desc, admin, type })
       .then(() => {
         fetchAndSetEvents();
         alert("Event created");
@@ -124,6 +133,22 @@ export default function CreateEvent({ fetchAndSetEvents }) {
             placeholder="Description"
             focused
           />
+          <FormControl margin="dense" focused>
+            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="type"
+              value={type}
+              onChange={handleChangeSelect}
+              placeholder="Type"
+              name="type"
+            >
+              <MenuItem value={"afterwork"}>Afterwork</MenuItem>
+              <MenuItem value={"concert"}>Concert</MenuItem>
+              <MenuItem value={"conference"}>Conference</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <Button type="submit" variant="outlined">
           Create
