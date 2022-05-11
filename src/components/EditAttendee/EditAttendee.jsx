@@ -64,7 +64,6 @@ export default function EditAttendee({
   const handleSubmit = () => {
     AttendeesServices.modifyAttendee(result._id, body)
       .then((response) => {
-        console.log(response.data);
         fetchAndSetAttendees(eventID);
         setOpen(false);
       })

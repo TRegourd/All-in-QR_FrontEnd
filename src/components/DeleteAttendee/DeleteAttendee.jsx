@@ -11,13 +11,10 @@ export default function DeleteAttendee({
   const handleClick = () => {
     AttendeesServices.deleteAttendee(result._id)
       .then((response) => {
-        console.log(response.data);
         fetchAndSetAttendees(eventID);
       })
       .catch(() => alert("erreur"));
   };
-
-  console.log(eventID);
 
   return (
     <div>

@@ -59,6 +59,9 @@ export default function FormAdd({ fetchAndSetAttendees }) {
     AttendeesServices.createAttendees(body).then((result) => {
       fetchAndSetAttendees(params.eventID);
     });
+    e.target.reset();
+    setSelectedRole("");
+    setCheckedActivities([]);
   };
 
   const updateBody = (key, value) => {
