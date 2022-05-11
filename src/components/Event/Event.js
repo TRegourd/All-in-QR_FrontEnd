@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import afterwork from "../../assets/afterwork.jpg";
+import concert from "../../assets/concert.jpg";
+import conference from "../../assets/conference.jpg";
+
 import dayjs from "dayjs";
 import EditEvent from "./EditEvent";
 import EventServices from "../../services/Event";
@@ -24,9 +27,19 @@ function Event({ event, fetchAndSetEvents }) {
     }
   }
 
+  function imgSrc() {
+    if (event.type === "concert") {
+      return concert;
+    } else if (event.type === "afterwork") {
+      return afterwork;
+    } else if (event.type === "conference") {
+      return conference;
+    }
+  }
+
   return (
     <Card>
-      <img src={afterwork} alt="backgroundimg" />
+      <img src={imgSrc()} alt="backgroundimg" />
       <CardTitle>
         <h2>{event.name}</h2>
       </CardTitle>
