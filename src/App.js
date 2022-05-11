@@ -14,6 +14,7 @@ import Profile from "./pages/Profile/Profile";
 import EventDetails from "./pages/EventDetails/EventDetails";
 
 import Signin from "./pages/Signin/Signin";
+import Register from "./pages/Register/Register";
 
 function App() {
   const { logged, setLogged } = useContext(AuthContext);
@@ -30,6 +31,7 @@ function App() {
         <Route element={<Signin />} path="/signin" exact />
         <Route element={<Forgot />} path="/forgot" exact />
         <Route element={<Reset />} path="/reset/:id" exact />
+        <Route element={<Register />} path="/register/:eventId/:roleId" exact />
       </Routes>
     </>
   );
