@@ -59,7 +59,7 @@ export default function Signin() {
           <TextField
             required
             id="outlined-first_name-required"
-            label="Name"
+            label="Company Name"
             type="text"
             name="name"
           />

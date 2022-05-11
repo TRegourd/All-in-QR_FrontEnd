@@ -12,6 +12,9 @@ export default function EditProfile({ currentUser, fetchAndSetCurrentUser }) {
   const [open, setOpen] = React.useState(false);
   const [form, setForm] = React.useState({
     name: currentUser.name,
+    admin_name: currentUser.admin_name,
+    admin_surname: currentUser.admin_surname,
+    adress: currentUser.adress,
     email: currentUser.email,
   });
 
@@ -33,7 +36,6 @@ export default function EditProfile({ currentUser, fetchAndSetCurrentUser }) {
   };
 
   const handleSubmit = () => {
-    console.log(form);
     authServices
       .editCurrentUser(form)
       .then(() => {
@@ -43,8 +45,6 @@ export default function EditProfile({ currentUser, fetchAndSetCurrentUser }) {
       })
       .catch(() => alert("erreur"));
   };
-
-  console.log(currentUser);
 
   return (
     <div>
@@ -61,12 +61,42 @@ export default function EditProfile({ currentUser, fetchAndSetCurrentUser }) {
           <TextField
             autoFocus
             margin="dense"
-            label="Name"
-            name="name"
+            label="Company Name"
+            name="companyName"
             type="text"
             fullWidth
             variant="standard"
             defaultValue={currentUser.name}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            label="User Name"
+            name="admin_name"
+            type="text"
+            fullWidth
+            variant="standard"
+            defaultValue={currentUser.admin_name}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            label="User Surname"
+            name="admin_surname"
+            type="text"
+            fullWidth
+            variant="standard"
+            defaultValue={currentUser.admin_surname}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Adress"
+            name="adress"
+            type="text"
+            fullWidth
+            variant="standard"
+            defaultValue={currentUser.adress}
           />
           <TextField
             autoFocus

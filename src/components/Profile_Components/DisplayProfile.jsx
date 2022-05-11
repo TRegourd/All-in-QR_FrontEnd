@@ -10,9 +10,25 @@ export default function DisplayProfile({
 }) {
   return (
     <div>
+      <h1>My profile</h1>
       <Grid container direction="row" spacing={2} justifyContent="center">
         <Item>
-          Name : <span>{currentUser.name}</span>
+          Company Name : <span>{currentUser.name}</span>
+        </Item>
+      </Grid>
+      <Grid container direction="row" spacing={2} justifyContent="center">
+        <Item>
+          User Name : <span>{currentUser.admin_name}</span>
+        </Item>
+      </Grid>
+      <Grid container direction="row" spacing={2} justifyContent="center">
+        <Item>
+          User SurName : <span>{currentUser.admin_surname}</span>
+        </Item>
+      </Grid>
+      <Grid container direction="row" spacing={2} justifyContent="center">
+        <Item>
+          Adress : <span>{currentUser.adress}</span>
         </Item>
       </Grid>
       <Grid container direction="row" spacing={2} justifyContent="center">
