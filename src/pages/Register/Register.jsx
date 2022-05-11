@@ -5,33 +5,21 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import SigninSnackbar from "../../components/Log_Components/SigninSnackbar";
+import RegisterSnackbar from "../../components/Register_Components/RegisterSnackbar";
+import AttendeesServices from "../../services/attendees";
 
 export default function Register() {
-  const [body, setBody] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
   const navigate = useNavigate();
   const params = useParams();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(params.eventId, params.roleId);
-    // authServices
-    //   .signin(body)
-    //   .then(() => {
-    //     alert("user successfully created");
-    //     navigate("/login");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     alert("incorrect entry");
-    //   });
-  }
+  const [body, setBody] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    extra_activities: [],
+    role: params.roleId,
+    event: params.eventId,
+  });
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -51,43 +39,36 @@ export default function Register() {
         }}
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit}
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
-        <h1>Sign In</h1>
+        <h1>Register to the event</h1>
         <div>
+          <TextField required id="name" label="Name" type="text" name="name" />
           <TextField
             required
-            id="outlined-first_name-required"
-            label="Company Name"
+            id="surname"
+            label="SurName"
             type="text"
-            name="name"
+            name="surname"
           />
+          <br />
           <TextField
             required
-            id="outlined-email-required"
+            id="email"
             label="Email"
             type="email"
             name="email"
           />
-          <br />
           <TextField
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            name="password"
-          />
-          <TextField
-            id="outlined-confirmPassword-input"
-            label="Confirm Password"
-            type="password"
-            autoComplete="current-password"
-            name="confirmPassword"
+            required
+            id="phone"
+            label="Phone"
+            type="text"
+            name="phone"
           />
         </div>
-        <SigninSnackbar body={body}></SigninSnackbar>
+        <RegisterSnackbar body={body}></RegisterSnackbar>
         <br />
         <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
           Already have an account ? <Link to="/login">{"LogIn"}</Link>
