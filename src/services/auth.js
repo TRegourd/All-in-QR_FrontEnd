@@ -22,7 +22,6 @@ const authServices = {
   },
 
   reset(body, id) {
-    console.log(id);
     return base.put(`/auth/reset/${id}`, body);
   },
 
