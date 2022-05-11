@@ -32,9 +32,9 @@ export default function EditAttendee({
   fetchAndSetAttendees,
 }) {
   const [open, setOpen] = useState(false);
-  const [checkedActivities, setCheckedActivities] = useState([
-    result.extra_activities._id,
-  ]);
+  const [checkedActivities, setCheckedActivities] = useState(
+    result.extra_activities.map((x) => x._id)
+  );
   const [allRole, setAllRole] = useState([]);
   const [selectedRole, setSelectedRole] = useState(result.role._id);
   const [allActivities, setAllActivities] = useState([]);
@@ -43,12 +43,10 @@ export default function EditAttendee({
     surname: result.surname,
     email: result.email,
     phone: result.phone,
-    extra_activities: [result.extra_activities._id],
+    extra_activities: result.extra_activities.map((x) => x._id),
     role: result.role._id,
     event: eventID,
   });
-
-  console.log(body);
 
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
@@ -63,10 +61,10 @@ export default function EditAttendee({
     handleBodyChange(event);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     AttendeesServices.modifyAttendee(result._id, body)
-      .then((result) => {
-        console.log(result.data);
+      .then((response) => {
+        console.log(response.data);
         fetchAndSetAttendees(eventID);
         setOpen(false);
       })
