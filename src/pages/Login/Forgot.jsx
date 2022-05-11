@@ -1,15 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider";
 import styled from "styled-components";
 import authServices from "../../services/auth";
 
 export default function Forgot() {
-  const { logged, setLogged } = useContext(AuthContext);
   const [body, setBody] = useState({
     email: "",
   });
@@ -20,8 +18,9 @@ export default function Forgot() {
     e.preventDefault();
     authServices
       .forgot(body)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        alert("Email sent, please check your mailbox");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
