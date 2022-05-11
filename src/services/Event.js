@@ -16,13 +16,12 @@ const eventServices = {
     return base.get("/events/" + id).then((res) => res.data);
   },
 
-
   modifyOneEvent(id, body) {
     return base.put(`/events/${id}`, body);
+  },
 
   deleteOneEvent(id) {
     return base.delete("/events/" + id).then((res) => console.log(res));
-
   },
 };
 

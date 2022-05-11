@@ -3,12 +3,11 @@ import styled from "styled-components";
 import afterwork from "../../assets/afterwork.jpg";
 import dayjs from "dayjs";
 import EditEvent from "./EditEvent";
+import EventServices from "../../services/Event";
 
 function handleClick(e) {
   e.preventDefault();
 }
-
-import EventServices from "../../services/Event";
 
 function Event({ event, fetchAndSetEvents }) {
   function deleteEvent(e) {
@@ -25,7 +24,6 @@ function Event({ event, fetchAndSetEvents }) {
     }
   }
 
-
   return (
     <Card>
       <img src={afterwork} alt="backgroundimg" />
@@ -37,11 +35,8 @@ function Event({ event, fetchAndSetEvents }) {
       <p>Au {dayjs(event.end_date).format("DD-MM-YY")}</p>
 
       <div onClick={handleClick}>
-        <button>Supprimer</button>
-        <EditEvent currentEvent={event}></EditEvent>
-      <div>
         <button onClick={deleteEvent}>Supprimer</button>
-        <button>Modifier</button>
+        <EditEvent currentEvent={event}></EditEvent>
       </div>
     </Card>
   );
