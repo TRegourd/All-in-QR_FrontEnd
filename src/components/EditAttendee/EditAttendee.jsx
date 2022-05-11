@@ -26,7 +26,11 @@ const MenuProps = {
   },
 };
 
-export default function EditAttendee({ result, eventID }) {
+export default function EditAttendee({
+  result,
+  eventID,
+  fetchAndSetAttendees,
+}) {
   const [open, setOpen] = useState(false);
   const [checkedActivities, setCheckedActivities] = useState([
     result.extra_activities._id,
@@ -63,6 +67,7 @@ export default function EditAttendee({ result, eventID }) {
     AttendeesServices.modifyAttendee(result._id, body)
       .then((result) => {
         console.log(result.data);
+        fetchAndSetAttendees(eventID);
         setOpen(false);
       })
       .catch(() => alert("erreur"));

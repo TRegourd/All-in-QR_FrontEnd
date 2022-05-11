@@ -36,7 +36,10 @@ function EventDetails() {
     <section>
       <div>{eventData.name}</div>
       <FormAdd fetchAndSetAttendees={fetchAndSetAttendees} />
-      <AttendeeList attendees={attendees} />
+      <AttendeeList
+        attendees={attendees}
+        fetchAndSetAttendees={fetchAndSetAttendees}
+      />
     </section>
   );
 }
