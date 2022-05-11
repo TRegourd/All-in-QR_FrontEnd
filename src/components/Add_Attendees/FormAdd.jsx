@@ -56,9 +56,9 @@ export default function FormAdd({ fetchAndSetAttendees }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    AttendeesServices.createAttendees(body).then((result) =>
-      fetchAndSetAttendees(params.eventID)
-    );
+    AttendeesServices.createAttendees(body).then((result) => {
+      fetchAndSetAttendees(params.eventID);
+    });
   };
 
   const updateBody = (key, value) => {

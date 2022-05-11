@@ -1,5 +1,6 @@
 import React from "react";
 import Styled from "styled-components";
+import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
 import EditAttendee from "../EditAttendee/EditAttendee";
 
 function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
@@ -13,6 +14,13 @@ function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
         <div>{attendeeInfo.email}</div>
         <div>
           <EditAttendee
+            result={attendeeInfo}
+            eventID={eventId}
+            fetchAndSetAttendees={fetchAndSetAttendees}
+          />
+        </div>
+        <div>
+          <DeleteAttendee
             result={attendeeInfo}
             eventID={eventId}
             fetchAndSetAttendees={fetchAndSetAttendees}
