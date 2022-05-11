@@ -32,7 +32,7 @@ function Dashboard() {
           return (
             <div key={event._id}>
               <Link to={`/${event._id}`}>
-                <Event event={event} />
+                <Event event={event} fetchAndSetEvents={fetchAndSetEvents} />
               </Link>
             </div>
           );
