@@ -15,6 +15,10 @@ const eventServices = {
   getOneEvent(id) {
     return base.get("/events/" + id).then((res) => res.data);
   },
+
+  modifyOneEvent(id, body) {
+    return base.put(`/events/${id}`, body);
+  },
 };
 
 export default eventServices;
