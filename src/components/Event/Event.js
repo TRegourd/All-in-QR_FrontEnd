@@ -8,7 +8,24 @@ function handleClick(e) {
   e.preventDefault();
 }
 
-function Event({ event }) {
+import EventServices from "../../services/Event";
+
+function Event({ event, fetchAndSetEvents }) {
+  function deleteEvent(e) {
+    e.preventDefault();
+    let confirmed = window.confirm(
+      "Etes-vous sûr de vous supprimer l'évènement? Les données des participants et activitées seront supprimées."
+    );
+    if (confirmed === true) {
+      EventServices.deleteOneEvent(event._id)
+        .then(fetchAndSetEvents())
+        .catch((err) => console.log(err));
+    } else {
+      alert("Suppression annulée.");
+    }
+  }
+
+
   return (
     <Card>
       <img src={afterwork} alt="backgroundimg" />
@@ -18,9 +35,13 @@ function Event({ event }) {
       <p>{event.place}</p>
       <p>Du {dayjs(event.start_date).format("DD-MM-YY")}</p>
       <p>Au {dayjs(event.end_date).format("DD-MM-YY")}</p>
+
       <div onClick={handleClick}>
         <button>Supprimer</button>
         <EditEvent currentEvent={event}></EditEvent>
+      <div>
+        <button onClick={deleteEvent}>Supprimer</button>
+        <button>Modifier</button>
       </div>
     </Card>
   );
