@@ -7,18 +7,19 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import eventServices from "../../services/Event";
+import dayjs from "dayjs";
 
 export default function EditEvent({ currentEvent }) {
   const [open, setOpen] = useState(false);
 
   const [body, setBody] = useState({
     name: currentEvent.name,
-    start_date: currentEvent.startDate,
-    end_date: currentEvent.endDate,
+    start_date: currentEvent.start_date,
+    end_date: currentEvent.end_date,
     place: currentEvent.place,
     desc: currentEvent.desc,
   });
-
+  console.log(body.start_date);
   function updateEvent(key, value) {
     setBody({ ...body, [key]: value });
   }
@@ -37,7 +38,6 @@ export default function EditEvent({ currentEvent }) {
   };
 
   const handleSubmit = () => {
-    console.log(body);
     eventServices
       .modifyOneEvent(currentEvent._id, body)
       .then(() => {
@@ -61,6 +61,7 @@ export default function EditEvent({ currentEvent }) {
             placeholder="Event Name"
             name="name"
             margin="normal"
+            value={body.name}
             fullWidth
             focused
           />
@@ -70,6 +71,7 @@ export default function EditEvent({ currentEvent }) {
             type="date"
             name="start_date"
             margin="normal"
+            defaultValue={dayjs(body.start_date).format("YYYY-MM-DD")}
             fullWidth
             focused
           />
@@ -79,6 +81,7 @@ export default function EditEvent({ currentEvent }) {
             type="date"
             name="end_date"
             margin="normal"
+            defaultValue={dayjs(body.end_date).format("YYYY-MM-DD")}
             fullWidth
             focused
           />
@@ -89,6 +92,7 @@ export default function EditEvent({ currentEvent }) {
             name="place"
             placeholder="Place"
             margin="normal"
+            value={body.place}
             fullWidth
             focused
           />
@@ -99,6 +103,7 @@ export default function EditEvent({ currentEvent }) {
             name="desc"
             placeholder="Description"
             margin="normal"
+            value={body.desc}
             fullWidth
             focused
           />
