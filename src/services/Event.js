@@ -15,6 +15,10 @@ const eventServices = {
   getOneEvent(id) {
     return base.get("/events/" + id).then((res) => res.data);
   },
+
+  deleteOneEvent(id) {
+    return base.delete("/events/" + id).then((res) => console.log(res));
+  },
 };
 
 export default eventServices;
