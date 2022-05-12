@@ -14,6 +14,8 @@ import {
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import AttendeesServices from "../../services/attendees";
+import RolesServices from "../../services/roles";
+import ActivitiesServices from "../../services/activitiesServices";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -80,13 +82,13 @@ export default function EditAttendee({
   };
 
   useEffect(() => {
-    AttendeesServices.getRoles().then((result) => {
+    RolesServices.listRoles(eventID).then((result) => {
       setAllRole(result.data);
     });
   }, []);
 
   useEffect(() => {
-    AttendeesServices.getActivities().then((result) => {
+    ActivitiesServices.listActivities(eventID).then((result) => {
       setAllActivities(result.data);
     });
   }, []);

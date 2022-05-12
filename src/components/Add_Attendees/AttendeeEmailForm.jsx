@@ -7,6 +7,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
 import SendRegisterEmailSnackbar from "./sendRegisterEmailSnackbar";
 import { useParams } from "react-router-dom";
+import RolesServices from "../../services/roles";
 
 export default function AttendeeEmailForm() {
   const params = useParams();
@@ -27,7 +28,7 @@ export default function AttendeeEmailForm() {
   }
 
   useEffect(() => {
-    AttendeesServices.getRoles().then((result) => {
+    RolesServices.listRoles(params.eventID).then((result) => {
       setAllRole(result.data);
     });
   }, []);
