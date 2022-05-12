@@ -28,7 +28,7 @@ function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
             fetchAndSetAttendees={fetchAndSetAttendees}
           />
         </div>
-        <div>
+        <div className="QR">
           <SendQRCode result={attendeeInfo} />
         </div>
         <div key={attendeeInfo._id}>
@@ -43,7 +43,6 @@ const AttendeeStyle = Styled.div`
   display: flex;
   margin: 1rem; 
   justify-content: space-around; 
-  background-color: grey; 
   padding: 1rem;
   border-radius : 20px;
   align-items : center; 

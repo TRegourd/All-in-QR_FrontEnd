@@ -6,22 +6,19 @@ function AttendeeList({ attendees, fetchAndSetAttendees }) {
   let params = useParams();
 
   return (
-    <section>
-      <h2>Liste des participants</h2>
-      <div>
-        {attendees?.map((result) => {
-          return (
-            <div key={result._id}>
-              <Attendee
-                attendeeInfo={result}
-                eventId={params.eventID}
-                fetchAndSetAttendees={fetchAndSetAttendees}
-              />
-            </div>
-          );
-        })}
-      </div>
-    </section>
+    <div>
+      {attendees?.map((result) => {
+        return (
+          <div key={result._id}>
+            <Attendee
+              attendeeInfo={result}
+              eventId={params.eventID}
+              fetchAndSetAttendees={fetchAndSetAttendees}
+            />
+          </div>
+        );
+      })}
+    </div>
   );
 }
 

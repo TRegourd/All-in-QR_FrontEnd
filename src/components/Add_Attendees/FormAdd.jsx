@@ -90,6 +90,7 @@ export default function FormAdd({ fetchAndSetAttendees, roles }) {
       }}
     >
       <div>
+        <h3>Add new attendee</h3>
         <div>
           <TextField
             required
