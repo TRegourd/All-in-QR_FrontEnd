@@ -15,6 +15,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "styled-components";
+import SendQRCodeToAll from "../../components/SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
 
 function EventDetails() {
   let params = useParams();
@@ -91,7 +92,7 @@ function EventDetails() {
         <section className="eventSection" id="roles">
           <h2>Roles</h2>
           <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
-              <RoleList fetchAndSetRoles={fetchAndSetRoles}></RoleList>
+          <RoleList fetchAndSetRoles={fetchAndSetRoles}></RoleList>
         </section>
         <section className="eventSection" id="activities">
           <h2>Activities</h2>
@@ -121,10 +122,10 @@ function EventDetails() {
               /> */}
             </AccordionDetails>
           </Accordion>
+          <SendQRCodeToAll />
         </section>
       </EventDataContainer>
     </EventContainer>
-
   );
 }
 
