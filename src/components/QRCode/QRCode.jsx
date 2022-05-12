@@ -1,10 +1,26 @@
-import React from "react";
-import { QRCodeSVG } from "qrcode.react";
+import React, { useState } from "react";
+import QRCodeNew from "qrcode";
 
-export default function QRCode(attendee) {
+/* https://www.npmjs.com/package/qrcode */
+
+export default function QRCode(attendeeID) {
+  const [url, setUrl] = useState("");
+
+  function generateQRCode(attendeeID) {
+    QRCodeNew.toDataURL(JSON.stringify(attendeeID))
+      .then((url) => {
+        setUrl(url);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  generateQRCode(attendeeID);
+
   return (
-    <div>
-      <QRCodeSVG value={attendee} />
+    <div key={attendeeID}>
+      <img src={url} alt="" />
     </div>
   );
 }
