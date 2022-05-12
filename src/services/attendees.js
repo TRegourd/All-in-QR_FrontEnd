@@ -31,6 +31,10 @@ const AttendeesServices = {
   deleteAttendee(id) {
     return base.delete(`/attendees/${id}`);
   },
+
+  deleteRole(id) {
+    return base.delete(`/roles/${id}`);
+  },
 };
 
 export default AttendeesServices;
