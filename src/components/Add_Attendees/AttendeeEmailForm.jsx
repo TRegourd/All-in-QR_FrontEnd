@@ -44,7 +44,7 @@ export default function AttendeeEmailForm() {
         onChange={handleChange}
         style={{ marginTop: "50px" }}
       >
-        <h1>Email Register Link</h1>
+        <h3>Email Register Link</h3>
         {/* <pre>{JSON.stringify(body, null, 2)}</pre> */}
         <div>
           <TextField

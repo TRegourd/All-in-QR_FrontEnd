@@ -45,7 +45,7 @@ export default function SendRegisterEmailSnackbar({ body }) {
 
   return (
     <Stack>
-      <Button style={{ width: "20%" }} variant="outlined" onClick={handleClick}>
+      <Button variant="outlined" onClick={handleClick}>
         Send Register Email
       </Button>
       {signed && (
