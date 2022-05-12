@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../../components/Home_Components/Header/Header";
 import styled, { css } from "styled-components";
 import About from "../../components/Home_Components/About/About";
+import Footer from "../../components/Home_Components/Footer/Footer";
+import Contact from "../../components/Home_Components/Contact/Contact";
 
 export default function Home() {
   return (
@@ -13,6 +15,10 @@ export default function Home() {
       <Container>
         <About />
         <AboutShape></AboutShape>
+      </Container>
+      <Container>
+        <Contact />
+        <Footer />
       </Container>
     </section>
   );
