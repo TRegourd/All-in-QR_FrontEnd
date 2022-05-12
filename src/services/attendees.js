@@ -31,6 +31,10 @@ const AttendeesServices = {
   deleteAttendee(id) {
     return base.delete(`/attendees/${id}`);
   },
+
+  sendRegisterEmail(body) {
+    return base.post(`/register`, body);
+  },
 };
 
 export default AttendeesServices;
