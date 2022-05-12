@@ -23,11 +23,15 @@ function RoleList() {
   return (
     <section>
       <div>
-        <h2>Liste des évéments</h2>
+        <h2>Liste des rôles</h2>
       </div>
       <div>
         {roles.map((role) => {
-          return <Role role={role} />;
+          return (
+            <div>
+              <Role role={role} />
+            </div>
+          );
         })}
       </div>
     </section>
