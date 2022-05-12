@@ -37,7 +37,6 @@ export default function Register() {
     eventServices
       .getOneEvent(id)
       .then((result) => {
-        console.log(result);
         setCurrentEvent(result);
       })
       .catch((err) => {
@@ -61,17 +60,20 @@ export default function Register() {
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
-        <h1>
-          Register to the event "{currentEvent.name}" organized by{" "}
-          {currentEvent.admin.name}
-        </h1>
-        <p>
-          This event will take place in {currentEvent.place}
-          <br />
-          From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
-          {dayjs(currentEvent.end_date).format("DD-MM")}
-        </p>
-
+        {currentEvent && (
+          <div>
+            <h1>
+              Register to the event "{currentEvent.name}" organized by{" "}
+              {currentEvent.admin.name}
+            </h1>
+            <p>
+              This event will take place in {currentEvent.place}
+              <br />
+              From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
+              {dayjs(currentEvent.end_date).format("DD-MM")}
+            </p>
+          </div>
+        )}
         <div>
           <TextField required id="name" label="Name" type="text" name="name" />
           <TextField
