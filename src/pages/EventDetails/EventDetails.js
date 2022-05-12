@@ -6,6 +6,7 @@ import AttendeeList from "../../components/AttendeeList/AttendeeList";
 import AttendeesServices from "../../services/attendees";
 import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
+import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
 
 function EventDetails() {
   let params = useParams();
@@ -58,7 +59,9 @@ function EventDetails() {
       <div style={styles}>
         <FormAdd fetchAndSetAttendees={fetchAndSetAttendees} roles={roles} />
         <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
+        <AttendeeEmailForm />
       </div>
+
       <AttendeeList
         attendees={attendees}
         fetchAndSetAttendees={fetchAndSetAttendees}
