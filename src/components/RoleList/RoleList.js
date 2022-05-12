@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AttendeesServices from "../../services/attendees";
+import RolesServices from "../../services/roles";
 import Role from "../Role/Role";
 
 function RoleList() {
@@ -8,7 +9,7 @@ function RoleList() {
   let params = useParams();
 
   function fetchAndSetRoles(eventID) {
-    AttendeesServices.getRoles(eventID)
+    RolesServices.listRoles(eventID)
       .then((result) => {
         setRoles(result.data);
       })
