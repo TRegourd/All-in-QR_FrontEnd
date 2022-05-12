@@ -16,6 +16,9 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "styled-components";
 import SendQRCodeToAll from "../../components/SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
+import dayjs from "dayjs";
+import { Item } from "../../components/Profile_Components/Item";
+import EditEvent from "../../components/Event/EditEvent";
 
 function EventDetails() {
   let params = useParams();
@@ -30,7 +33,7 @@ function EventDetails() {
 
   useEffect(() => {
     fetchAndSetOneEvent(params.eventID);
-  }, []);
+  }, [eventData]);
 
   const [roles, setRoles] = useState([]);
 
@@ -87,7 +90,27 @@ function EventDetails() {
       <EventDataContainer>
         <section className="eventSection" id="details">
           <h2>Event Details</h2>
-          <div>{eventData.name}</div>
+          <Item>
+            <h3>{eventData.name}</h3>
+            <h4>{eventData.desc}</h4>
+          </Item>
+          <Item>
+            <div className="eventDateAndPlace">
+              {eventData.type}
+              <br />
+              {eventData.place}
+              <br />
+              From {dayjs(eventData.start_date).format("DD-MM")} to{" "}
+              {dayjs(eventData.end_date).format("DD-MM")}
+            </div>
+          </Item>
+          <div className="eventInfoContainer">
+            <Item>
+              There is currently {attendees.length} attendees registered to this
+              event
+            </Item>
+          </div>
+          <EditEvent currentEvent={eventData}></EditEvent>
         </section>
         <section className="eventSection" id="roles">
           <h2>Roles</h2>
@@ -122,7 +145,6 @@ function EventDetails() {
               /> */}
             </AccordionDetails>
           </Accordion>
-          <SendQRCodeToAll />
         </section>
       </EventDataContainer>
     </EventContainer>

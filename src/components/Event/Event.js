@@ -49,7 +49,6 @@ function Event({ event, fetchAndSetEvents }) {
 
       <div onClick={handleClick}>
         <button onClick={deleteEvent}>Supprimer</button>
-        <EditEvent currentEvent={event}></EditEvent>
       </div>
     </Card>
   );
