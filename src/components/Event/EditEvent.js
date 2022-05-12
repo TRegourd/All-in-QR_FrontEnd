@@ -19,7 +19,7 @@ export default function EditEvent({ currentEvent }) {
     place: currentEvent.place,
     desc: currentEvent.desc,
   });
-  console.log(body.start_date);
+
   function updateEvent(key, value) {
     setBody({ ...body, [key]: value });
   }

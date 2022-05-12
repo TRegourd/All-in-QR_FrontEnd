@@ -32,6 +32,9 @@ const AttendeesServices = {
     return base.delete(`/attendees/${id}`);
   },
 
+  deleteRole(id) {
+    return base.delete(`/roles/${id}`);
+  },
   sendQrCodeEmail(id) {
     return base.post(`/qrcode/${id}`);
   },

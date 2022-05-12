@@ -5,6 +5,7 @@ import eventServices from "../../services/Event";
 import FormAdd from "../../components/Add_Attendees/FormAdd";
 import AttendeeList from "../../components/AttendeeList/AttendeeList";
 import AttendeesServices from "../../services/attendees";
+import RoleList from "../../components/RoleList/RoleList";
 import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
 import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
@@ -90,6 +91,7 @@ function EventDetails() {
         <section className="eventSection" id="roles">
           <h2>Roles</h2>
           <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
+              <RoleList fetchAndSetRoles={fetchAndSetRoles}></RoleList>
         </section>
         <section className="eventSection" id="activities">
           <h2>Activities</h2>
@@ -122,6 +124,7 @@ function EventDetails() {
         </section>
       </EventDataContainer>
     </EventContainer>
+
   );
 }
 
