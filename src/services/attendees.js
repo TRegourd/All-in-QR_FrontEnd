@@ -24,8 +24,15 @@ const AttendeesServices = {
     return base.delete(`/attendees/${id}`);
   },
 
+  deleteRole(id) {
+    return base.delete(`/roles/${id}`);
+  },
   sendQrCodeEmail(id) {
     return base.post(`/qrcode/${id}`);
+  },
+
+  sendQrCodeEmailToEveryone(id) {
+    return base.post(`/qrcode/all/${id}`);
   },
 
   sendRegisterEmail(body) {

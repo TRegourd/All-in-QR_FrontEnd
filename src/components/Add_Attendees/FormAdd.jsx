@@ -42,6 +42,18 @@ export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
     event: params.eventID,
   });
 
+  function deleteRole(data) {
+    console.log(data);
+    let confirmed = window.confirm("Etes-vous sûr de vous supprimer ce rôle?");
+    if (confirmed === true) {
+      AttendeesServices.deleteRole()
+        .then(fetchAndSetAttendees())
+        .catch((err) => console.log(err));
+    } else {
+      alert("Suppression annulée.");
+    }
+  }
+
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
     handleBodyChange(event);
@@ -85,6 +97,7 @@ export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
       }}
     >
       <div>
+        <h3>Add new attendee</h3>
         <div>
           <TextField
             required
