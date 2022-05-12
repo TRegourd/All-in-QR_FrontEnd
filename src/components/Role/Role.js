@@ -1,7 +1,6 @@
-import { Button } from "@mui/material";
 import React from "react";
 import Styled from "styled-components";
-import AttendeesServices from "../../services/attendees";
+
 import { DeleteRole } from "../DeleteRole/DeleteRole";
 
 function Role({ role, eventId, fetchAndSetAttendees }) {
