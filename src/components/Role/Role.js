@@ -24,7 +24,7 @@ const RoleStyle = Styled.div`
   border-radius : 20px;
   align-items : center; 
   div {
-      width: 10%;
+      width: 100%;
   }
   .roleName {
       font-size : 18px;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -7,6 +7,8 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import RegisterSnackbar from "../../components/Register_Components/RegisterSnackbar";
 import AttendeesServices from "../../services/attendees";
+import eventServices from "../../services/Event";
+import dayjs from "dayjs";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ export default function Register() {
     role: params.roleId,
     event: params.eventId,
   });
+  const [currentEvent, setCurrentEvent] = useState("");
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -29,6 +32,21 @@ export default function Register() {
     const { name, value } = e.target;
     updateBody(name, value);
   }
+
+  function fetchCurrentEvent(id) {
+    eventServices
+      .getOneEvent(id)
+      .then((result) => {
+        setCurrentEvent(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    fetchCurrentEvent(params.eventId);
+  }, []);
 
   return (
     <Container>
@@ -42,7 +60,20 @@ export default function Register() {
         onChange={handleChange}
         style={{ marginTop: "100px" }}
       >
-        <h1>Register to the event</h1>
+        {currentEvent && (
+          <div>
+            <h1>
+              Register to the event "{currentEvent.name}" organized by{" "}
+              {currentEvent.admin.name}
+            </h1>
+            <p>
+              This event will take place in {currentEvent.place}
+              <br />
+              From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
+              {dayjs(currentEvent.end_date).format("DD-MM")}
+            </p>
+          </div>
+        )}
         <div>
           <TextField required id="name" label="Name" type="text" name="name" />
           <TextField
@@ -69,10 +100,6 @@ export default function Register() {
           />
         </div>
         <RegisterSnackbar body={body}></RegisterSnackbar>
-        <br />
-        <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
-          Already have an account ? <Link to="/login">{"LogIn"}</Link>
-        </div>
       </Box>
     </Container>
   );

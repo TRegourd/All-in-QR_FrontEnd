@@ -5,6 +5,9 @@ import FormAdd from "../../components/Add_Attendees/FormAdd";
 import AttendeeList from "../../components/AttendeeList/AttendeeList";
 import AttendeesServices from "../../services/attendees";
 import RoleList from "../../components/RoleList/RoleList";
+import AddRoles from "../../components/AddRoles/AddRoles";
+import RolesServices from "../../services/roles";
+import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
 
 function EventDetails() {
   let params = useParams();
@@ -21,6 +24,18 @@ function EventDetails() {
     fetchAndSetOneEvent(params.eventID);
   }, []);
 
+  const [roles, setRoles] = useState([]);
+
+  function fetchAndSetRoles(eventID) {
+    RolesServices.listRoles(eventID).then((result) => {
+      setRoles(result.data);
+    });
+  }
+
+  useEffect(() => {
+    fetchAndSetRoles(params.eventID);
+  }, []);
+
   const [attendees, setAttendees] = useState([]);
 
   function fetchAndSetAttendees(eventID) {
@@ -33,11 +48,22 @@ function EventDetails() {
     fetchAndSetAttendees(params.eventID);
   }, []);
 
+  const styles = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  };
+
   return (
     <section>
       <div>{eventData.name}</div>
-      <FormAdd fetchAndSetAttendees={fetchAndSetAttendees} />
-      <RoleList></RoleList>
+      <div style={styles}>
+        <FormAdd fetchAndSetAttendees={fetchAndSetAttendees} roles={roles} />
+        <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
+        <RoleList fetchAndSetRoles={fetchAndSetRoles}></RoleList>
+        <AttendeeEmailForm />
+      </div>
+
       <AttendeeList
         attendees={attendees}
         fetchAndSetAttendees={fetchAndSetAttendees}

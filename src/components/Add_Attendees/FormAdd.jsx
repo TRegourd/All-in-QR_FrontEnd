@@ -24,11 +24,11 @@ const MenuProps = {
   },
 };
 
-export default function FormAdd({ fetchAndSetAttendees }) {
+export default function FormAdd({ fetchAndSetAttendees, roles }) {
   let params = useParams();
 
   const [checkedActivities, setCheckedActivities] = useState([]);
-  const [allRole, setAllRole] = useState([]);
+  const allRole = roles;
   const [selectedRole, setSelectedRole] = useState("");
   const [allActivities, setAllActivities] = useState([]);
   const [body, setBody] = useState({
@@ -84,12 +84,6 @@ export default function FormAdd({ fetchAndSetAttendees }) {
     const { name, value } = event.target;
     updateBody(name, value);
   };
-
-  useEffect(() => {
-    AttendeesServices.getRoles().then((result) => {
-      setAllRole(result.data);
-    });
-  }, []);
 
   useEffect(() => {
     AttendeesServices.getActivities().then((result) => {
