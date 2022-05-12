@@ -1,7 +1,9 @@
 import React from "react";
 import Styled from "styled-components";
 import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
+import SendQRCode from "../SendQRCodeEmail/SendQRCodeEmail";
 import EditAttendee from "../EditAttendee/EditAttendee";
+import QRCode from "../QRCode/QRCode";
 
 function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
   return (
@@ -27,7 +29,10 @@ function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
           />
         </div>
         <div>
-          <button>Envoyer le QR code</button>
+          <SendQRCode result={attendeeInfo} />
+        </div>
+        <div key={attendeeInfo._id}>
+          <QRCode attendeeID={attendeeInfo._id} />
         </div>
       </AttendeeStyle>
     </div>

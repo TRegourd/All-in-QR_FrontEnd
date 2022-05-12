@@ -11,11 +11,10 @@ function AttendeeList({ attendees, fetchAndSetAttendees }) {
       <div>
         {attendees?.map((result) => {
           return (
-            <div>
+            <div key={result._id}>
               <Attendee
                 attendeeInfo={result}
                 eventId={params.eventID}
-                key={result._id}
                 fetchAndSetAttendees={fetchAndSetAttendees}
               />
             </div>

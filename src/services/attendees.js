@@ -31,6 +31,10 @@ const AttendeesServices = {
   deleteAttendee(id) {
     return base.delete(`/attendees/${id}`);
   },
+
+  sendQrCodeEmail(id) {
+    return base.post(`/qrcode/${id}`);
+  },
 };
 
 export default AttendeesServices;
