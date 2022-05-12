@@ -12,6 +12,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
+import ActivitiesServices from "../../services/activitiesServices";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -24,13 +25,13 @@ const MenuProps = {
   },
 };
 
-export default function FormAdd({ fetchAndSetAttendees, roles }) {
+export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
   let params = useParams();
 
   const [checkedActivities, setCheckedActivities] = useState([]);
   const allRole = roles;
   const [selectedRole, setSelectedRole] = useState("");
-  const [allActivities, setAllActivities] = useState([]);
+  const allActivities = activities;
   const [body, setBody] = useState({
     name: "",
     surname: "",
@@ -84,12 +85,6 @@ export default function FormAdd({ fetchAndSetAttendees, roles }) {
     const { name, value } = event.target;
     updateBody(name, value);
   };
-
-  useEffect(() => {
-    AttendeesServices.getActivities().then((result) => {
-      setAllActivities(result.data);
-    });
-  }, []);
 
   return (
     <Box

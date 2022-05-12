@@ -9,6 +9,8 @@ import RoleList from "../../components/RoleList/RoleList";
 import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
 import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
+import AddACtivities from "../../components/AddActivities/AddActivities";
+import ActivitiesServices from "../../services/activitiesServices";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -45,6 +47,18 @@ function EventDetails() {
 
   useEffect(() => {
     fetchAndSetRoles(params.eventID);
+  }, []);
+
+  const [activities, setActivities] = useState([]);
+
+  function fetchAndSetActivities(eventID) {
+    ActivitiesServices.listActivities(eventID).then((result) => {
+      setActivities(result.data);
+    });
+  }
+
+  useEffect(() => {
+    fetchAndSetActivities(params.eventID);
   }, []);
 
   const [attendees, setAttendees] = useState([]);
@@ -119,6 +133,10 @@ function EventDetails() {
         </section>
         <section className="eventSection" id="activities">
           <h2>Activities</h2>
+          <AddACtivities
+            fetchAndSetActivities={fetchAndSetActivities}
+            roles={roles}
+          />
         </section>
         <section className="eventSection" id="attendees">
           <h2>Attendees</h2>
@@ -126,6 +144,7 @@ function EventDetails() {
             <FormAdd
               fetchAndSetAttendees={fetchAndSetAttendees}
               roles={roles}
+              activities={activities}
             />
             <p>OR</p>
             <AttendeeEmailForm />
