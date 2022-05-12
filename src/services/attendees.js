@@ -32,13 +32,12 @@ const AttendeesServices = {
     return base.delete(`/attendees/${id}`);
   },
 
-
   sendQrCodeEmail(id) {
     return base.post(`/qrcode/${id}`);
+  },
 
   sendRegisterEmail(body) {
     return base.post(`/register`, body);
-
   },
 };
 
