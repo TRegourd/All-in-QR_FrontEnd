@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Event from "../../components/Event/Event";
 import eventServices from "../../services/Event";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CreateEvent from "../CreateEvent/CreateEvent";
+import EventCard from "../../components/Event/EventCard";
 
 function Dashboard() {
   const [events, setEvents] = useState([]);
@@ -32,7 +32,10 @@ function Dashboard() {
           return (
             <div key={event._id}>
               <Link to={`/${event._id}`}>
-                <Event event={event} fetchAndSetEvents={fetchAndSetEvents} />
+                <EventCard
+                  event={event}
+                  fetchAndSetEvents={fetchAndSetEvents}
+                ></EventCard>
               </Link>
             </div>
           );
@@ -51,7 +54,8 @@ const EventTitle = styled.div`
 
 const EventsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2rem;
   flex-wrap: wrap;
 `;
 
