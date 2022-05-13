@@ -13,7 +13,6 @@ import RoleList from "../../components/RoleList/RoleList";
 import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
 import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
-import AddACtivities from "../../components/AddActivities/AddActivities";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -31,6 +30,8 @@ import {
 } from "react-icons/bs";
 import ActivitiesServices from "../../services/activities";
 import EventDetailsData from "./EventDetailsData";
+import ActivitiesList from "../../components/ActivitiesList/ActivitiesList";
+import AddACtivities from "../../components/AddActivities/AddActivities";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -199,6 +200,11 @@ export default function EventDetailsAndTab() {
           fetchAndSetActivities={fetchAndSetActivities}
           roles={roles}
         />
+        <ActivitiesList
+          activities={activities}
+          fetchAndSetActivities={fetchAndSetActivities}
+          roles={roles}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <h2>Attendees</h2>
@@ -209,25 +215,14 @@ export default function EventDetailsAndTab() {
             activities={activities}
           />
           <p>OR</p>
-          <AttendeeEmailForm />
+          <AttendeeEmailForm roles={roles} />
         </AttendeesFormContainer>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Attendees List</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <SendQRCodeToAll />
-
-            <AttendeeList
-              attendees={attendees}
-              fetchAndSetAttendees={fetchAndSetAttendees}
-            />
-          </AccordionDetails>
-        </Accordion>
+        <AttendeeList
+          attendees={attendees}
+          fetchAndSetAttendees={fetchAndSetAttendees}
+          roles={roles}
+          activities={activities}
+        />
       </TabPanel>
       <TabPanel value={value} index={4}>
         Item Five

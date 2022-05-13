@@ -198,18 +198,6 @@ function EventDetails() {
             roles={roles}
             activities={activities}
           />
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
-              <Typography>Attendees List</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <SendQRCodeToAll />
-            </AccordionDetails>
-          </Accordion>
         </section>
       </EventDataContainer>
     </EventContainer>
