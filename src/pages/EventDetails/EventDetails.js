@@ -189,7 +189,7 @@ function EventDetails() {
               activities={activities}
             />
             <p>OR</p>
-            <AttendeeEmailForm />
+            <AttendeeEmailForm roles={roles} />
           </AttendeesFormContainer>
           <Accordion>
             <AccordionSummary
@@ -205,6 +205,8 @@ function EventDetails() {
               <AttendeeList
                 attendees={attendees}
                 fetchAndSetAttendees={fetchAndSetAttendees}
+                roles={roles}
+                activities={activities}
               />
             </AccordionDetails>
           </Accordion>

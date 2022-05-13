@@ -7,7 +7,6 @@ export default function Activities({
   eventID,
   fetchAndSetActivities,
 }) {
-  console.log(activities);
   return (
     <div>
       <ActivitiesStyle>

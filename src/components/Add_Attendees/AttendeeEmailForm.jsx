@@ -7,17 +7,16 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
 import SendRegisterEmailSnackbar from "./sendRegisterEmailSnackbar";
 import { useParams } from "react-router-dom";
-import RolesServices from "../../services/roles";
 import MultipleEmailsTooltip from "./MultipleEmailTooltip";
 
-export default function AttendeeEmailForm() {
+export default function AttendeeEmailForm({ roles }) {
   const params = useParams();
   const [body, setBody] = useState({
     email: "",
     roleId: "",
     eventId: params.eventID,
   });
-  const [allRole, setAllRole] = useState([]);
+  const allRole = roles;
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -27,12 +26,6 @@ export default function AttendeeEmailForm() {
     const { name, value } = e.target;
     updateBody(name, value);
   }
-
-  useEffect(() => {
-    RolesServices.listRoles(params.eventID).then((result) => {
-      setAllRole(result.data);
-    });
-  }, []);
 
   return (
     <Container>
