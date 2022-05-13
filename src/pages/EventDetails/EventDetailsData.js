@@ -14,7 +14,6 @@ export default function EventDetailsData({
   attendees,
   fetchAndSetOneEvent,
 }) {
-  console.log(eventData);
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent
