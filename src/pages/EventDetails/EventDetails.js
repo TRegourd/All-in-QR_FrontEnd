@@ -178,6 +178,7 @@ function EventDetails() {
           <ActivitiesList
             activities={activities}
             fetchAndSetActivities={fetchAndSetActivities}
+            roles={roles}
           />
         </section>
         <section className="eventSection" id="attendees">

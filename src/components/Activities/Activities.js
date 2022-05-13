@@ -1,11 +1,13 @@
 import DeleteActivities from "../DeleteActivities/DeleteActivities";
 import Styled from "styled-components";
 import dayjs from "dayjs";
+import ModifyActivities from "../ModifyActivities/ModifyActivities";
 
 export default function Activities({
   activities,
   eventID,
   fetchAndSetActivities,
+  roles,
 }) {
   return (
     <div>
@@ -16,6 +18,14 @@ export default function Activities({
         <div>{activities.price} €</div>
         <div>{activities.desc}</div>
         <div>{activities.role !== null ? activities.role.name : ""}</div>
+        <div>
+          <ModifyActivities
+            result={activities}
+            eventID={eventID}
+            fetchAndSetActivities={fetchAndSetActivities}
+            roles={roles}
+          />
+        </div>
         <div>
           <DeleteActivities
             result={activities}

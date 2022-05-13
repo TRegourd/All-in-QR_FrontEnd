@@ -16,6 +16,9 @@ const ActivitiesServices = {
   deleteActivities(id) {
     return base.delete(`/activities/${id}`);
   },
+  modifyActivities(id, body) {
+    return base.put(`/activities/${id}`, body);
+  },
 };
 
 export default ActivitiesServices;

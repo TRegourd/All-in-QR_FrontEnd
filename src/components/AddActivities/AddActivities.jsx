@@ -88,14 +88,6 @@ export default function AddACtivities({ fetchAndSetActivities, roles }) {
               onChange={handleDateChange}
             />
           </LocalizationProvider>
-          {/* <TextField
-            required
-            id="outlined-date"
-            label="Date"
-            type="date"
-            name="date"
-            variant="outlined" 
-          /> */}
         </div>
         <div>
           <TextField
