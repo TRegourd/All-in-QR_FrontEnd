@@ -12,7 +12,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
-import ActivitiesServices from "../../services/activitiesServices";
+import ActivitiesServices from "../../services/activities";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -142,10 +142,12 @@ export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
             >
               {allActivities
                 .filter((value) => {
-                  return value.event === body.event;
+                  return value.event._id === body.event;
                 })
                 .filter((value) => {
-                  return value.role !== selectedRole;
+                  if (value.role !== null) {
+                    return value.role._id !== selectedRole;
+                  }
                 })
                 .map((value) => {
                   return (

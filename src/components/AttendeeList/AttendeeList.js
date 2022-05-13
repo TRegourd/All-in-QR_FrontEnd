@@ -5,7 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 
-function AttendeeList({ attendees, fetchAndSetAttendees }) {
+function AttendeeList({ attendees, fetchAndSetAttendees, roles, activities }) {
   let params = useParams();
 
   const columns = [

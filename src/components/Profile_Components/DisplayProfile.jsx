@@ -1,7 +1,16 @@
 import { Grid, Button } from "@mui/material";
 import React from "react";
+import ProfileAvatar from "./Avatar";
 import EditProfile from "./EditProfile";
 import { Item } from "./Item";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import { BiBuildings, BiMap, BiUser } from "react-icons/bi";
+import { MdAlternateEmail } from "react-icons/md";
+import styled from "styled-components";
 
 export default function DisplayProfile({
   currentUser,
@@ -10,44 +19,85 @@ export default function DisplayProfile({
 }) {
   return (
     <div>
-      <h1>My profile</h1>
-      <Grid container direction="row" spacing={2} justifyContent="center">
-        <Item>
-          Company Name : <span>{currentUser.name}</span>
-        </Item>
-      </Grid>
-      <Grid container direction="row" spacing={2} justifyContent="center">
-        <Item>
-          User Name : <span>{currentUser.admin_name}</span>
-        </Item>
-      </Grid>
-      <Grid container direction="row" spacing={2} justifyContent="center">
-        <Item>
-          User SurName : <span>{currentUser.admin_surname}</span>
-        </Item>
-      </Grid>
-      <Grid container direction="row" spacing={2} justifyContent="center">
-        <Item>
-          Adress : <span>{currentUser.adress}</span>
-        </Item>
-      </Grid>
-      <Grid container direction="row" spacing={2} justifyContent="center">
-        <Item>
-          Email : <span>{currentUser.email}</span>
-        </Item>
-      </Grid>
-      <Grid
-        container
-        direction="row"
-        spacing={2}
-        justifyContent="center"
-        marginTop={2}
+      <Card
+        sx={{
+          minWidth: 400,
+          marginTop: 10,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
-        <EditProfile
-          currentUser={currentUser}
-          fetchAndSetCurrentUser={fetchAndSetCurrentUser}
-        />
-      </Grid>
+        <CardContent>
+          <CardContainer>
+            <ProfileAvatar />
+            <DataContainer>
+              <Typography
+                sx={{ fontSize: 20 }}
+                color="text.secondary"
+                gutterBottom
+                className="profileDetails"
+              >
+                <BiBuildings />
+                <span>{currentUser.name}</span>
+              </Typography>
+              <Typography
+                sx={{ fontSize: 20 }}
+                color="text.secondary"
+                gutterBottom
+                className="profileDetails"
+              >
+                <BiUser />
+                <span>
+                  {currentUser.admin_surname} {currentUser.admin_name}
+                </span>
+              </Typography>
+              <Typography
+                sx={{ fontSize: 20 }}
+                color="text.secondary"
+                gutterBottom
+                className="profileDetails"
+              >
+                <BiMap />
+                <span>{currentUser.adress}</span>
+              </Typography>
+              <Typography
+                sx={{ fontSize: 20 }}
+                color="text.secondary"
+                gutterBottom
+                className="profileDetails"
+              >
+                <MdAlternateEmail />
+                <span>{currentUser.email}</span>
+              </Typography>
+            </DataContainer>
+          </CardContainer>
+        </CardContent>
+
+        <CardActions>
+          <EditProfile
+            currentUser={currentUser}
+            fetchAndSetCurrentUser={fetchAndSetCurrentUser}
+          />
+        </CardActions>
+      </Card>
     </div>
   );
 }
+
+const DataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  .profileDetails {
+    padding: 0.2rem;
+    display: flex;
+    gap: 1rem;
+  }
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;

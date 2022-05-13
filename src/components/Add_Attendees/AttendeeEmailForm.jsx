@@ -7,16 +7,16 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
 import SendRegisterEmailSnackbar from "./sendRegisterEmailSnackbar";
 import { useParams } from "react-router-dom";
-import RolesServices from "../../services/roles";
+import MultipleEmailsTooltip from "./MultipleEmailTooltip";
 
-export default function AttendeeEmailForm() {
+export default function AttendeeEmailForm({ roles }) {
   const params = useParams();
   const [body, setBody] = useState({
     email: "",
     roleId: "",
     eventId: params.eventID,
   });
-  const [allRole, setAllRole] = useState([]);
+  const allRole = roles;
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -26,12 +26,6 @@ export default function AttendeeEmailForm() {
     const { name, value } = e.target;
     updateBody(name, value);
   }
-
-  useEffect(() => {
-    RolesServices.listRoles(params.eventID).then((result) => {
-      setAllRole(result.data);
-    });
-  }, []);
 
   return (
     <Container>
@@ -45,36 +39,38 @@ export default function AttendeeEmailForm() {
         onChange={handleChange}
         style={{ marginTop: "50px" }}
       >
-        <h3>Email Register Link</h3>
-        {/* <pre>{JSON.stringify(body, null, 2)}</pre> */}
-        <div>
-          <TextField
-            required
-            id="outlined-email-required"
-            label="Email"
-            type="email"
-            name="email"
-          />
-          <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
-            <InputLabel id="select-role-label">Role</InputLabel>
-            <Select
-              labelId="select-role-label"
-              id="select-role"
-              defaultValue=""
-              label="Role"
-              onChange={handleChange}
-              name="roleId"
-            >
-              {allRole.map((value) => {
-                return (
-                  <MenuItem key={value._id} value={value._id}>
-                    {value.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
+        <TitleContainer>
+          <h3>Email Register Link</h3>
+          {/* <pre>{JSON.stringify(body, null, 2)}</pre> */}
+          <MultipleEmailsTooltip></MultipleEmailsTooltip>
+        </TitleContainer>
+        <TextField
+          required
+          id="outlined-email-required"
+          label="Email"
+          type="text"
+          name="email"
+        />
+
+        <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
+          <InputLabel id="select-role-label">Role</InputLabel>
+          <Select
+            labelId="select-role-label"
+            id="select-role"
+            defaultValue=""
+            label="Role"
+            onChange={handleChange}
+            name="roleId"
+          >
+            {allRole.map((value) => {
+              return (
+                <MenuItem key={value._id} value={value._id}>
+                  {value.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
         <SendRegisterEmailSnackbar body={body}></SendRegisterEmailSnackbar>
       </Box>
     </Container>
@@ -84,4 +80,9 @@ export default function AttendeeEmailForm() {
 const Container = styled.div`
   overflow: hidden;
   position: relative;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;

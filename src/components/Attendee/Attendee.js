@@ -5,7 +5,13 @@ import SendQRCode from "../SendQRCodeEmail/SendQRCodeEmail";
 import EditAttendee from "../EditAttendee/EditAttendee";
 import QRCode from "../QRCode/QRCode";
 
-function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
+function Attendee({
+  attendeeInfo,
+  eventId,
+  fetchAndSetAttendees,
+  roles,
+  activities,
+}) {
   return (
     <div>
       <AttendeeStyle>
@@ -19,6 +25,8 @@ function Attendee({ attendeeInfo, eventId, fetchAndSetAttendees }) {
             result={attendeeInfo}
             eventID={eventId}
             fetchAndSetAttendees={fetchAndSetAttendees}
+            roles={roles}
+            activities={activities}
           />
         </div>
         <div>
