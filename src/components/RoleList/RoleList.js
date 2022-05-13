@@ -1,25 +1,8 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import RolesServices from "../../services/roles";
 import Role from "../Role/Role";
 
-function RoleList() {
-  const [roles, setRoles] = useState([]);
+function RoleList({ roles, fetchAndSetRoles }) {
   let params = useParams();
-
-  function fetchAndSetRoles(eventID) {
-    RolesServices.listRoles(eventID)
-      .then((result) => {
-        setRoles(result.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  useEffect(() => {
-    fetchAndSetRoles(params.eventID);
-  }, []);
-
   return (
     <section>
       <div>
@@ -28,8 +11,12 @@ function RoleList() {
       <div>
         {roles.map((role) => {
           return (
-            <div>
-              <Role role={role} />
+            <div key={role._id}>
+              <Role
+                role={role}
+                eventID={params.eventID}
+                fetchAndSetRoles={fetchAndSetRoles}
+              />
             </div>
           );
         })}

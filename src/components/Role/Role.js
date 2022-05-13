@@ -3,14 +3,14 @@ import Styled from "styled-components";
 
 import { DeleteRole } from "../DeleteRole/DeleteRole";
 
-function Role({ role, eventId, fetchAndSetAttendees }) {
+function Role({ role, eventID, fetchAndSetRoles }) {
   return (
     <RoleStyle>
       <div className="roleName">{role.name}</div>
       <DeleteRole
         data={role}
-        eventId={eventId}
-        fetchAndSetAttendees={fetchAndSetAttendees}
+        eventID={eventID}
+        fetchAndSetRoles={fetchAndSetRoles}
       ></DeleteRole>
     </RoleStyle>
   );
