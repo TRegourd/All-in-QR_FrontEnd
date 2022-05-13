@@ -26,7 +26,7 @@ function App() {
         <Route element={<Dashboard />} path="/dashboard" exact />
         <Route element={<Profile />} path="/profile" exact />
         <Route element={<Login />} path="/login" exact />
-        <Route element={<EventDetails />} path="/:eventID" />
+        <Route element={<EventDetailsAndTab />} path="/:eventID" />
         <Route element={<Signin />} path="/signin" exact />
         <Route element={<Forgot />} path="/forgot" exact />
         <Route element={<Reset />} path="/reset/:id" exact />

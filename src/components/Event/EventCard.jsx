@@ -51,10 +51,11 @@ export default function EventCard({ event, fetchAndSetEvents }) {
             {event.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            <p>{event.place}</p>
+            <span>{event.place}</span>
             <br />
-            <p>Du {dayjs(event.start_date).format("DD-MM-YY")}</p>
-            <p>Au {dayjs(event.end_date).format("DD-MM-YY")}</p>
+            <span>Du {dayjs(event.start_date).format("DD-MM-YY")}</span>
+            <br />
+            <span>Au {dayjs(event.end_date).format("DD-MM-YY")}</span>
           </Typography>
         </CardContent>
       </CardActionArea>

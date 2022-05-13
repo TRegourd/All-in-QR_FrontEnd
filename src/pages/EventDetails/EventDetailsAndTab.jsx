@@ -30,6 +30,7 @@ import {
   BsFilterSquareFill,
 } from "react-icons/bs";
 import ActivitiesServices from "../../services/activities";
+import EventDetailsData from "./EventDetailsData";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,11 +43,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -185,31 +182,11 @@ export default function EventDetailsAndTab() {
         />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <h2>Event Details</h2>
-        <Item>
-          <h3>{eventData.name}</h3>
-          <h4>{eventData.desc}</h4>
-        </Item>
-        <Item>
-          <div className="eventDateAndPlace">
-            {eventData.type}
-            <br />
-            {eventData.place}
-            <br />
-            From {dayjs(eventData.start_date).format("DD-MM")} to{" "}
-            {dayjs(eventData.end_date).format("DD-MM")}
-          </div>
-        </Item>
-        <div className="eventInfoContainer">
-          <Item>
-            There is currently {attendees.length} attendees registered to this
-            event
-          </Item>
-        </div>
-        <EditEvent
-          fetchEvent={fetchAndSetOneEvent}
-          currentEvent={eventData}
-        ></EditEvent>
+        <EventDetailsData
+          eventData={eventData}
+          attendees={attendees}
+          fetchAndSetOneEvent={fetchAndSetOneEvent}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <h2>Roles</h2>
