@@ -51,12 +51,8 @@ export default function SigninSnackbar({ body }) {
 
   return (
     <Stack>
-      <Button
-        style={{ width: "20%", alignSelf: "center" }}
-        variant="outlined"
-        onClick={handleClick}
-      >
-        Login
+      <Button variant="outlined" onClick={handleClick}>
+        Sign Up
       </Button>
       {signed && (
         <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
