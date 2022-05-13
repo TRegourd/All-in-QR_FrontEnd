@@ -161,10 +161,10 @@ function EventDetails() {
               <Typography>Attendees List</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {/* <AttendeeList
+              <AttendeeList
                 attendees={attendees}
                 fetchAndSetAttendees={fetchAndSetAttendees}
-              /> */}
+              />
             </AccordionDetails>
           </Accordion>
         </section>
