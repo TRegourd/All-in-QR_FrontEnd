@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
-import ActivitiesServices from "../../services/activitiesServices";
+import ActivitiesServices from "../../services/activities";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

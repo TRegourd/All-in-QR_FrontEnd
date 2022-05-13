@@ -12,7 +12,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
-import ActivitiesServices from "../../services/activitiesServices";
+import ActivitiesServices from "../../services/activities";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

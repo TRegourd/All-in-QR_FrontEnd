@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import AttendeesServices from "../../services/attendees";
 import RolesServices from "../../services/roles";
-import ActivitiesServices from "../../services/activitiesServices";
+import ActivitiesServices from "../../services/activities";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

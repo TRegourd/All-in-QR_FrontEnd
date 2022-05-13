@@ -10,7 +10,7 @@ import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
 import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
 import AddACtivities from "../../components/AddActivities/AddActivities";
-import ActivitiesServices from "../../services/activitiesServices";
+import ActivitiesServices from "../../services/activities";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -21,6 +21,7 @@ import SendQRCodeToAll from "../../components/SendQRCodeToEveryAttendee/SendQRCo
 import dayjs from "dayjs";
 import { Item } from "../../components/Profile_Components/Item";
 import EditEvent from "../../components/Event/EditEvent";
+import ActivitiesList from "../../components/ActivitiesList/ActivitiesList";
 
 function EventDetails() {
   let params = useParams();
@@ -139,6 +140,10 @@ function EventDetails() {
           <AddACtivities
             fetchAndSetActivities={fetchAndSetActivities}
             roles={roles}
+          />
+          <ActivitiesList
+            activities={activities}
+            fetchAndSetActivities={fetchAndSetActivities}
           />
         </section>
         <section className="eventSection" id="attendees">
