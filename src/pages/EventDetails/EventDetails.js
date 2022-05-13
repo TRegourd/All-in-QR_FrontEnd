@@ -21,6 +21,12 @@ import SendQRCodeToAll from "../../components/SendQRCodeToEveryAttendee/SendQRCo
 import dayjs from "dayjs";
 import { Item } from "../../components/Profile_Components/Item";
 import EditEvent from "../../components/Event/EditEvent";
+import {
+  BsCalendarEventFill,
+  BsFillPersonLinesFill,
+  BsFillPeopleFill,
+  BsFilterSquareFill,
+} from "react-icons/bs";
 
 function EventDetails() {
   let params = useParams();
@@ -79,23 +85,51 @@ function EventDetails() {
         <section>
           <ul>
             <li>
-              <Link activeClass="active" smooth spy to="details">
-                Events Detail
+              <Link
+                className="eventNavLink"
+                activeClass="active"
+                smooth
+                spy
+                to="details"
+              >
+                <BsCalendarEventFill />
+                <span>Events Detail</span>
               </Link>
             </li>
             <li>
-              <Link activeClass="active" smooth spy to="roles">
-                Roles
+              <Link
+                className="eventNavLink"
+                activeClass="active"
+                smooth
+                spy
+                to="roles"
+              >
+                <BsFillPersonLinesFill />
+                <span>Roles</span>
               </Link>
             </li>
             <li>
-              <Link activeClass="active" smooth spy to="activities">
-                Activities
+              <Link
+                className="eventNavLink"
+                activeClass="active"
+                smooth
+                spy
+                to="activities"
+              >
+                <BsFilterSquareFill></BsFilterSquareFill>
+                <span>Activities</span>
               </Link>
             </li>
             <li>
-              <Link activeClass="active" smooth spy to="attendees">
-                Attendees
+              <Link
+                className="eventNavLink"
+                activeClass="active"
+                smooth
+                spy
+                to="attendees"
+              >
+                <BsFillPeopleFill />
+                <span>Attendees</span>
               </Link>
             </li>
           </ul>
@@ -161,7 +195,6 @@ function EventDetails() {
               <Typography>Attendees List</Typography>
             </AccordionSummary>
             <AccordionDetails>
-
               <SendQRCodeToAll />
 
               <AttendeeList
@@ -198,17 +231,25 @@ const EventContainer = styled.div`
 `;
 
 const NavContainer = styled.div`
+  margin-top: 4rem;
   top: 0;
   position: sticky;
   bottom: 0;
   align-items: center;
-  width: 10rem;
+  width: 15rem;
   background-color: lightgray;
   height: 100vh;
   padding: 10rem 1rem;
   box-shadow: 0 0.125rem 0.25rem 0 rgb(0 0 0 / 11%);
   li {
     cursor: pointer;
+    padding: 1rem;
+  }
+  .eventNavLink {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 1.2rem;
   }
   li:hover {
     text-decoration: underline;
