@@ -54,7 +54,8 @@ const EventTitle = styled.div`
 
 const EventsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 2rem;
   flex-wrap: wrap;
 `;
 

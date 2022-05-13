@@ -14,7 +14,6 @@ import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
 import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
 import AddACtivities from "../../components/AddActivities/AddActivities";
-import ActivitiesServices from "../../services/activitiesServices";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -30,6 +29,7 @@ import {
   BsFillPeopleFill,
   BsFilterSquareFill,
 } from "react-icons/bs";
+import ActivitiesServices from "../../services/activities";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
