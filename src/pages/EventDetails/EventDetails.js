@@ -129,7 +129,7 @@ function EventDetails() {
         <section className="eventSection" id="roles">
           <h2>Roles</h2>
           <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
-          <RoleList fetchAndSetRoles={fetchAndSetRoles}></RoleList>
+          <RoleList roles={roles} fetchAndSetRoles={fetchAndSetRoles} />
         </section>
         <section className="eventSection" id="activities">
           <h2>Activities</h2>
@@ -158,10 +158,10 @@ function EventDetails() {
               <Typography>Attendees List</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {/* <AttendeeList
+              <AttendeeList
                 attendees={attendees}
                 fetchAndSetAttendees={fetchAndSetAttendees}
-              /> */}
+              />
             </AccordionDetails>
           </Accordion>
         </section>

@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
 
-export function DeleteRole(data) {
+export function DeleteRole({ data, eventID, fetchAndSetRoles }) {
   const handleClick = () => {
-    console.log(data.data._id);
-    AttendeesServices.deleteRole(data.data._id)
+    AttendeesServices.deleteRole(data._id)
       .then(() => {
+        fetchAndSetRoles(eventID);
         alert("Role deleted");
       })
       .catch((err) => {
