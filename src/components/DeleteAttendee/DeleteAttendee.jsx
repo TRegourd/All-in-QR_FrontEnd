@@ -3,15 +3,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AttendeesServices from "../../services/attendees";
 import React from "react";
 
-export default function DeleteAttendee({
-  result,
-  eventID,
-  fetchAndSetAttendees,
-}) {
-  const handleClick = () => {
-    AttendeesServices.deleteAttendee(result._id)
+export default function DeleteAttendee({ attendeesToDelete }) {
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("toto", attendeesToDelete);
+    AttendeesServices.deleteAttendee(attendeesToDelete)
       .then((response) => {
-        fetchAndSetAttendees(eventID);
+        console.log(response.data);
       })
       .catch(() => alert("erreur"));
   };

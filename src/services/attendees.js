@@ -20,8 +20,10 @@ const AttendeesServices = {
   modifyAttendee(id, body) {
     return base.put(`/attendees/${id}`, body);
   },
-  deleteAttendee(id) {
-    return base.delete(`/attendees/${id}`);
+  deleteAttendee(body) {
+    return base.post(`/attendees/delete`, {
+      body,
+    });
   },
 
   deleteRole(id) {

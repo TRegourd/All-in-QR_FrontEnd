@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
+import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
 
-function AttendeeList({ attendees, fetchAndSetAttendees, roles, activities }) {
+function AttendeeList({ attendees }) {
   let params = useParams();
 
   const columns = [
@@ -48,22 +49,27 @@ function AttendeeList({ attendees, fetchAndSetAttendees, roles, activities }) {
   }));
 
   const [selectionModel, setSelectionModel] = useState([]);
-  console.log(selectionModel);
+
+  const body = { id: selectionModel };
+
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        disableSelectionOnClick
-        onSelectionModelChange={(newSelectionModel) => {
-          setSelectionModel(newSelectionModel);
-        }}
-        selectionModel={selectionModel}
-        {...rows}
-      />
+    <div>
+      <div style={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          disableSelectionOnClick
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
+          {...rows}
+        />
+      </div>
+      {body.id && <DeleteAttendee attendeesToDelete={body} />}
     </div>
   );
 }
