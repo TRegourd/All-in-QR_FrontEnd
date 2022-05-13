@@ -1,23 +1,69 @@
 import AttendeesServices from "../../services/attendees";
 import Attendee from "../Attendee/Attendee";
 import { useParams } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
+import { useState } from "react";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function AttendeeList({ attendees, fetchAndSetAttendees }) {
   let params = useParams();
 
+  const columns = [
+    {
+      field: "name",
+      headerName: "Name",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "surname",
+      headerName: "Surname",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "roleName",
+      headerName: "Role",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "phone",
+      headerName: "Phone",
+      width: 150,
+      editable: true,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 150,
+      editable: true,
+    },
+  ];
+
+  const rows = attendees.map((attendee) => ({
+    ...attendee,
+    id: attendee._id,
+    roleName: attendee.role.name,
+  }));
+
+  const [selectionModel, setSelectionModel] = useState([]);
+  console.log(selectionModel);
   return (
-    <div>
-      {attendees?.map((result) => {
-        return (
-          <div key={result._id}>
-            <Attendee
-              attendeeInfo={result}
-              eventId={params.eventID}
-              fetchAndSetAttendees={fetchAndSetAttendees}
-            />
-          </div>
-        );
-      })}
+    <div style={{ height: 400, width: "100%" }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+        onSelectionModelChange={(newSelectionModel) => {
+          setSelectionModel(newSelectionModel);
+        }}
+        selectionModel={selectionModel}
+        {...rows}
+      />
     </div>
   );
 }
