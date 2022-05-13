@@ -36,7 +36,7 @@ export default function LogOutSnackbar() {
 
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
-      <Button variant="outlined" onClick={handleClick}>
+      <Button variant="contained" onClick={handleClick}>
         LogOut
       </Button>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
