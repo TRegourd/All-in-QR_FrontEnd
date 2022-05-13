@@ -47,7 +47,7 @@ export default function DisplayProfile({
                 gutterBottom
                 className="profileDetails"
               >
-                <BiUser style={{ fontType: "bold" }} />
+                <BiUser />
                 <span>
                   {currentUser.admin_surname} {currentUser.admin_name}
                 </span>
