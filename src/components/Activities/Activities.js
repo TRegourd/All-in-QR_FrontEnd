@@ -16,7 +16,7 @@ export default function Activities({
         <div>{activities.duration} minutes</div>
         <div>{activities.price} €</div>
         <div>{activities.desc}</div>
-        <div>{activities.role.name}</div>
+        <div>{activities.role !== null ? activities.role.name : ""}</div>
         <div>
           <DeleteActivities
             result={activities}
