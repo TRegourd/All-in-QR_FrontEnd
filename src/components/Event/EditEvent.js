@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import eventServices from "../../services/Event";
 import dayjs from "dayjs";
 
-export default function EditEvent({ currentEvent }) {
+export default function EditEvent({ currentEvent, fetchEvent }) {
   const [open, setOpen] = useState(false);
 
   const [body, setBody] = useState({
@@ -43,6 +43,7 @@ export default function EditEvent({ currentEvent }) {
       .then(() => {
         alert("Event edited");
         setOpen(false);
+        fetchEvent(currentEvent._id);
       })
       .catch(() => alert("Error"));
   };
