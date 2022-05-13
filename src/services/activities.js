@@ -12,6 +12,10 @@ const ActivitiesServices = {
   listActivities(id) {
     return base.get(`/activities/${id}`);
   },
+
+  deleteActivities(id) {
+    return base.delete(`/activities/${id}`);
+  },
 };
 
 export default ActivitiesServices;
