@@ -22,7 +22,7 @@ export default function SendQRCodeToAll() {
         onClick={handleClick}
         startIcon={<EmailIcon />}
       >
-        Envoyer à tous
+        Envoyer le QR Code à tous.
       </Button>
     </div>
   );
