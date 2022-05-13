@@ -161,10 +161,11 @@ function EventDetails() {
               <Typography>Attendees List</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {/* <AttendeeList
+              <SendQRCodeToAll />
+              <AttendeeList
                 attendees={attendees}
                 fetchAndSetAttendees={fetchAndSetAttendees}
-              /> */}
+              />
             </AccordionDetails>
           </Accordion>
         </section>
