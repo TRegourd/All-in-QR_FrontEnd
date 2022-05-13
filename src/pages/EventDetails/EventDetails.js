@@ -192,6 +192,12 @@ function EventDetails() {
             <p>OR</p>
             <AttendeeEmailForm roles={roles} />
           </AttendeesFormContainer>
+          <AttendeeList
+            attendees={attendees}
+            fetchAndSetAttendees={fetchAndSetAttendees}
+            roles={roles}
+            activities={activities}
+          />
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -202,13 +208,6 @@ function EventDetails() {
             </AccordionSummary>
             <AccordionDetails>
               <SendQRCodeToAll />
-
-              <AttendeeList
-                attendees={attendees}
-                fetchAndSetAttendees={fetchAndSetAttendees}
-                roles={roles}
-                activities={activities}
-              />
             </AccordionDetails>
           </Accordion>
         </section>
