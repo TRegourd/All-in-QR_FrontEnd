@@ -32,14 +32,16 @@ export default function EditAttendee({
   result,
   eventID,
   fetchAndSetAttendees,
+  roles,
+  activities,
 }) {
   const [open, setOpen] = useState(false);
   const [checkedActivities, setCheckedActivities] = useState(
     result.extra_activities.map((x) => x._id)
   );
-  const [allRole, setAllRole] = useState([]);
+  const allRole = roles;
   const [selectedRole, setSelectedRole] = useState(result.role._id);
-  const [allActivities, setAllActivities] = useState([]);
+  const allActivities = activities;
   const [body, setBody] = useState({
     name: result.name,
     surname: result.surname,
@@ -80,18 +82,6 @@ export default function EditAttendee({
     const { name, value } = event.target;
     updateBody(name, value);
   };
-
-  useEffect(() => {
-    RolesServices.listRoles(eventID).then((result) => {
-      setAllRole(result.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    ActivitiesServices.listActivities(eventID).then((result) => {
-      setAllActivities(result.data);
-    });
-  }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -165,10 +155,12 @@ export default function EditAttendee({
                 >
                   {allActivities
                     .filter((value) => {
-                      return value.event === body.event;
+                      return value.event._id === body.event;
                     })
                     .filter((value) => {
-                      return value.role !== selectedRole;
+                      if (value.role !== null) {
+                        return value.role._id !== selectedRole;
+                      }
                     })
                     .map((value) => {
                       return (
