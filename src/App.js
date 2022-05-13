@@ -10,11 +10,10 @@ import Forgot from "./pages/Login/Forgot";
 import Login from "./pages/Login/Login";
 import Reset from "./pages/Login/Reset";
 import Profile from "./pages/Profile/Profile";
-
 import EventDetails from "./pages/EventDetails/EventDetails";
-
 import Signin from "./pages/Signin/Signin";
 import Register from "./pages/Register/Register";
+import EventDetailsAndTab from "./pages/EventDetails/EventDetailsAndTab";
 
 function App() {
   const { logged, setLogged } = useContext(AuthContext);
