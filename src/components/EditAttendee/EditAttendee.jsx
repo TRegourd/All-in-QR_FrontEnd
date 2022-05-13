@@ -93,7 +93,7 @@ export default function EditAttendee({
 
   return (
     <div>
-      <Button varient="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Modifier le participant
       </Button>
       <Dialog
