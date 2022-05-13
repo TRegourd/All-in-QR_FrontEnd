@@ -1,74 +1,22 @@
-import React, { useContext } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import React from "react";
+
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider";
-import styled, { css } from "styled-components";
-import authServices from "../../services/auth";
-import LoginSnackbar from "../../components/Log_Components/LoginSnackbar";
+
+import styled from "styled-components";
+
+import LoginCard from "./LoginCard";
 
 export default function Login() {
-  const [body, setBody] = useState({
-    email: "",
-    password: "",
-  });
-
-  function updateBody(key, value) {
-    setBody({ ...body, [key]: value });
-  }
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    updateBody(name, value);
-  }
-
   return (
     <Container>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-        onChange={handleChange}
-        style={{ marginTop: "100px" }}
-      >
-        <h1>Login</h1>
-        <div>
-          <TextField
-            required
-            id="outlined-email-required"
-            label="Email"
-            type="email"
-            name="email"
-          />
-          <TextField
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            name="password"
-          />
-        </div>
-        <LoginSnackbar body={body}></LoginSnackbar>
-        <br />
-        <div className="signinToLoginLink" style={{ marginTop: "10px" }}>
-          Dont' have account yet ? <Link to="/signin">{"Sign in"}</Link>
-        </div>
-        <br />
-        <div className="signinToLoginLink">
-          Forgot your passwrod ? <Link to="/forgot">{"Reset Password"}</Link>
-        </div>
-      </Box>
+      <LoginCard></LoginCard>
     </Container>
   );
 }
 
 const Container = styled.div`
   height: 100vh;
+  padding-top: 3rem;
   text-align: center;
   overflow: hidden;
   position: relative;

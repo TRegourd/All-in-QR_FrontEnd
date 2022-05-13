@@ -35,7 +35,7 @@ function EventDetails() {
 
   useEffect(() => {
     fetchAndSetOneEvent(params.eventID);
-  }, [eventData]);
+  }, []);
 
   const [roles, setRoles] = useState([]);
 
@@ -124,7 +124,10 @@ function EventDetails() {
               event
             </Item>
           </div>
-          <EditEvent currentEvent={eventData}></EditEvent>
+          <EditEvent
+            fetchEvent={fetchAndSetOneEvent}
+            currentEvent={eventData}
+          ></EditEvent>
         </section>
         <section className="eventSection" id="roles">
           <h2>Roles</h2>
@@ -158,6 +161,8 @@ function EventDetails() {
               <Typography>Attendees List</Typography>
             </AccordionSummary>
             <AccordionDetails>
+              <SendQRCodeToAll />
+
               <AttendeeList
                 attendees={attendees}
                 fetchAndSetAttendees={fetchAndSetAttendees}
