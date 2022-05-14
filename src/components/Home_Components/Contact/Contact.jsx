@@ -3,7 +3,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 90%;
+  height: 100vh;
+  background: rgb(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  color: white;
 `;
 
 const Wrapper = styled.div`
@@ -34,12 +37,15 @@ const Title = styled.h1`
 `;
 
 const Form = styled.form`
-  height: 250px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   @media only screen and (max-width: 480px) {
     flex-direction: column;
+  }
+  @media only screen and (max-width: 900px) {
+    height: 400px;
   }
 `;
 
@@ -66,20 +72,30 @@ const RightForm = styled.div`
 `;
 
 const Input = styled.input`
-  width: 200px;
+  width: 400px;
+  height: 150px;
   padding: 20px;
-  @media only screen and (max-width: 480px) {
+  color: white;
+  background: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+  @media only screen and (max-width: 900px) {
     padding: 5px;
+    width: 200px;
+    height: 100px;
   }
 `;
 
 const TextArea = styled.textarea`
-  width: 200px;
-  height: 60%;
+  width: 400px;
+  height: 80%;
   padding: 20px;
-  @media only screen and (max-width: 480px) {
+  background: rgb(0, 0, 0, 0.6);
+  backdrop-filter: blur(15px);
+  color: white;
+  @media only screen and (max-width: 900px) {
     padding: 5px;
     margin-top: 20px;
+    width: 200px;
   }
 `;
 

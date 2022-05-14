@@ -11,13 +11,14 @@ import Signin from "./pages/Signin/Signin";
 import Register from "./pages/Register/Register";
 import EventDetailsAndTab from "./pages/EventDetails/EventDetailsAndTab";
 import NavbarNew from "./components/Navbar/NavbarNew";
+import VideoHome from "./pages/Home/VideoHome";
 
 function App() {
   return (
     <>
       <NavbarNew />
       <Routes>
-        <Route element={<Home />} path="/" exact />
+        <Route element={<VideoHome />} path="/" exact />
         <Route element={<Dashboard />} path="/dashboard" exact />
         <Route element={<Profile />} path="/profile" exact />
         <Route element={<Login />} path="/login" exact />

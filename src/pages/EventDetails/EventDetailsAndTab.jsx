@@ -125,9 +125,9 @@ export default function EventDetailsAndTab() {
         bgcolor: "background.paper",
         display: "flex",
         height: "100vh",
-        paddingTop: 10,
-        position: "sticky",
-        top: 0,
+        // paddingTop: 10,
+        // position: "sticky",
+        // top: 0,
       }}
     >
       <Tabs
@@ -135,7 +135,12 @@ export default function EventDetailsAndTab() {
         value={value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
+        sx={{
+          borderRight: 1,
+          borderColor: "divider",
+          position: "sticky",
+          top: 0,
+        }}
       >
         <Tab
           sx={{
