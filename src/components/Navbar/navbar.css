@@ -1,4 +1,4 @@
-nav {
+/* nav {
   background: rgba(35, 35, 35, 0.4);
   width: 100%;
   padding: 0.7rem 1.7rem;
@@ -41,17 +41,17 @@ nav {
 
 .logo {
   width: 10rem;
-}
+} */
 
 /* ================ MEDIA QUERIES (MEDIUM DEVICES) ================= */
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .links {
     gap: 2rem;
   }
-}
+} */
 
 /* ================ MEDIA QUERIES (SMALL DEVICES) ================= */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .links {
     gap: 1rem;
   }
@@ -63,4 +63,4 @@ nav {
   .navLogo {
     display: none;
   }
-}
+} */
