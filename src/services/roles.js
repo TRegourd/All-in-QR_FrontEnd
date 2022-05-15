@@ -12,6 +12,10 @@ const RolesServices = {
   listRoles(id) {
     return base.get(`/roles/${id}`);
   },
+
+  modifyRoles(id, body) {
+    return base.put(`/roles/${id}`, body);
+  },
 };
 
 export default RolesServices;

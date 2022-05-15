@@ -23,6 +23,8 @@ import SendQRCodeToAll from "../../components/SendQRCodeToEveryAttendee/SendQRCo
 import dayjs from "dayjs";
 import { Item } from "../../components/Profile_Components/Item";
 import EditEvent from "../../components/Event/EditEvent";
+import ActivitiesList from "../../components/ActivitiesList/ActivitiesList";
+
 import {
   BsCalendarEventFill,
   BsFillPersonLinesFill,
@@ -199,6 +201,11 @@ export default function EventDetailsAndTab() {
           fetchAndSetActivities={fetchAndSetActivities}
           roles={roles}
         />
+        <ActivitiesList
+          activities={activities}
+          fetchAndSetActivities={fetchAndSetActivities}
+          roles={roles}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <h2>Attendees</h2>
@@ -209,7 +216,7 @@ export default function EventDetailsAndTab() {
             activities={activities}
           />
           <p>OR</p>
-          <AttendeeEmailForm />
+          <AttendeeEmailForm roles={roles} />{" "}
         </AttendeesFormContainer>
         <Accordion>
           <AccordionSummary
@@ -225,6 +232,8 @@ export default function EventDetailsAndTab() {
             <AttendeeList
               attendees={attendees}
               fetchAndSetAttendees={fetchAndSetAttendees}
+              roles={roles}
+              activities={activities}
             />
           </AccordionDetails>
         </Accordion>
