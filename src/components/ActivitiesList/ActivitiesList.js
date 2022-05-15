@@ -1,10 +1,6 @@
 import { useParams } from "react-router-dom";
 import Activities from "../Activities/Activities";
-export default function ActivitiesList({
-  activities,
-  fetchAndSetActivities,
-  roles,
-}) {
+export default function ActivitiesList({ activities, fetchAndSet, roles }) {
   let params = useParams();
 
   return (
@@ -15,7 +11,7 @@ export default function ActivitiesList({
             <Activities
               activities={result}
               eventID={params.eventID}
-              fetchAndSetActivities={fetchAndSetActivities}
+              fetchAndSet={fetchAndSet}
               roles={roles}
             />
           </div>

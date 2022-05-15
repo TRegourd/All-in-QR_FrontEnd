@@ -2,15 +2,11 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ActivitiesServices from "../../services/activities";
 
-export default function DeleteActivities({
-  result,
-  eventID,
-  fetchAndSetActivities,
-}) {
+export default function DeleteActivities({ result, eventID, fetchAndSet }) {
   const handleClick = () => {
     ActivitiesServices.deleteActivities(result._id)
       .then(() => {
-        fetchAndSetActivities(eventID);
+        fetchAndSet(eventID);
       })
       .catch(() => alert("erreur"));
   };

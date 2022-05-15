@@ -80,39 +80,23 @@ export default function EventDetailsAndTab() {
   }, []);
 
   const [roles, setRoles] = useState([]);
+  const [activities, setActivities] = useState([]);
+  const [attendees, setAttendees] = useState([]);
 
-  function fetchAndSetRoles(eventID) {
+  function fetchAndSet(eventID) {
     RolesServices.listRoles(eventID).then((result) => {
       setRoles(result.data);
     });
-  }
-
-  useEffect(() => {
-    fetchAndSetRoles(params.eventID);
-  }, []);
-
-  const [activities, setActivities] = useState([]);
-
-  function fetchAndSetActivities(eventID) {
     ActivitiesServices.listActivities(eventID).then((result) => {
       setActivities(result.data);
     });
+    AttendeesServices.getAttendeesList(eventID).then((result) =>
+      setAttendees(result)
+    );
   }
 
   useEffect(() => {
-    fetchAndSetActivities(params.eventID);
-  }, []);
-
-  const [attendees, setAttendees] = useState([]);
-
-  function fetchAndSetAttendees(eventID) {
-    AttendeesServices.getAttendeesList(eventID)
-      .then((result) => setAttendees(result))
-      .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    fetchAndSetAttendees(params.eventID);
+    fetchAndSet(params.eventID);
   }, []);
 
   const handleChange = (event, newValue) => {
@@ -192,18 +176,15 @@ export default function EventDetailsAndTab() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <h2>Roles</h2>
-        <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
-        <RoleList roles={roles} fetchAndSetRoles={fetchAndSetRoles} />
+        <AddRoles fetchAndSet={fetchAndSet} />
+        <RoleList roles={roles} fetchAndSet={fetchAndSet} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <h2>Activities</h2>
-        <AddACtivities
-          fetchAndSetActivities={fetchAndSetActivities}
-          roles={roles}
-        />
+        <AddACtivities fetchAndSet={fetchAndSet} roles={roles} />
         <ActivitiesList
           activities={activities}
-          fetchAndSetActivities={fetchAndSetActivities}
+          fetchAndSet={fetchAndSet}
           roles={roles}
         />
       </TabPanel>
@@ -211,7 +192,7 @@ export default function EventDetailsAndTab() {
         <h2>Attendees</h2>
         <AttendeesFormContainer>
           <FormAdd
-            fetchAndSetAttendees={fetchAndSetAttendees}
+            fetchAndSet={fetchAndSet}
             roles={roles}
             activities={activities}
           />
@@ -220,7 +201,7 @@ export default function EventDetailsAndTab() {
         </AttendeesFormContainer>
         <AttendeeList
           attendees={attendees}
-          fetchAndSetAttendees={fetchAndSetAttendees}
+          fetchAndSet={fetchAndSet}
           roles={roles}
           activities={activities}
         />

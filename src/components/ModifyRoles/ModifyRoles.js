@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import RolesServices from "../../services/roles";
 
-export default function ModifyRoles({ result, eventID, fetchAndSetRoles }) {
+export default function ModifyRoles({ result, eventID, fetchAndSet }) {
   const [open, setOpen] = useState(false);
 
   const [body, setBody] = useState({
@@ -20,7 +20,7 @@ export default function ModifyRoles({ result, eventID, fetchAndSetRoles }) {
   const handleSubmit = (e) => {
     RolesServices.modifyRoles(result._id, body)
       .then((result) => {
-        fetchAndSetRoles(eventID);
+        fetchAndSet(eventID);
         setOpen(false);
       })
       .catch(() => alert("erreur"));

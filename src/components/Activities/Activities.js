@@ -6,7 +6,7 @@ import ModifyActivities from "../ModifyActivities/ModifyActivities";
 export default function Activities({
   activities,
   eventID,
-  fetchAndSetActivities,
+  fetchAndSet,
   roles,
 }) {
   return (
@@ -22,7 +22,7 @@ export default function Activities({
           <ModifyActivities
             result={activities}
             eventID={eventID}
-            fetchAndSetActivities={fetchAndSetActivities}
+            fetchAndSet={fetchAndSet}
             roles={roles}
           />
         </div>
@@ -30,7 +30,7 @@ export default function Activities({
           <DeleteActivities
             result={activities}
             eventID={eventID}
-            fetchAndSetActivities={fetchAndSetActivities}
+            fetchAndSet={fetchAndSet}
           />
         </div>
       </ActivitiesStyle>

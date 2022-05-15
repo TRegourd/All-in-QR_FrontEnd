@@ -46,38 +46,38 @@ function EventDetails() {
 
   const [roles, setRoles] = useState([]);
 
-  function fetchAndSetRoles(eventID) {
+  function fetchAndSet(eventID) {
     RolesServices.listRoles(eventID).then((result) => {
       setRoles(result.data);
     });
   }
 
   useEffect(() => {
-    fetchAndSetRoles(params.eventID);
+    fetchAndSet(params.eventID);
   }, []);
 
   const [activities, setActivities] = useState([]);
 
-  function fetchAndSetActivities(eventID) {
+  function fetchAndSet(eventID) {
     ActivitiesServices.listActivities(eventID).then((result) => {
       setActivities(result.data);
     });
   }
 
   useEffect(() => {
-    fetchAndSetActivities(params.eventID);
+    fetchAndSet(params.eventID);
   }, []);
 
   const [attendees, setAttendees] = useState([]);
 
-  function fetchAndSetAttendees(eventID) {
+  function fetchAndSet(eventID) {
     AttendeesServices.getAttendeesList(eventID)
       .then((result) => setAttendees(result))
       .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    fetchAndSetAttendees(params.eventID);
+    fetchAndSet(params.eventID);
   }, []);
 
   return (
@@ -166,18 +166,15 @@ function EventDetails() {
         </section>
         <section className="eventSection" id="roles">
           <h2>Roles</h2>
-          <AddRoles fetchAndSetRoles={fetchAndSetRoles} />
-          <RoleList roles={roles} fetchAndSetRoles={fetchAndSetRoles} />
+          <AddRoles fetchAndSet={fetchAndSet} />
+          <RoleList roles={roles} fetchAndSet={fetchAndSet} />
         </section>
         <section className="eventSection" id="activities">
           <h2>Activities</h2>
-          <AddACtivities
-            fetchAndSetActivities={fetchAndSetActivities}
-            roles={roles}
-          />
+          <AddACtivities fetchAndSet={fetchAndSet} roles={roles} />
           <ActivitiesList
             activities={activities}
-            fetchAndSetActivities={fetchAndSetActivities}
+            fetchAndSet={fetchAndSet}
             roles={roles}
           />
         </section>
@@ -185,7 +182,7 @@ function EventDetails() {
           <h2>Attendees</h2>
           <AttendeesFormContainer>
             <FormAdd
-              fetchAndSetAttendees={fetchAndSetAttendees}
+              fetchAndSet={fetchAndSet}
               roles={roles}
               activities={activities}
             />
@@ -194,7 +191,7 @@ function EventDetails() {
           </AttendeesFormContainer>
           <AttendeeList
             attendees={attendees}
-            fetchAndSetAttendees={fetchAndSetAttendees}
+            fetchAndSet={fetchAndSet}
             roles={roles}
             activities={activities}
           />

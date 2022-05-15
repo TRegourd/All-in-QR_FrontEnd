@@ -8,6 +8,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
 import { useParams } from "react-router-dom";
 import ActivitiesServices from "../../services/activities";
@@ -16,15 +17,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
-export default function AddACtivities({ fetchAndSetActivities, roles }) {
+export default function AddACtivities({ fetchAndSet, roles }) {
   let params = useParams();
 
   const allRole = roles;
   const [selectedRole, setSelectedRole] = useState("");
-  const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState(dayjs().format("LLL"));
   const [body, setBody] = useState({
     name: "",
-    date: "",
+    date: dayjs().format("LLL"),
     duration: null,
     price: null,
     desc: "",
@@ -40,7 +41,7 @@ export default function AddACtivities({ fetchAndSetActivities, roles }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     ActivitiesServices.createActivities(body).then((result) => {
-      fetchAndSetActivities(params.eventID);
+      fetchAndSet(params.eventID);
     });
     e.target.reset();
     setSelectedRole("");
