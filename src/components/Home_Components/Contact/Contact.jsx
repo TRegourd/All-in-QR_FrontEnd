@@ -37,43 +37,17 @@ const Title = styled.h1`
 `;
 
 const Form = styled.form`
-  height: 500px;
+  height: 300px;
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  @media only screen and (max-width: 480px) {
-    flex-direction: column;
-  }
-  @media only screen and (max-width: 900px) {
-    height: 400px;
-  }
-`;
-
-const LeftForm = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-right: 20px;
-  @media only screen and (max-width: 480px) {
-    height: 50%;
-    margin-right: 0;
-  }
-`;
-
-const RightForm = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  @media only screen and (max-width: 480px) {
-    height: 50%;
-  }
 `;
 
 const Input = styled.input`
   width: 400px;
-  height: 150px;
+
   padding: 20px;
   color: white;
   background: rgb(0, 0, 0, 0.6);
@@ -81,7 +55,6 @@ const Input = styled.input`
   @media only screen and (max-width: 900px) {
     padding: 5px;
     width: 200px;
-    height: 100px;
   }
 `;
 
@@ -101,22 +74,17 @@ const TextArea = styled.textarea`
 
 const Contact = () => {
   return (
-    <Container>
+    <Container id="contact">
       <Wrapper>
         <FormContainer>
           <Title>
             Questions? <br /> Let's Get In Touch
           </Title>
           <Form>
-            <LeftForm>
-              <Input placeholder="Your Name" />
-              <Input placeholder="Your Email" />
-              <Input placeholder="Subject" />
-            </LeftForm>
-            <RightForm>
-              <TextArea placeholder="Your Message" />
-              <Button variant="contained">Send</Button>
-            </RightForm>
+            <Input placeholder="Your Email" />
+
+            <TextArea placeholder="Your Message" />
+            <Button variant="contained">Send</Button>
           </Form>
         </FormContainer>
       </Wrapper>
