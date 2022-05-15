@@ -31,7 +31,7 @@ const MenuProps = {
 export default function EditAttendee({
   result,
   eventID,
-  fetchAndSetAttendees,
+  fetchAndSet,
   roles,
   activities,
 }) {
@@ -68,7 +68,7 @@ export default function EditAttendee({
   const handleSubmit = () => {
     AttendeesServices.modifyAttendee(result._id, body)
       .then((response) => {
-        fetchAndSetAttendees(eventID);
+        fetchAndSet(eventID);
         setOpen(false);
       })
       .catch(() => alert("erreur"));

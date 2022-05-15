@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import Role from "../Role/Role";
 
-function RoleList({ roles, fetchAndSetRoles }) {
+function RoleList({ roles, fetchAndSet }) {
   let params = useParams();
   return (
     <section>
@@ -15,7 +15,7 @@ function RoleList({ roles, fetchAndSetRoles }) {
               <Role
                 role={role}
                 eventID={params.eventID}
-                fetchAndSetRoles={fetchAndSetRoles}
+                fetchAndSet={fetchAndSet}
               />
             </div>
           );

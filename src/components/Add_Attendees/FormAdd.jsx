@@ -25,7 +25,7 @@ const MenuProps = {
   },
 };
 
-export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
+export default function FormAdd({ fetchAndSet, roles, activities }) {
   let params = useParams();
 
   const [checkedActivities, setCheckedActivities] = useState([]);
@@ -47,7 +47,7 @@ export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
     let confirmed = window.confirm("Etes-vous sûr de vous supprimer ce rôle?");
     if (confirmed === true) {
       AttendeesServices.deleteRole()
-        .then(fetchAndSetAttendees())
+        .then(fetchAndSet())
         .catch((err) => console.log(err));
     } else {
       alert("Suppression annulée.");
@@ -70,7 +70,7 @@ export default function FormAdd({ fetchAndSetAttendees, roles, activities }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     AttendeesServices.createAttendees(body).then((result) => {
-      fetchAndSetAttendees(params.eventID);
+      fetchAndSet(params.eventID);
     });
     e.target.reset();
     setSelectedRole("");

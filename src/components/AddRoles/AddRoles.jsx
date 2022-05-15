@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
 import RolesServices from "../../services/roles";
 
-export default function AddRoles({ fetchAndSetRoles }) {
+export default function AddRoles({ fetchAndSet }) {
   let params = useParams();
 
   const [body, setBody] = useState({
@@ -25,7 +25,7 @@ export default function AddRoles({ fetchAndSetRoles }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     RolesServices.createRoles(body).then(() => {
-      fetchAndSetRoles(params.eventID);
+      fetchAndSet(params.eventID);
       e.target.reset();
     });
   };

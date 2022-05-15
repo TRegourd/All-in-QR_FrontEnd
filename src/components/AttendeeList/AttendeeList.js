@@ -45,7 +45,7 @@ function AttendeeList({ attendees }) {
   const rows = attendees.map((attendee) => ({
     ...attendee,
     id: attendee._id,
-    roleName: attendee.role.name,
+    roleName: attendee.role !== null ? attendee.role.name : "",
   }));
 
   const [selectionModel, setSelectionModel] = useState([]);

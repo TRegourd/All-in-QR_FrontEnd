@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   TextField,
   FormControl,
@@ -21,7 +20,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 export default function ModifyActivities({
   result,
   eventID,
-  fetchAndSetActivities,
+  fetchAndSet,
   roles,
 }) {
   const [open, setOpen] = useState(false);
@@ -49,7 +48,7 @@ export default function ModifyActivities({
   const handleSubmit = (e) => {
     ActivitiesServices.modifyActivities(result._id, body)
       .then((result) => {
-        fetchAndSetActivities(eventID);
+        fetchAndSet(eventID);
         setOpen(false);
       })
       .catch(() => alert("erreur"));
