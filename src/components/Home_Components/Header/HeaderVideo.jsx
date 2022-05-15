@@ -13,12 +13,12 @@ function HeaderVideo() {
       <p>Make your events managment easier</p>
       <div className="header-btns">
         <Button className="btns"></Button>
-        <Button className="btns" variant="contained">
+        <Button className="btns contained" variant="contained">
           GET STARTED
         </Button>
         <Link to="contact" smooth>
           <Button
-            className="btns"
+            className="btns outlined"
             onClick={console.log("hey")}
             variant="outlined"
           >

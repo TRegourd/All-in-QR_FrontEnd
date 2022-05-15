@@ -39,6 +39,23 @@ video {
   margin: 6px;
 }
 
+.header-btns .contained {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.header-btns .outlined {
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.contained:hover,
+.outlined:hover {
+  background-color: #eaeaeac7 !important;
+  transition: 0.3s ease-out;
+  border-color: #eaeaeac7 !important;
+}
+
 @media screen and (max-width: 960px) {
   .header-container > h1 {
     font-size: 70px;
