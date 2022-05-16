@@ -8,7 +8,7 @@ import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
 import SendQRCodeToAll from "../SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
 import AttendeesServices from "../../services/attendees";
 
-function AttendeeList({ attendees, fetchAndSet, roles }) {
+function AttendeeListCopy({ attendees, fetchAndSet, roles }) {
   let params = useParams();
   const [editedField, setEditedFiled] = useState({});
 
@@ -25,7 +25,9 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
       const selectedRole = roles.find((e) => e.name === event.target.value);
       const body = { role: selectedRole._id };
       AttendeesServices.modifyAttendee(id, body)
-        .then(() => {})
+        .then(() => {
+          console.log("toto");
+        })
         .catch(() => alert("erreur"));
     };
 
@@ -156,4 +158,4 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
   );
 }
 
-export default AttendeeList;
+export default AttendeeListCopy;
