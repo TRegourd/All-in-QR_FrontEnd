@@ -4,6 +4,7 @@ import React from "react";
 import "./HeaderVideo.css";
 import HomeVideo from "../../../assets/video.mp4";
 import Link from "react-scroll/modules/components/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 function HeaderVideo() {
   return (
@@ -13,9 +14,11 @@ function HeaderVideo() {
       <p>Make your events managment easier</p>
       <div className="header-btns">
         <Button className="btns"></Button>
-        <Button className="btns contained" variant="contained">
-          GET STARTED
-        </Button>
+        <RouterLink to="login" smooth>
+          <Button className="btns contained" variant="contained">
+            GET STARTED
+          </Button>
+        </RouterLink>
         <Link to="contact" smooth>
           <Button
             className="btns outlined"

@@ -121,7 +121,7 @@ const CardInput = styled.input`
   transition: border-bottom-color 0.25s ease-in;
 
   &:focus {
-    border-bottom-color: #e5195f;
+    border-bottom-color: #1990e5;
     outline: 0;
   }
 `;
