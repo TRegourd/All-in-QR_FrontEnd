@@ -1,11 +1,14 @@
 import {
-  Box,
   Button,
   TextField,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
@@ -19,6 +22,8 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 export default function AddACtivities({ fetchAndSet, roles }) {
   let params = useParams();
+
+  const [open, setOpen] = useState(false);
 
   const allRole = roles;
   const [selectedRole, setSelectedRole] = useState("");
@@ -39,12 +44,10 @@ export default function AddACtivities({ fetchAndSet, roles }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     ActivitiesServices.createActivities(body).then((result) => {
       fetchAndSet(params.eventID);
+      setOpen(false);
     });
-    e.target.reset();
-    setSelectedRole("");
   };
 
   const handleRoleChange = (event) => {
@@ -61,84 +64,100 @@ export default function AddACtivities({ fetchAndSet, roles }) {
     updateBody(name, value);
   };
 
-  return (
-    <Box
-      component="form"
-      noValidate
-      onSubmit={handleSubmit}
-      onChange={handleBodyChange}
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: 250 },
-      }}
-    >
-      <div>
-        <div>
-          <TextField
-            required
-            id="outlined-name"
-            label="Name"
-            name="name"
-            variant="outlined"
-          />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateTimePicker
-              renderInput={(props) => <TextField {...props} />}
-              label="date"
-              name="date"
-              value={date}
-              onChange={handleDateChange}
-            />
-          </LocalizationProvider>
-        </div>
-        <div>
-          <TextField
-            required
-            id="outlined-duration"
-            label="Duration"
-            name="duration"
-            variant="outlined"
-          />
-          <TextField
-            required
-            id="outlined-price"
-            label="Price"
-            name="price"
-            variant="outlined"
-          />
-        </div>
-        <div>
-          <TextField
-            required
-            id="outlined-desc"
-            label="Description"
-            name="desc"
-            variant="outlined"
-          />
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-          <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
-            <InputLabel id="select-role-label">Role</InputLabel>
-            <Select
-              labelId="select-role-label"
-              id="select-role"
-              value={selectedRole}
-              label="Role"
-              onChange={handleRoleChange}
-              name="role"
-            >
-              {allRole.map((value) => {
-                return (
-                  <MenuItem key={value._id} value={value._id}>
-                    {value.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-        <Button type="submit" variant="outlined">
-          Créer
-        </Button>
-      </div>
-    </Box>
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        créer une activité
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        onChange={handleBodyChange}
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: 250 },
+        }}
+      >
+        <DialogTitle>créer une activité</DialogTitle>
+        <DialogContent>
+          <div>
+            <div>
+              <TextField
+                required
+                id="outlined-name"
+                label="Name"
+                name="name"
+                variant="outlined"
+              />
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  renderInput={(props) => <TextField {...props} />}
+                  label="date"
+                  name="date"
+                  value={date}
+                  onChange={handleDateChange}
+                />
+              </LocalizationProvider>
+            </div>
+            <div>
+              <TextField
+                required
+                id="outlined-duration"
+                label="Duration"
+                name="duration"
+                variant="outlined"
+              />
+              <TextField
+                required
+                id="outlined-price"
+                label="Price"
+                name="price"
+                variant="outlined"
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                id="outlined-desc"
+                label="Description"
+                name="desc"
+                variant="outlined"
+              />
+
+              <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
+                <InputLabel id="select-role-label">Role</InputLabel>
+                <Select
+                  labelId="select-role-label"
+                  id="select-role"
+                  value={selectedRole}
+                  label="Role"
+                  onChange={handleRoleChange}
+                  name="role"
+                >
+                  {allRole.map((value) => {
+                    return (
+                      <MenuItem key={value._id} value={value._id}>
+                        {value.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit}>Envoyer</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }

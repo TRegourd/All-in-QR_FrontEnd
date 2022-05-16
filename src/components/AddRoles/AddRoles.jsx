@@ -1,12 +1,19 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+} from "@mui/material";
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
 import RolesServices from "../../services/roles";
 
 export default function AddRoles({ fetchAndSet }) {
   let params = useParams();
+
+  const [open, setOpen] = useState(false);
 
   const [body, setBody] = useState({
     name: "",
@@ -23,38 +30,49 @@ export default function AddRoles({ fetchAndSet }) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     RolesServices.createRoles(body).then(() => {
       fetchAndSet(params.eventID);
-      e.target.reset();
+      setOpen(false);
     });
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
     <div>
-      <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1, width: 250 },
-        }}
-        noValidate
+      <Button variant="outlined" onClick={handleClickOpen}>
+        créer un role
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
         onChange={handleBodyChange}
-        onSubmit={handleSubmit}
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: 250 },
+        }}
       >
-        <div>
-          <TextField
-            id="outlined-role"
-            label="role"
-            variant="outlined"
-            name="name"
-          />
-        </div>
-        <div>
-          <Button type="submit" variant="outlined">
-            Créer
-          </Button>
-        </div>
-      </Box>
+        <DialogTitle>créer le role</DialogTitle>
+        <DialogContent>
+          <div>
+            <TextField
+              id="outlined-role"
+              label="role"
+              variant="outlined"
+              name="name"
+            />
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit}>Envoyer</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

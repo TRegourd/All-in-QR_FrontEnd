@@ -12,7 +12,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function SendRegisterEmailSnackbar({ body }) {
+export default function SendRegisterEmailSnackbar({ body, handleCloseForm }) {
   const [open, setOpen] = React.useState(false);
   const [signed, setSigned] = React.useState(false);
 
@@ -22,6 +22,7 @@ export default function SendRegisterEmailSnackbar({ body }) {
         .then(() => {
           setSigned(true);
           snackBarTrue();
+          handleCloseForm();
         })
         .catch((err) => {
           console.log(err);

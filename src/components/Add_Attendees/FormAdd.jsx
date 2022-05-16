@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import {
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Checkbox,
   Select,
   MenuItem,
   InputLabel,
   FormControl,
   OutlinedInput,
+  TextField,
 } from "@mui/material";
 import AttendeesServices from "../../services/attendees";
 import ActivitiesServices from "../../services/activities";
@@ -28,6 +31,8 @@ const MenuProps = {
 export default function FormAdd({ fetchAndSet, roles, activities }) {
   let params = useParams();
 
+  const [open, setOpen] = useState(false);
+
   const [checkedActivities, setCheckedActivities] = useState([]);
   const allRole = roles;
   const [selectedRole, setSelectedRole] = useState("");
@@ -41,18 +46,6 @@ export default function FormAdd({ fetchAndSet, roles, activities }) {
     role: "",
     event: params.eventID,
   });
-
-  function deleteRole(data) {
-    console.log(data);
-    let confirmed = window.confirm("Etes-vous sûr de vous supprimer ce rôle?");
-    if (confirmed === true) {
-      AttendeesServices.deleteRole()
-        .then(fetchAndSet())
-        .catch((err) => console.log(err));
-    } else {
-      alert("Suppression annulée.");
-    }
-  }
 
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
@@ -71,10 +64,8 @@ export default function FormAdd({ fetchAndSet, roles, activities }) {
     e.preventDefault();
     AttendeesServices.createAttendees(body).then((result) => {
       fetchAndSet(params.eventID);
+      setOpen(false);
     });
-    e.target.reset();
-    setSelectedRole("");
-    setCheckedActivities([]);
   };
 
   const updateBody = (key, value) => {
@@ -86,106 +77,120 @@ export default function FormAdd({ fetchAndSet, roles, activities }) {
     updateBody(name, value);
   };
 
-  return (
-    <Box
-      component="form"
-      noValidate
-      onSubmit={handleSubmit}
-      onChange={handleBodyChange}
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: 250 },
-      }}
-    >
-      <div>
-        <h3>Add new attendee</h3>
-        <div>
-          <TextField
-            required
-            id="outlined-name-required"
-            label="Name"
-            name="name"
-          />
-          <TextField
-            required
-            id="outlined-surname-required"
-            label="Surname"
-            name="surname"
-          />
-        </div>
-        <div>
-          <TextField
-            required
-            id="outlined-email-required"
-            label="Email"
-            name="email"
-          />
-          <TextField
-            required
-            id="outlined-phone-required"
-            label="Phone"
-            name="phone"
-          />
-        </div>
-        <div>
-          <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
-            <InputLabel id="select-activities-label">Activities</InputLabel>
-            <Select
-              labelId="select-activities-label"
-              id="select-activities"
-              multiple
-              value={checkedActivities}
-              onChange={handleActivitiesChange}
-              input={<OutlinedInput label="Activities" />}
-              //renderValue={(selected) => selected.join(", ")}
-              MenuProps={MenuProps}
-              name="extra_activities"
-            >
-              {allActivities
-                .filter((value) => {
-                  return value.event._id === body.event;
-                })
-                .filter((value) => {
-                  if (value.role !== null) {
-                    return value.role._id !== selectedRole;
-                  }
-                })
-                .map((value) => {
-                  return (
-                    <MenuItem key={value._id} value={value._id}>
-                      <Checkbox
-                        checked={checkedActivities.indexOf(value._id) > -1}
-                      />
-                      {value.name}
-                    </MenuItem>
-                  );
-                })}
-            </Select>
-          </FormControl>
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-          <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
-            <InputLabel id="select-role-label">Role</InputLabel>
-            <Select
-              labelId="select-role-label"
-              id="select-role"
-              value={selectedRole}
-              label="Role"
-              onChange={handleRoleChange}
-              name="role"
-            >
-              {allRole.map((value) => {
-                return (
-                  <MenuItem key={value._id} value={value._id}>
-                    {value.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-        <Button type="submit" variant="outlined">
-          Add Attendee
-        </Button>
-      </div>
-    </Box>
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        créer un attendee
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        onChange={handleBodyChange}
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: 250 },
+        }}
+      >
+        <DialogContent>
+          <div>
+            <div>
+              <TextField
+                required
+                id="outlined-name-required"
+                label="Name"
+                name="name"
+              />
+              <TextField
+                required
+                id="outlined-surname-required"
+                label="Surname"
+                name="surname"
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                id="outlined-email-required"
+                label="Email"
+                name="email"
+              />
+              <TextField
+                required
+                id="outlined-phone-required"
+                label="Phone"
+                name="phone"
+              />
+            </div>
+            <div>
+              <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
+                <InputLabel id="select-activities-label">Activities</InputLabel>
+                <Select
+                  labelId="select-activities-label"
+                  id="select-activities"
+                  multiple
+                  value={checkedActivities}
+                  onChange={handleActivitiesChange}
+                  input={<OutlinedInput label="Activities" />}
+                  //renderValue={(selected) => selected.join(", ")}
+                  MenuProps={MenuProps}
+                  name="extra_activities"
+                >
+                  {allActivities
+                    .filter((value) => {
+                      return value.event._id === body.event;
+                    })
+                    .filter((value) => {
+                      if (value.role !== null) {
+                        return value.role._id !== selectedRole;
+                      }
+                    })
+                    .map((value) => {
+                      return (
+                        <MenuItem key={value._id} value={value._id}>
+                          <Checkbox
+                            checked={checkedActivities.indexOf(value._id) > -1}
+                          />
+                          {value.name}
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+              </FormControl>
+
+              <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
+                <InputLabel id="select-role-label">Role</InputLabel>
+                <Select
+                  labelId="select-role-label"
+                  id="select-role"
+                  value={selectedRole}
+                  label="Role"
+                  onChange={handleRoleChange}
+                  name="role"
+                >
+                  {allRole.map((value) => {
+                    return (
+                      <MenuItem key={value._id} value={value._id}>
+                        {value.name}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSubmit}>Envoyer</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
