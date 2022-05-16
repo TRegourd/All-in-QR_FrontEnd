@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import EventCard from "../../components/Event/EventCard";
 import NewEvent from "../CreateEvent/NewEvent";
 import authServices from "../../services/auth";
+import dayjs from "dayjs";
 
 function Dashboard() {
   const [events, setEvents] = useState([]);
@@ -44,21 +45,59 @@ function Dashboard() {
           currentUser={currentUser}
         ></NewEvent>
       )}
-      <div>
-        <EventTitle>Mes évènements</EventTitle>
-      </div>
+
+      <EventTitle>Current Events</EventTitle>
+
       <EventsContainer>
         {events.map((event) => {
-          return (
-            <div key={event._id}>
-              <Link to={`/${event._id}`}>
-                <EventCard
-                  event={event}
-                  fetchAndSetEvents={fetchAndSetEvents}
-                ></EventCard>
-              </Link>
-            </div>
-          );
+          if (
+            dayjs(event.start_date).format("YYYY-MM-DD") <=
+              dayjs().format("YYYY-MM-DD") &&
+            dayjs().format("YYYY-MM-DD") <=
+              dayjs(event.end_date).format("YYYY-MM-DD")
+          )
+            return (
+              <div key={event._id}>
+                <Link to={`/${event._id}`}>
+                  <EventCard
+                    event={event}
+                    fetchAndSetEvents={fetchAndSetEvents}
+                  ></EventCard>
+                </Link>
+              </div>
+            );
+        })}
+      </EventsContainer>
+      <EventTitle>Events to come</EventTitle>
+      <EventsContainer>
+        {events.map((event) => {
+          if (dayjs(event.start_date) > dayjs())
+            return (
+              <div key={event._id}>
+                <Link to={`/${event._id}`}>
+                  <EventCard
+                    event={event}
+                    fetchAndSetEvents={fetchAndSetEvents}
+                  ></EventCard>
+                </Link>
+              </div>
+            );
+        })}
+      </EventsContainer>
+      <EventTitle>Finished events</EventTitle>
+      <EventsContainer>
+        {events.map((event) => {
+          if (dayjs(event.end_date) < dayjs())
+            return (
+              <div key={event._id}>
+                <Link to={`/${event._id}`}>
+                  <EventCard
+                    event={event}
+                    fetchAndSetEvents={fetchAndSetEvents}
+                  ></EventCard>
+                </Link>
+              </div>
+            );
         })}
       </EventsContainer>
     </Container>

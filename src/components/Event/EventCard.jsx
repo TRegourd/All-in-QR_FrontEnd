@@ -38,11 +38,11 @@ export default function EventCard({ event, fetchAndSetEvents }) {
   }
 
   return (
-    <Card sx={{ maxWidth: 500 }}>
+    <Card sx={{ maxWidth: 200 }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="200"
+          height="100"
           image={imgSrc()}
           alt="cover img"
         />
