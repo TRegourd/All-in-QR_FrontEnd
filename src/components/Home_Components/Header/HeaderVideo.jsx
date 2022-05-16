@@ -14,7 +14,7 @@ function HeaderVideo() {
       <p>Make your events managment easier</p>
       <div className="header-btns">
         <Button className="btns"></Button>
-        <RouterLink to="login" smooth>
+        <RouterLink to="login">
           <Button className="btns contained" variant="contained">
             GET STARTED
           </Button>

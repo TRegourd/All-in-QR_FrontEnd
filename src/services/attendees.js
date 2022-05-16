@@ -31,8 +31,8 @@ const AttendeesServices = {
     return base.post(`/qrcode/${id}`);
   },
 
-  sendQrCodeEmailToEveryone(id) {
-    return base.post(`/qrcode/all/${id}`);
+  sendQrCodeEmailToEveryone(body) {
+    return base.post(`/qrcode/many/`, body);
   },
 
   sendRegisterEmail(body) {

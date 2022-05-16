@@ -4,11 +4,11 @@ import AttendeesServices from "../../services/attendees";
 import React from "react";
 import { useParams } from "react-router-dom";
 
-export default function SendQRCodeToAll() {
+export default function SendQRCodeToAll({ attendeesQR }) {
   const params = useParams();
 
   const handleClick = () => {
-    AttendeesServices.sendQrCodeEmailToEveryone(params.eventID)
+    AttendeesServices.sendQrCodeEmailToEveryone(attendeesQR)
       .then((response) => {
         alert("Emails envoyé");
       })
