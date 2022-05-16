@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import eventServices from "../../services/Event";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import CreateEvent from "../CreateEvent/CreateEvent";
 import EventCard from "../../components/Event/EventCard";
+import NewEvent from "../CreateEvent/NewEvent";
+import authServices from "../../services/auth";
 
 function Dashboard() {
   const [events, setEvents] = useState([]);
+  const [currentUser, setCurrentUser] = useState();
 
   function fetchAndSetEvents() {
     eventServices
@@ -21,9 +23,27 @@ function Dashboard() {
     fetchAndSetEvents();
   }, []);
 
+  function fetchAndSetUserList() {
+    authServices
+      .getCurrentUser()
+      .then((user) => {
+        setCurrentUser(user);
+      })
+      .catch(() => alert("erreur"));
+  }
+
+  React.useEffect(() => {
+    fetchAndSetUserList();
+  }, []);
+
   return (
-    <>
-      <CreateEvent fetchAndSetEvents={fetchAndSetEvents}></CreateEvent>
+    <Container>
+      {currentUser && (
+        <NewEvent
+          fetchAndSetEvents={fetchAndSetEvents}
+          currentUser={currentUser}
+        ></NewEvent>
+      )}
       <div>
         <EventTitle>Mes évènements</EventTitle>
       </div>
@@ -41,7 +61,7 @@ function Dashboard() {
           );
         })}
       </EventsContainer>
-    </>
+    </Container>
   );
 }
 
@@ -57,6 +77,14 @@ const EventsContainer = styled.div`
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
 `;
 
 export default Dashboard;
