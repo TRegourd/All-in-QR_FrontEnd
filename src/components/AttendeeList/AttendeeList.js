@@ -8,6 +8,7 @@ import AttendeesServices from "../../services/attendees";
 function AttendeeList({ attendees, fetchAndSet }) {
   let params = useParams();
   const [editedField, setEditedFiled] = useState({});
+  console.log("params", params.eventID);
 
   const columns = [
     {
@@ -91,7 +92,13 @@ function AttendeeList({ attendees, fetchAndSet }) {
           }}
         />
       </div>
-      {selectionModel && <DeleteAttendee attendeesToDelete={selectionModel} />}
+      {selectionModel && (
+        <DeleteAttendee
+          attendeesToDelete={selectionModel}
+          fetchAndSet={fetchAndSet}
+          eventID={params.eventID}
+        />
+      )}
       <SendQRCodeToAll attendeesQR={selectionModel} />
     </div>
   );
