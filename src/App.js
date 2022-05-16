@@ -10,8 +10,9 @@ import Profile from "./pages/Profile/Profile";
 import Signin from "./pages/Signin/Signin";
 import Register from "./pages/Register/Register";
 import EventDetailsAndTab from "./pages/EventDetails/EventDetailsAndTab";
-import NavbarNew from "./components/Navbar/NavbarNew";
+
 import VideoHome from "./pages/Home/VideoHome";
+import NavbarNew from "./components/Navbar/NavbarNew";
 
 function App() {
   return (

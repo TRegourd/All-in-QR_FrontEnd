@@ -5,6 +5,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
+import SendQRCodeToAll from "../SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
 
 function AttendeeList({ attendees }) {
   let params = useParams();
@@ -68,6 +69,7 @@ function AttendeeList({ attendees }) {
         />
       </div>
       {selectionModel && <DeleteAttendee attendeesToDelete={selectionModel} />}
+      <SendQRCodeToAll attendeesQR={selectionModel} />
     </div>
   );
 }
