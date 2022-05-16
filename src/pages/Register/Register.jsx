@@ -1,14 +1,33 @@
-import React, { useEffect } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  Checkbox,
+} from "@mui/material";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import RegisterSnackbar from "../../components/Register_Components/RegisterSnackbar";
 import AttendeesServices from "../../services/attendees";
+import ActivitiesServices from "../../services/activities";
 import eventServices from "../../services/Event";
 import dayjs from "dayjs";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default function Register() {
   const navigate = useNavigate();
@@ -23,6 +42,16 @@ export default function Register() {
     event: params.eventId,
   });
   const [currentEvent, setCurrentEvent] = useState("");
+  const [allActivities, setAllActivities] = useState([]);
+  const [checkedActivities, setCheckedActivities] = useState([]);
+
+  const handleActivitiesChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setCheckedActivities(typeof value === "string" ? value.split(",") : value);
+    handleChange(event);
+  };
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -44,8 +73,19 @@ export default function Register() {
       });
   }
 
+  function fetchActivities(id) {
+    ActivitiesServices.listActivities(id)
+      .then((result) => {
+        setAllActivities(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
     fetchCurrentEvent(params.eventId);
+    fetchActivities(params.eventId);
   }, []);
 
   return (
@@ -98,6 +138,42 @@ export default function Register() {
             type="text"
             name="phone"
           />
+          <br />
+          <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
+            <InputLabel id="select-Extra Activities-label">
+              Extra Activities
+            </InputLabel>
+            <Select
+              labelId="select-Extra Activities-label"
+              id="select-Extra Activities"
+              multiple
+              value={checkedActivities}
+              onChange={handleActivitiesChange}
+              input={<OutlinedInput label="Extra Activities" />}
+              MenuProps={MenuProps}
+              name="extra_activities"
+            >
+              {allActivities
+                .filter((value) => {
+                  return value.event._id === body.event;
+                })
+                .filter((value) => {
+                  if (value.role !== null) {
+                    return value.role._id !== body.role;
+                  }
+                })
+                .map((value) => {
+                  return (
+                    <MenuItem key={value._id} value={value._id}>
+                      <Checkbox
+                        checked={checkedActivities.indexOf(value._id) > -1}
+                      />
+                      {value.name}
+                    </MenuItem>
+                  );
+                })}
+            </Select>
+          </FormControl>
         </div>
         <RegisterSnackbar body={body}></RegisterSnackbar>
       </Box>

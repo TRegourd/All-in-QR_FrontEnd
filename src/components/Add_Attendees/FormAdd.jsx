@@ -130,15 +130,16 @@ export default function FormAdd({ fetchAndSet, roles, activities }) {
             </div>
             <div>
               <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
-                <InputLabel id="select-activities-label">Activities</InputLabel>
+                <InputLabel id="select-Extra Activities-label">
+                  Extra Activities
+                </InputLabel>
                 <Select
-                  labelId="select-activities-label"
-                  id="select-activities"
+                  labelId="select-Extra Activities-label"
+                  id="select-Extra Activities"
                   multiple
                   value={checkedActivities}
                   onChange={handleActivitiesChange}
-                  input={<OutlinedInput label="Activities" />}
-                  //renderValue={(selected) => selected.join(", ")}
+                  input={<OutlinedInput label="Extra Activities" />}
                   MenuProps={MenuProps}
                   name="extra_activities"
                 >
