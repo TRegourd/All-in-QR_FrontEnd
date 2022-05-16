@@ -28,9 +28,12 @@ const Left = styled.div`
 `;
 
 const Desc = styled.p`
-  width: 70%;
+  width: 80%;
   font-size: 15px;
+  padding: 20px;
+  border-radius: 10px;
   text-align: justify;
+  background: rgb(0, 0, 0, 0.6);
   @media only screen and (max-width: 480px) {
     width: 100%;
   }

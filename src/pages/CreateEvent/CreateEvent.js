@@ -91,7 +91,6 @@ export default function CreateEvent({ fetchAndSetEvents }) {
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
-        style={{ marginTop: "100px" }}
         method="POST"
       >
         <h1>Create an Event</h1>
