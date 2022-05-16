@@ -162,7 +162,7 @@ export default function ModifyActivities({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Envoyer</Button>
+          <Button onClick={handleSubmit}>Modifier</Button>
         </DialogActions>
       </Dialog>
     </div>

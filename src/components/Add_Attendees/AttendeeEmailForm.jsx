@@ -51,7 +51,7 @@ export default function AttendeeEmailForm({ roles }) {
   return (
     <Container>
       <Button variant="outlined" onClick={handleClickOpen}>
-        créer une activité
+        envoyer le formulaire par mail
       </Button>
       <Dialog
         component="form"
@@ -66,7 +66,7 @@ export default function AttendeeEmailForm({ roles }) {
         style={{ marginTop: "50px" }}
       >
         <DialogTitle>
-          créer une activité
+          envoyer le formulaire par mail
           {/* <pre>{JSON.stringify(body, null, 2)}</pre> */}
           <MultipleEmailsTooltip></MultipleEmailsTooltip>
         </DialogTitle>

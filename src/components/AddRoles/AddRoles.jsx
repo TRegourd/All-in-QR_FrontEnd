@@ -70,7 +70,7 @@ export default function AddRoles({ fetchAndSet }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Envoyer</Button>
+          <Button onClick={handleSubmit}>Créer</Button>
         </DialogActions>
       </Dialog>
     </div>
