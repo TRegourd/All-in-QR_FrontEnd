@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Home from "./pages/Home/Home";
 import Forgot from "./pages/Login/Forgot";
 import Login from "./pages/Login/Login";
 import Reset from "./pages/Login/Reset";
