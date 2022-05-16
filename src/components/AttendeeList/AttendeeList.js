@@ -50,8 +50,6 @@ function AttendeeList({ attendees }) {
 
   const [selectionModel, setSelectionModel] = useState([]);
 
-  const body = { id: selectionModel };
-
   return (
     <div>
       <div style={{ height: 400, width: "100%" }}>
@@ -69,7 +67,7 @@ function AttendeeList({ attendees }) {
           {...rows}
         />
       </div>
-      {body.id && <DeleteAttendee attendeesToDelete={body} />}
+      {selectionModel && <DeleteAttendee attendeesToDelete={selectionModel} />}
     </div>
   );
 }

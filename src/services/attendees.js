@@ -21,9 +21,7 @@ const AttendeesServices = {
     return base.put(`/attendees/${id}`, body);
   },
   deleteAttendee(body) {
-    return base.post(`/attendees/delete`, {
-      body,
-    });
+    return base.post(`/attendees/delete`, body);
   },
 
   deleteRole(id) {
