@@ -183,7 +183,7 @@ export default function FormAdd({ fetchAndSet, roles, activities }) {
           </FormControl>
         </div>
         <Button type="submit" variant="outlined">
-          Créer
+          Add Attendee
         </Button>
       </div>
     </Box>

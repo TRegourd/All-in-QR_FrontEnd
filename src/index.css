@@ -56,10 +56,6 @@ h1 {
   font-size: 2.5rem;
 }
 
-section {
-  margin-top: 4rem;
-}
-
 a {
   color: var(--color-primary);
   transition: var(--transition);

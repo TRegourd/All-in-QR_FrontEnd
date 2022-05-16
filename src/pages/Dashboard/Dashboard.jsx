@@ -22,7 +22,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <section>
+    <>
       <CreateEvent fetchAndSetEvents={fetchAndSetEvents}></CreateEvent>
       <div>
         <EventTitle>Mes évènements</EventTitle>
@@ -41,7 +41,7 @@ function Dashboard() {
           );
         })}
       </EventsContainer>
-    </section>
+    </>
   );
 }
 
