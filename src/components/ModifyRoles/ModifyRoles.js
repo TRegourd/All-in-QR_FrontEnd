@@ -45,7 +45,7 @@ export default function ModifyRoles({ result, eventID, fetchAndSet }) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Modifier l'activité
+        Modifier le role
       </Button>
       <Dialog
         open={open}
