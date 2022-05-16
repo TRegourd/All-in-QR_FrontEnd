@@ -51,7 +51,7 @@ export default function AttendeeEmailForm({ roles }) {
   return (
     <Container>
       <Button variant="outlined" onClick={handleClickOpen}>
-        créer une activité
+        Email Register Links
       </Button>
       <Dialog
         component="form"
