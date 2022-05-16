@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -13,16 +13,7 @@ import RoleList from "../../components/RoleList/RoleList";
 import AddRoles from "../../components/AddRoles/AddRoles";
 import RolesServices from "../../services/roles";
 import AttendeeEmailForm from "../../components/Add_Attendees/AttendeeEmailForm";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "styled-components";
-import SendQRCodeToAll from "../../components/SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
-import dayjs from "dayjs";
-import { Item } from "../../components/Profile_Components/Item";
-import EditEvent from "../../components/Event/EditEvent";
-
 import {
   BsCalendarEventFill,
   BsFillPersonLinesFill,
@@ -45,7 +36,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ p: 3, width: "80vw" }}>{children}</Box>}
     </div>
   );
 }

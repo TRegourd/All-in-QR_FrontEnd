@@ -1,14 +1,13 @@
-import AttendeesServices from "../../services/attendees";
-import Attendee from "../Attendee/Attendee";
 import { useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
-import LinearProgress from "@mui/material/LinearProgress";
 import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
 import SendQRCodeToAll from "../SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
+import AttendeesServices from "../../services/attendees";
 
-function AttendeeList({ attendees }) {
+function AttendeeList({ attendees, fetchAndSet }) {
   let params = useParams();
+  const [editedField, setEditedFiled] = useState({});
 
   const columns = [
     {
@@ -51,6 +50,21 @@ function AttendeeList({ attendees }) {
 
   const [selectionModel, setSelectionModel] = useState([]);
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (event.target.value) {
+      const body = {
+        id: editedField.id,
+        [editedField.field]: event.target.value,
+      };
+      AttendeesServices.modifyAttendee(editedField.id, body)
+        .then(() => {
+          fetchAndSet(params.eventID);
+        })
+        .catch(() => alert("erreur"));
+    }
+  }
+
   return (
     <div>
       <div style={{ height: 400, width: "100%" }}>
@@ -66,6 +80,15 @@ function AttendeeList({ attendees }) {
           }}
           selectionModel={selectionModel}
           {...rows}
+          onCellKeyDown={(params, event) => {
+            setEditedFiled({
+              id: event.currentTarget.parentElement.dataset.id,
+              field: event.currentTarget.dataset.field,
+            });
+          }}
+          onCellEditStop={(params, event) => {
+            handleSubmit(event);
+          }}
         />
       </div>
       {selectionModel && <DeleteAttendee attendeesToDelete={selectionModel} />}
