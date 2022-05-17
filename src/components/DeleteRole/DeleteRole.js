@@ -1,21 +1,27 @@
 import { Button } from "@mui/material";
-import AttendeesServices from "../../services/attendees";
+import DeleteIcon from "@mui/icons-material/Delete";
+import RolesServices from "../../services/roles";
 
-export function DeleteRole({ data, eventID, fetchAndSet }) {
-  const handleClick = () => {
-    AttendeesServices.deleteRole(data._id)
-      .then(() => {
+export default function DeleteRole({ rolesToDelete, fetchAndSet, eventID }) {
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    RolesServices.deleteRole(rolesToDelete)
+      .then((result) => {
         fetchAndSet(eventID);
-        alert("Role deleted");
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => alert("erreur"));
   };
 
   return (
     <div>
-      <Button onClick={handleClick}>Supprimer</Button>
+      <Button
+        onClick={handleClick}
+        variant="outlined"
+        startIcon={<DeleteIcon />}
+      >
+        Supprimer
+      </Button>
     </div>
   );
 }
