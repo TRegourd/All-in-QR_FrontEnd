@@ -16,6 +16,9 @@ const RolesServices = {
   modifyRoles(id, body) {
     return base.put(`/roles/${id}`, body);
   },
+  deleteRole(body) {
+    return base.post("/roles/delete", body);
+  },
 };
 
 export default RolesServices;
