@@ -12,6 +12,9 @@ import EventDetailsAndTab from "./pages/EventDetails/EventDetailsAndTab";
 
 import VideoHome from "./pages/Home/VideoHome";
 import NavbarNew from "./components/Navbar/NavbarNew";
+import Payment from "./pages/Payment/Payment";
+import PaymentSucceed from "./pages/Payment/PaymentSucceed";
+import CheckoutProvider from "./CheckoutProvider";
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
         <Route element={<Signin />} path="/signin" exact />
         <Route element={<Forgot />} path="/forgot" exact />
         <Route element={<Reset />} path="/reset/:id" exact />
+        <Route element={<Payment />} path="/payment" exact />
+        <Route element={<PaymentSucceed />} path="/payment/succeed" exact />
         <Route element={<Register />} path="/register/:eventId/:roleId" exact />
       </Routes>
     </>
