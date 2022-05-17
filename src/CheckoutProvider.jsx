@@ -16,7 +16,16 @@ export default function CheckoutProvider({ children }) {
   const [extraActivities, setExtraActivities] = useState([]);
 
   let checkout = defaultActivities?.concat(extraActivities);
-  console.log("checkout", checkout);
+
+  let checkoutTotal = 0;
+
+  checkout?.map((item) => {
+    checkoutTotal += Number(item.price);
+  });
+
+  useEffect(() => {
+    setTotal(checkoutTotal);
+  }, [checkoutTotal]);
 
   const value = {
     total,

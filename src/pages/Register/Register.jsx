@@ -106,7 +106,6 @@ export default function Register() {
 
   return (
     <>
-      <pre>{JSON.stringify(body, null, 2)}</pre>
       <Container>
         <Box
           component="form"
@@ -199,7 +198,7 @@ export default function Register() {
               </Select>
             </FormControl>
           </div>
-          <div></div>
+          <div>Total attendance amount : {total}€</div>
           <RegisterSnackbar body={body}></RegisterSnackbar>
         </Box>
       </Container>
