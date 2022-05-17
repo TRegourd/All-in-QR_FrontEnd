@@ -9,6 +9,10 @@ const ActivitiesServices = {
     return base.post("/activities", body);
   },
 
+  listActivitieswithID({ body }) {
+    return base.post("/activities/get", body);
+  },
+
   listActivities(id) {
     return base.get(`/activities/${id}`);
   },
