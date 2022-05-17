@@ -99,6 +99,10 @@ export default function Register() {
       });
   }
 
+  function handleSubmit() {
+    localStorage.setItem("@body", JSON.stringify(body));
+  }
+
   useEffect(() => {
     fetchCurrentEvent(params.eventId);
     fetchActivities(params.eventId);
@@ -199,7 +203,13 @@ export default function Register() {
             </FormControl>
           </div>
           <div>Total attendance amount : {total}€</div>
-          <RegisterSnackbar body={body}></RegisterSnackbar>
+
+          <Link to="/payment">
+            <Button variant="contained" onClick={handleSubmit}>
+              Proceed to Checkout
+            </Button>
+          </Link>
+          {/* <RegisterSnackbar body={body}></RegisterSnackbar> */}
         </Box>
       </Container>
     </>

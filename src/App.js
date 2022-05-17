@@ -29,18 +29,10 @@ function App() {
         <Route element={<Signin />} path="/signin" exact />
         <Route element={<Forgot />} path="/forgot" exact />
         <Route element={<Reset />} path="/reset/:id" exact />
+        <Route element={<Payment />} path="/payment" exact />
+        <Route element={<PaymentSucceed />} path="/payment/succeed" exact />
+        <Route element={<Register />} path="/register/:eventId/:roleId" exact />
       </Routes>
-      <CheckoutProvider>
-        <Routes>
-          <Route
-            element={<Register />}
-            path="/register/:eventId/:roleId"
-            exact
-          />
-          <Route element={<Payment />} path="/payment" exact />
-          <Route element={<PaymentSucceed />} path="/payment/succeed" exact />
-        </Routes>
-      </CheckoutProvider>
     </>
   );
 }

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { CheckoutContext } from "../../CheckoutProvider";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const { total } = useContext(CheckoutContext);
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +80,7 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <div>Total : {total}€</div>
       <PaymentElement id="payment-element" />
       <button
         disabled={isLoading || !stripe || !elements}

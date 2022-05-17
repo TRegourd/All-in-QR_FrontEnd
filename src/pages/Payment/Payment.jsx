@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import "./Payment.css";
 import CheckoutForm from "../../components/Register_Components/CheckoutForm";
 import paymentServices from "../../services/payment";
+import { CheckoutContext } from "../../CheckoutProvider";
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -15,12 +16,12 @@ const stripePromise = loadStripe(
 export default function Payment() {
   const [clientSecret, setClientSecret] = useState("");
 
+  const { total } = useContext(CheckoutContext);
+
   useEffect(() => {
-    paymentServices
-      .intentPayment({ tshirt: 1200, lunettes: 3000 })
-      .then((data) => {
-        setClientSecret(data.data.clientSecret);
-      });
+    paymentServices.intentPayment({ total: total * 100 }).then((data) => {
+      setClientSecret(data.data.clientSecret);
+    });
 
     //     // Create PaymentIntent as soon as the page loads
   }, []);
