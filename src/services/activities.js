@@ -13,8 +13,8 @@ const ActivitiesServices = {
     return base.get(`/activities/${id}`);
   },
 
-  deleteActivities(id) {
-    return base.delete(`/activities/${id}`);
+  deleteActivities(body) {
+    return base.post(`/activities/delete`, body);
   },
   modifyActivities(id, body) {
     return base.put(`/activities/${id}`, body);

@@ -8,7 +8,6 @@ export default function DeleteRole({ rolesToDelete, fetchAndSet, eventID }) {
 
     RolesServices.deleteRole(rolesToDelete)
       .then((result) => {
-        console.log(result.data);
         fetchAndSet(eventID);
       })
       .catch(() => alert("erreur"));

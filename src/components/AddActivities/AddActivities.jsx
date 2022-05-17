@@ -27,10 +27,10 @@ export default function AddACtivities({ fetchAndSet, roles }) {
 
   const allRole = roles;
   const [selectedRole, setSelectedRole] = useState("");
-  const [date, setDate] = React.useState(dayjs().format("LLL"));
+  const [date, setDate] = React.useState(dayjs());
   const [body, setBody] = useState({
     name: "",
-    date: dayjs().format("LLL"),
+    date: dayjs(),
     duration: null,
     price: null,
     desc: "",
@@ -103,6 +103,7 @@ export default function AddACtivities({ fetchAndSet, roles }) {
                   name="date"
                   value={date}
                   onChange={handleDateChange}
+                  inputFormat="DD-MM-YYYY HH:mm"
                 />
               </LocalizationProvider>
             </div>
