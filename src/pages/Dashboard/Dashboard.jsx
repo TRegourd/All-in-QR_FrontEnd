@@ -57,7 +57,12 @@ function Dashboard() {
               dayjs(event.end_date).format("YYYY-MM-DD")
           )
             return (
-              <div key={event._id}>
+              <div
+                style={{
+                  filter: "drop-shadow(2px 4px 6px black)",
+                }}
+                key={event._id}
+              >
                 <Link to={`/${event._id}`}>
                   <EventCard
                     event={event}
@@ -71,9 +76,17 @@ function Dashboard() {
       <EventTitle>Events to come</EventTitle>
       <EventsContainer>
         {events.map((event) => {
-          if (dayjs(event.start_date) > dayjs())
+          if (
+            dayjs(event.start_date).format("YYYY-MM-DD") >
+            dayjs().format("YYYY-MM-DD")
+          )
             return (
-              <div key={event._id}>
+              <div
+                style={{
+                  filter: "drop-shadow(2px 4px 6px gray)",
+                }}
+                key={event._id}
+              >
                 <Link to={`/${event._id}`}>
                   <EventCard
                     event={event}
@@ -87,9 +100,17 @@ function Dashboard() {
       <EventTitle>Finished events</EventTitle>
       <EventsContainer>
         {events.map((event) => {
-          if (dayjs(event.end_date) < dayjs())
+          if (
+            dayjs(event.end_date).format("YYYY-MM-DD") <
+            dayjs().format("YYYY-MM-DD")
+          )
             return (
-              <div key={event._id}>
+              <div
+                style={{
+                  filter: "opacity(0.5)",
+                }}
+                key={event._id}
+              >
                 <Link to={`/${event._id}`}>
                   <EventCard
                     event={event}
