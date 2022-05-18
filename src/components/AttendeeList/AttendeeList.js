@@ -105,7 +105,7 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
       field: "extra_activities",
       headerName: "Extra Activities",
 
-      width: 300,
+      width: 200,
       editable: true,
     },
     {
@@ -127,9 +127,9 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
     ...attendee,
     id: attendee._id,
     roleName: attendee.role !== null ? attendee.role.name : "",
-    extra_activities: attendees[0].extra_activities.map(
-      (activities) => activities.name
-    ),
+    extra_activities: attendee.extra_activities.map((activity) => {
+      return activity.name;
+    }),
   }));
 
   const [selectionModel, setSelectionModel] = useState([]);
