@@ -18,6 +18,7 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
     end_date: currentEvent.end_date,
     place: currentEvent.place,
     desc: currentEvent.desc,
+    background_image: currentEvent.background_image,
   });
 
   function updateEvent(key, value) {
@@ -115,6 +116,16 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
             name="max_attendees"
             margin="normal"
             defaultValue={body.max_attendees}
+            fullWidth
+            focused
+          />
+          <TextField
+            id="outlined-background_image"
+            label="Background image URL"
+            type="text"
+            name="background_image"
+            margin="normal"
+            defaultValue={body.background_image}
             fullWidth
             focused
           />
