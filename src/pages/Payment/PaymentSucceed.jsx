@@ -1,22 +1,43 @@
 import { Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import AttendeesServices from "../../services/attendees";
 
 export default function PaymentSucceed() {
-  const body = localStorage.getItem("@body");
-  console.log(JSON.parse(body));
+  const [body, setBody] = useState(JSON.parse(localStorage.getItem("@body")));
+
+  const wait = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(true), 1500);
+    });
+  };
+
+  async function createAttendee(userBody) {
+    if (userBody) {
+      AttendeesServices.getOneAttendeeByEmail(userBody)
+        .then((result) => {
+          console.log(result.data);
+          if (result.data === null) {
+            AttendeesServices.createAttendees(userBody)
+              .then(() => {
+                console.log("successfully created");
+                localStorage.removeItem("@body");
+                setBody(null);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
 
   useEffect(() => {
-    AttendeesServices.createAttendees(JSON.parse(body))
-      .then(() => {
-        console.log("successfully created");
-        localStorage.removeItem("@body");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    createAttendee(body);
   }, []);
 
   return (
