@@ -7,18 +7,33 @@ import AttendeesServices from "../../services/attendees";
 export default function PaymentSucceed() {
   const [body, setBody] = useState(JSON.parse(localStorage.getItem("@body")));
 
-  function createAttendee(userBody) {
-    console.log(userBody);
-    userBody &&
-      AttendeesServices.createAttendees(userBody)
-        .then(() => {
-          console.log("successfully created");
-          localStorage.removeItem("@body");
-          setBody(null);
+  const wait = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(true), 1500);
+    });
+  };
+
+  async function createAttendee(userBody) {
+    if (userBody) {
+      AttendeesServices.getOneAttendeeByEmail(userBody)
+        .then((result) => {
+          console.log(result.data);
+          if (result.data === null) {
+            AttendeesServices.createAttendees(userBody)
+              .then(() => {
+                console.log("successfully created");
+                localStorage.removeItem("@body");
+                setBody(null);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         })
         .catch((err) => {
           console.log(err);
         });
+    }
   }
 
   useEffect(() => {
