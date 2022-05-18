@@ -11,7 +11,6 @@ import AttendeesServices from "../../services/attendees";
 function AttendeeList({ attendees, fetchAndSet, roles }) {
   let params = useParams();
   const [editedField, setEditedFiled] = useState({});
-  console.log("params", params.eventID);
 
   function SelectEditInputCell(props) {
     const { id, value, field } = props;
@@ -98,6 +97,13 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
       field: "email",
       headerName: "Email",
       width: 150,
+      editable: false,
+    },
+    {
+      field: "extra_activities",
+      headerName: "Extra Activities",
+
+      width: 300,
       editable: true,
     },
   ];
@@ -106,6 +112,9 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
     ...attendee,
     id: attendee._id,
     roleName: attendee.role !== null ? attendee.role.name : "",
+    extra_activities: attendees[0].extra_activities.map(
+      (activities) => activities.name
+    ),
   }));
 
   const [selectionModel, setSelectionModel] = useState([]);
