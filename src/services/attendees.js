@@ -17,6 +17,10 @@ const AttendeesServices = {
     return base.get(`/attendees/${id}`);
   },
 
+  getOneAttendeeByEmail(body) {
+    return base.post(`/attendees/email`, body);
+  },
+
   modifyAttendee(id, body) {
     return base.put(`/attendees/${id}`, body);
   },

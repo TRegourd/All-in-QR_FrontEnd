@@ -101,7 +101,14 @@ export default function Register() {
   }
 
   function handleSubmit() {
-    localStorage.setItem("@body", JSON.stringify(body));
+    AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
+      if (!result.data) {
+        localStorage.setItem("@body", JSON.stringify(body));
+        navigate("/payment");
+      } else {
+        alert("Attendee Already exists");
+      }
+    });
   }
 
   useEffect(() => {
@@ -205,7 +212,7 @@ export default function Register() {
           </div>
           <div>Total attendance amount : {total}€</div>
 
-          <Link to="/payment">
+          <Link to="#">
             <Button variant="contained" onClick={handleSubmit}>
               Proceed to Checkout
             </Button>
