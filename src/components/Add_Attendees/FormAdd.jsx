@@ -28,9 +28,14 @@ const MenuProps = {
   },
 };
 
-export default function FormAdd({ fetchAndSet, roles, activities }) {
+export default function FormAdd({
+  fetchAndSet,
+  roles,
+  activities,
+  eventData,
+  attendees,
+}) {
   let params = useParams();
-
   const [open, setOpen] = useState(false);
 
   const [checkedActivities, setCheckedActivities] = useState([]);
@@ -78,7 +83,11 @@ export default function FormAdd({ fetchAndSet, roles, activities }) {
   };
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if (attendees.length < eventData.max_attendees) {
+      setOpen(true);
+    } else {
+      alert("Limit of attendees reached");
+    }
   };
 
   const handleClose = () => {
