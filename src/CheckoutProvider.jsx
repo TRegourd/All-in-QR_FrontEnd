@@ -15,6 +15,8 @@ export default function CheckoutProvider({ children }) {
 
   const [extraActivities, setExtraActivities] = useState([]);
 
+  const [checkoutBody, setCheckoutBody] = useState([]);
+
   let checkout = defaultActivities?.concat(extraActivities);
 
   let checkoutTotal = 0;
@@ -34,6 +36,8 @@ export default function CheckoutProvider({ children }) {
     setDefaultAcitivites,
     extraActivities,
     setExtraActivities,
+    checkoutBody,
+    setCheckoutBody,
   };
 
   return (

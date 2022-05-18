@@ -38,6 +38,7 @@ export default function Register() {
     setDefaultAcitivites,
     extraActivities,
     setExtraActivities,
+    setCheckoutBody,
   } = useContext(CheckoutContext);
   const navigate = useNavigate();
   const params = useParams();
@@ -100,7 +101,7 @@ export default function Register() {
   }
 
   function handleSubmit() {
-    localStorage.setItem("@body", JSON.stringify(body));
+    setCheckoutBody(body);
   }
 
   useEffect(() => {
