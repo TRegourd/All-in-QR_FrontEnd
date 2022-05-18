@@ -1,11 +1,30 @@
 import { Button } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { CheckoutContext } from "../../CheckoutProvider";
 import AttendeesServices from "../../services/attendees";
 
 export default function PaymentSucceed() {
+  const [body, setBody] = useState(JSON.parse(localStorage.getItem("@body")));
+
+  function createAttendee(userBody) {
+    console.log(userBody);
+    userBody &&
+      AttendeesServices.createAttendees(userBody)
+        .then(() => {
+          console.log("successfully created");
+          localStorage.removeItem("@body");
+          setBody(null);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+
+  useEffect(() => {
+    createAttendee(body);
+  }, []);
+
   return (
     <Container className="checkout">
       <h1>Thank you for registering</h1>

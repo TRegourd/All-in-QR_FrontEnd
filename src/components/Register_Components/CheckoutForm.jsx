@@ -57,13 +57,13 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
-    AttendeesServices.createAttendees(checkoutBody)
-      .then(() => {
-        console.log("successfully created");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // AttendeesServices.createAttendees(checkoutBody)
+    //   .then(() => {
+    //     console.log("successfully created");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     const result = await stripe.confirmPayment({
       elements,

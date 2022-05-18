@@ -101,7 +101,7 @@ export default function Register() {
   }
 
   function handleSubmit() {
-    setCheckoutBody(body);
+    localStorage.setItem("@body", JSON.stringify(body));
   }
 
   useEffect(() => {
