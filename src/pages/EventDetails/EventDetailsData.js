@@ -43,6 +43,10 @@ export default function EventDetailsData({
         <Typography variant="h2" component="div">
           {eventData.name}
         </Typography>
+        <Typography variant="h4" component="div">
+          Code évènement : {eventData.uid}
+        </Typography>
+
         <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="h5">
           {eventData.desc}
         </Typography>

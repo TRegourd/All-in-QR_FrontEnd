@@ -28,7 +28,7 @@ export default function EventCard({ event, fetchAndSetEvents }) {
   }
   console.log(event);
   function imgSrc() {
-    if (event.background_image === undefined) {
+    if (event.background_image === undefined || event.background_image === "") {
       if (event.type === "concert") {
         return concert;
       } else if (event.type === "afterwork") {
