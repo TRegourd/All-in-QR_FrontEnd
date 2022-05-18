@@ -7,6 +7,8 @@ import { useGridApiContext } from "@mui/x-data-grid";
 import DeleteAttendee from "../DeleteAttendee/DeleteAttendee";
 import SendQRCodeToAll from "../SendQRCodeToEveryAttendee/SendQRCodeToEveryAttendee";
 import AttendeesServices from "../../services/attendees";
+import { Box } from "@mui/material";
+import { GridCellParams } from "@mui/x-data-grid";
 
 function AttendeeList({ attendees, fetchAndSet, roles }) {
   let params = useParams();
@@ -99,6 +101,19 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
       width: 150,
       editable: true,
     },
+    {
+      field: "present",
+      headerName: "Présence",
+      width: 150,
+      editable: false,
+      valueGetter: (params) => {
+        if (params.row.present === true) {
+          return "Présent";
+        } else {
+          return "Absent";
+        }
+      },
+    },
   ];
 
   const rows = attendees.map((attendee) => ({
@@ -127,28 +142,50 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
   return (
     <div>
       <div style={{ height: 400, width: "100%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-          disableSelectionOnClick
-          onSelectionModelChange={(newSelectionModel) => {
-            setSelectionModel(newSelectionModel);
+        <Box
+          sx={{
+            height: 300,
+            width: 1,
+            "& .true": {
+              backgroundColor: "#2ECC71",
+              color: "white",
+            },
+            "& .false": {
+              backgroundColor: "#E74C3C",
+              color: "white",
+            },
           }}
-          selectionModel={selectionModel}
-          {...rows}
-          onCellKeyDown={(params, event) => {
-            setEditedFiled({
-              id: event.currentTarget.parentElement.dataset.id,
-              field: event.currentTarget.dataset.field,
-            });
-          }}
-          onCellEditStop={(params, event) => {
-            handleSubmit(event);
-          }}
-        />
+        >
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+            onSelectionModelChange={(newSelectionModel) => {
+              setSelectionModel(newSelectionModel);
+            }}
+            selectionModel={selectionModel}
+            {...rows}
+            onCellKeyDown={(params, event) => {
+              setEditedFiled({
+                id: event.currentTarget.parentElement.dataset.id,
+                field: event.currentTarget.dataset.field,
+              });
+            }}
+            onCellEditStop={(params, event) => {
+              handleSubmit(event);
+            }}
+            getCellClassName={(params) => {
+              if (params.value === "Présent") {
+                return "true";
+              } else if (params.value === "Absent") {
+                return "false";
+              }
+            }}
+          />
+        </Box>
       </div>
       {selectionModel && <DeleteAttendee attendeesToDelete={selectionModel} />}
       <SendQRCodeToAll attendeesQR={selectionModel} />
