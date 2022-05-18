@@ -108,6 +108,16 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
             fullWidth
             focused
           />
+          <TextField
+            id="outlined-max_attendees"
+            label="Max Attendees"
+            type="number"
+            name="max_attendees"
+            margin="normal"
+            defaultValue={body.max_attendees}
+            fullWidth
+            focused
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
