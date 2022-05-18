@@ -188,6 +188,8 @@ export default function EventDetailsAndTab() {
             fetchAndSet={fetchAndSet}
             roles={roles}
             activities={activities}
+            eventData={eventData}
+            attendees={attendees}
           />
           <p>OR</p>
           <AttendeeEmailForm roles={roles} />
