@@ -103,6 +103,7 @@ export default function Register() {
   function handleSubmit() {
     AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
       if (!result.data) {
+        setCheckoutBody(body);
         localStorage.setItem("@body", JSON.stringify(body));
         navigate("/payment");
       } else {
