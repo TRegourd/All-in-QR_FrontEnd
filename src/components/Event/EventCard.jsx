@@ -26,14 +26,18 @@ export default function EventCard({ event, fetchAndSetEvents }) {
       alert("Suppression annulée.");
     }
   }
-
+  console.log(event);
   function imgSrc() {
-    if (event.type === "concert") {
-      return concert;
-    } else if (event.type === "afterwork") {
-      return afterwork;
-    } else if (event.type === "conference") {
-      return conference;
+    if (event.background_image === undefined) {
+      if (event.type === "concert") {
+        return concert;
+      } else if (event.type === "afterwork") {
+        return afterwork;
+      } else if (event.type === "conference") {
+        return conference;
+      }
+    } else {
+      return event.background_image;
     }
   }
 
