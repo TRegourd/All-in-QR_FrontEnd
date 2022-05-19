@@ -49,22 +49,22 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
         })}
       </Select>
     );
-
-    SelectEditInputCell.propTypes = {
-      /**
-       * The column field of the cell that triggered the event.
-       */
-      field: PropTypes.string.isRequired,
-      /**
-       * The grid row id.
-       */
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-      /**
-       * The cell value, but if the column has valueGetter, use getValue.
-       */
-      value: PropTypes.any,
-    };
   }
+
+  SelectEditInputCell.propTypes = {
+    /**
+     * The column field of the cell that triggered the event.
+     */
+    field: PropTypes.string.isRequired,
+    /**
+     * The grid row id.
+     */
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    /**
+     * The cell value, but if the column has valueGetter, use getValue.
+     */
+    value: PropTypes.any,
+  };
 
   const renderSelectEditInputCell = (params) => {
     return <SelectEditInputCell {...params} />;
