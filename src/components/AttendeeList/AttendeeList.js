@@ -10,9 +10,12 @@ import AttendeesServices from "../../services/attendees";
 import { Box } from "@mui/material";
 import { GridCellParams } from "@mui/x-data-grid";
 
-function AttendeeList({ attendees, fetchAndSet, roles }) {
+function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
   let params = useParams();
   const [editedField, setEditedFiled] = useState({});
+
+  console.log(activities);
+  console.log(editedField);
 
   function SelectEditInputCell(props) {
     const { id, value, field } = props;
@@ -182,8 +185,8 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
             checkboxSelection
             disableSelectionOnClick
             onSelectionModelChange={(newSelectionModel) => {
