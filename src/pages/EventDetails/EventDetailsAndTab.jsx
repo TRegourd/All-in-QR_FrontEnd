@@ -165,6 +165,7 @@ export default function EventDetailsAndTab() {
           eventData={eventData}
           attendees={attendees}
           fetchAndSetOneEvent={fetchAndSetOneEvent}
+          activities={activities}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
