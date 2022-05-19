@@ -97,7 +97,7 @@ export default EventCarousel;
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3440, min: 1024 },
     items: 3,
     partialVisibilityGutter: 60,
   },
