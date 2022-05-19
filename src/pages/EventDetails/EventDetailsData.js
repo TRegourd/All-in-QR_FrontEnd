@@ -33,7 +33,7 @@ export default function EventDetailsData({
 
   const normalise = (attendees.length * 100) / eventData.max_attendees;
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: "50%" }}>
       <CardContent
         sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
@@ -43,12 +43,12 @@ export default function EventDetailsData({
         <Typography variant="h2" component="div">
           {eventData.name}
         </Typography>
-        <Typography variant="h4" component="div">
-          Code évènement : {eventData.uid}
-        </Typography>
 
         <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="h5">
           {eventData.desc}
+        </Typography>
+        <Typography variant="h5" component="div">
+          Code évènement : {eventData.uid}
         </Typography>
         <Typography variant="body1">
           {eventData.place}
@@ -56,10 +56,6 @@ export default function EventDetailsData({
           {dayjs(eventData.end_date).format("DD-MM")}
         </Typography>
         <Typography variant="body1"></Typography>
-        <Typography variant="body2">
-          There is currently {attendees.length} attendees registered to this
-          event
-        </Typography>
       </CardContent>
       <Box
         sx={{
@@ -69,7 +65,7 @@ export default function EventDetailsData({
           marginBottom: 1,
         }}
       >
-        <Box width={300}>
+        <Box width={"50%"}>
           <BorderLinearProgress variant="determinate" value={normalise} />
         </Box>
         <Box sx={{ minWidth: 35 }}>

@@ -39,13 +39,22 @@ function NavbarNew() {
             <GiHamburgerMenu />
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
-            {logged && (
-              <li className="nav-item">
-                <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                  Home
-                </Link>
-              </li>
-            )}
+            <li className="nav-item">
+              <Link to="/" className="nav-links" onClick={closeMobileMenu}>
+                Home
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link
+                to="/allEvents"
+                className="nav-links"
+                onClick={closeMobileMenu}
+              >
+                All Events
+              </Link>
+            </li>
+
             {logged && (
               <li className="nav-item">
                 <Link

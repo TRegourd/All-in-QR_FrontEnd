@@ -11,20 +11,15 @@ function HeaderVideo() {
     <div className="header-container">
       <video src={HomeVideo} autoPlay loop muted />
       <h1>All in QR</h1>
-      <p>Make your events managment easier</p>
+      <p>Make your events management easier</p>
       <div className="header-btns">
-        <Button className="btns"></Button>
         <RouterLink to="login">
           <Button className="btns contained" variant="contained">
             GET STARTED
           </Button>
         </RouterLink>
         <Link to="contact" smooth>
-          <Button
-            className="btns outlined"
-            onClick={console.log("hey")}
-            variant="outlined"
-          >
+          <Button className="btns outlined" variant="outlined">
             CONTACT US
           </Button>
         </Link>

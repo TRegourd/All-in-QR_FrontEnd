@@ -14,7 +14,7 @@ import VideoHome from "./pages/Home/VideoHome";
 import NavbarNew from "./components/Navbar/NavbarNew";
 import Payment from "./pages/Payment/Payment";
 import PaymentSucceed from "./pages/Payment/PaymentSucceed";
-import CheckoutProvider from "./CheckoutProvider";
+import AllEventsHome from "./pages/AllEvents/AllEventsHome";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
       <NavbarNew />
       <Routes>
         <Route element={<VideoHome />} path="/" exact />
+        <Route element={<AllEventsHome />} path="/allEvents" exact />
         <Route element={<Dashboard />} path="/dashboard" exact />
         <Route element={<Profile />} path="/profile" exact />
         <Route element={<Login />} path="/login" exact />
