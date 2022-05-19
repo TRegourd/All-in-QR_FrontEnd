@@ -81,7 +81,7 @@ const EventCarousel = ({ deviceType }) => {
                   }}
                   key={event._id}
                 >
-                  <Link to={`#`}>
+                  <Link to={`/register/${event._id}/visitor`}>
                     <CarouselEventCard event={event}></CarouselEventCard>
                   </Link>
                 </div>
@@ -97,7 +97,7 @@ export default EventCarousel;
 
 const responsive = {
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3440, min: 1024 },
     items: 3,
     partialVisibilityGutter: 60,
   },

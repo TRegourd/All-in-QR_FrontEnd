@@ -12,6 +12,7 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
+import CardMedia from "@mui/material/CardMedia";
 
 export default function EventDetailsData({
   eventData,
@@ -37,6 +38,12 @@ export default function EventDetailsData({
       <CardContent
         sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
       >
+        <CardMedia
+          component="img"
+          height="500"
+          image={eventData.background_image}
+          alt="cover img"
+        />
         <Typography variant="h4" color="text.secondary" gutterBottom>
           {eventData.type}
         </Typography>
