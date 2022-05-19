@@ -51,7 +51,7 @@ const EventCarousel = ({ deviceType }) => {
                   }}
                   key={event._id}
                 >
-                  <Link to={`/register/${event._id}/default`}>
+                  <Link to={`/register/${event._id}/visitor`}>
                     <CarouselEventCard event={event}></CarouselEventCard>
                   </Link>
                 </div>

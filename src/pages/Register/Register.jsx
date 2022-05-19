@@ -12,12 +12,12 @@ import {
 } from "@mui/material";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import RegisterSnackbar from "../../components/Register_Components/RegisterSnackbar";
 import AttendeesServices from "../../services/attendees";
 import ActivitiesServices from "../../services/activities";
 import eventServices from "../../services/Event";
 import dayjs from "dayjs";
 import { CheckoutContext } from "../../CheckoutProvider";
+import RolesServices from "../../services/roles";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,24 +31,27 @@ const MenuProps = {
 };
 
 export default function Register() {
-  const {
-    total,
-    setTotal,
-    defaultActivities,
-    setDefaultAcitivites,
-    extraActivities,
-    setExtraActivities,
-    setCheckoutBody,
-  } = useContext(CheckoutContext);
+  const { total, setDefaultAcitivites, setExtraActivities, setCheckoutBody } =
+    useContext(CheckoutContext);
   const navigate = useNavigate();
   const params = useParams();
+  const [allRoles, setAllRoles] = useState();
+
+  let roleId;
+  if (params.roleId === "visitor") {
+    if (allRoles) {
+      roleId = allRoles.find((el) => el.name === params.roleId)._id;
+    }
+  } else {
+    roleId = params.roleId;
+  }
+
   const [body, setBody] = useState({
     name: "",
     surname: "",
     email: "",
     phone: "",
     extra_activities: [],
-    role: params.roleId,
     event: params.eventId,
   });
   const [currentEvent, setCurrentEvent] = useState("");
@@ -60,10 +63,15 @@ export default function Register() {
     const array = allActivities.filter((el) => {
       return event.target.value.find((item) => item === el._id);
     });
-
     setExtraActivities(array);
     handleChange(event);
   };
+
+  function getAllRoles() {
+    RolesServices.listRoles(params.eventId).then((result) =>
+      setAllRoles(result.data)
+    );
+  }
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -91,7 +99,7 @@ export default function Register() {
         setAllActivities(result.data);
         setDefaultAcitivites(
           result.data.filter((item) => {
-            return item.role._id === body.role;
+            return item.role._id === roleId;
           })
         );
       })
@@ -103,8 +111,7 @@ export default function Register() {
   function handleSubmit() {
     AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
       if (!result.data) {
-        setCheckoutBody(body);
-        localStorage.setItem("@body", JSON.stringify(body));
+        setCheckoutBody({ ...body, role: roleId });
         navigate("/payment");
       } else {
         alert("Attendee Already exists");
@@ -113,9 +120,10 @@ export default function Register() {
   }
 
   useEffect(() => {
+    getAllRoles(params.eventId);
     fetchCurrentEvent(params.eventId);
     fetchActivities(params.eventId);
-  }, []);
+  }, [roleId]);
 
   return (
     <>
@@ -195,7 +203,7 @@ export default function Register() {
                   })
                   .filter((value) => {
                     if (value.role !== null) {
-                      return value.role._id !== body.role;
+                      return value.role._id !== roleId;
                     }
                   })
                   .map((value) => {

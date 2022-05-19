@@ -26,7 +26,6 @@ export default function EventCard({ event, fetchAndSetEvents }) {
       alert("Suppression annulée.");
     }
   }
-  console.log(event);
   function imgSrc() {
     if (event.background_image === undefined || event.background_image === "") {
       if (event.type === "concert") {
