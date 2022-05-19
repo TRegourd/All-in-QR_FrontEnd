@@ -138,7 +138,7 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
 
   return (
     <div>
-      <div style={{ height: 400, width: "100%" }}>
+      <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           rows={rows}
           columns={columns}

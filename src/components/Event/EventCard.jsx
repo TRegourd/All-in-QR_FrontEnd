@@ -26,7 +26,6 @@ export default function EventCard({ event, fetchAndSetEvents }) {
       alert("Suppression annulée.");
     }
   }
-  console.log(event);
   function imgSrc() {
     if (event.background_image === undefined || event.background_image === "") {
       if (event.type === "concert") {
@@ -42,11 +41,11 @@ export default function EventCard({ event, fetchAndSetEvents }) {
   }
 
   return (
-    <Card sx={{ maxWidth: 200 }}>
+    <Card sx={{ maxWidth: "300" }}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="100"
+          height="500"
           image={imgSrc()}
           alt="cover img"
         />

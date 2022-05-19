@@ -12,6 +12,10 @@ const eventServices = {
       .then((res) => res.data);
   },
 
+  getAllEventList() {
+    return base.get("/events/home/all").then((res) => res.data);
+  },
+
   getOneEvent(id) {
     return base.get("/events/" + id).then((res) => res.data);
   },

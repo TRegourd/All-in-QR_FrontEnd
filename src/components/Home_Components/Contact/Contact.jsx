@@ -1,6 +1,45 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import contactServices from "../../../services/contact";
+import ContactSnackbar from "./ContactSnackbar";
+
+const Contact = () => {
+  const [form, setForm] = useState({
+    email: "", //currentUser.email,
+    message: "",
+  });
+
+  function updateForm(key, value) {
+    setForm({ ...form, [key]: value });
+  }
+
+  function handleChangeInput(e) {
+    const { name, value } = e.target;
+    updateForm(name, value);
+  }
+
+  return (
+    <Container id="contact">
+      <Wrapper>
+        {/* <pre>{JSON.stringify(form, null, 2)}</pre> */}
+        <FormContainer onChange={handleChangeInput}>
+          <Title>
+            Questions? <br /> Let's Get In Touch
+          </Title>
+          <Form>
+            <Input placeholder="Your Email" name="email" />
+            <TextArea placeholder="Your Message" name="message" />
+            <ContactSnackbar body={form} />
+          </Form>
+        </FormContainer>
+      </Wrapper>
+    </Container>
+  );
+};
+
+export default Contact;
 
 const Container = styled.div`
   height: 100vh;
@@ -20,7 +59,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   width: 50%;
   @media only screen and (max-width: 480px) {
     width: 100%;
@@ -71,25 +110,3 @@ const TextArea = styled.textarea`
     width: 200px;
   }
 `;
-
-const Contact = () => {
-  return (
-    <Container id="contact">
-      <Wrapper>
-        <FormContainer>
-          <Title>
-            Questions? <br /> Let's Get In Touch
-          </Title>
-          <Form>
-            <Input placeholder="Your Email" />
-
-            <TextArea placeholder="Your Message" />
-            <Button variant="contained">Send</Button>
-          </Form>
-        </FormContainer>
-      </Wrapper>
-    </Container>
-  );
-};
-
-export default Contact;

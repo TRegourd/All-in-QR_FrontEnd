@@ -13,6 +13,7 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import Revenue from "../../components/revenue/Revenue";
+import CardMedia from "@mui/material/CardMedia";
 
 export default function EventDetailsData({
   eventData,

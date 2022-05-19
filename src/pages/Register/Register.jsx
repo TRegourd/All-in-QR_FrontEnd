@@ -12,12 +12,12 @@ import {
 } from "@mui/material";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import RegisterSnackbar from "../../components/Register_Components/RegisterSnackbar";
 import AttendeesServices from "../../services/attendees";
 import ActivitiesServices from "../../services/activities";
 import eventServices from "../../services/Event";
 import dayjs from "dayjs";
 import { CheckoutContext } from "../../CheckoutProvider";
+import RolesServices from "../../services/roles";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,24 +31,33 @@ const MenuProps = {
 };
 
 export default function Register() {
-  const {
-    total,
-    setTotal,
-    defaultActivities,
-    setDefaultAcitivites,
-    extraActivities,
-    setExtraActivities,
-    setCheckoutBody,
-  } = useContext(CheckoutContext);
+  const { total, setDefaultAcitivites, setExtraActivities, setCheckoutBody } =
+    useContext(CheckoutContext);
   const navigate = useNavigate();
   const params = useParams();
+  const [allRoles, setAllRoles] = useState();
+  let noVisitorRole;
+
+  let roleId;
+  if (params.roleId === "visitor") {
+    if (allRoles) {
+      let isVisitor = allRoles.find((el) => el.name === params.roleId);
+      if (isVisitor) {
+        roleId = isVisitor._id;
+      } else {
+        noVisitorRole = true;
+      }
+    }
+  } else {
+    roleId = params.roleId;
+  }
+
   const [body, setBody] = useState({
     name: "",
     surname: "",
     email: "",
     phone: "",
     extra_activities: [],
-    role: params.roleId,
     event: params.eventId,
   });
   const [currentEvent, setCurrentEvent] = useState("");
@@ -60,10 +69,15 @@ export default function Register() {
     const array = allActivities.filter((el) => {
       return event.target.value.find((item) => item === el._id);
     });
-
     setExtraActivities(array);
     handleChange(event);
   };
+
+  function getAllRoles() {
+    RolesServices.listRoles(params.eventId).then((result) =>
+      setAllRoles(result.data)
+    );
+  }
 
   function updateBody(key, value) {
     setBody({ ...body, [key]: value });
@@ -91,7 +105,7 @@ export default function Register() {
         setAllActivities(result.data);
         setDefaultAcitivites(
           result.data.filter((item) => {
-            return item.role._id === body.role;
+            return item.role._id === roleId;
           })
         );
       })
@@ -103,8 +117,7 @@ export default function Register() {
   function handleSubmit() {
     AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
       if (!result.data) {
-        setCheckoutBody(body);
-        localStorage.setItem("@body", JSON.stringify(body));
+        setCheckoutBody({ ...body, role: roleId });
         navigate("/payment");
       } else {
         alert("Attendee Already exists");
@@ -113,114 +126,137 @@ export default function Register() {
   }
 
   useEffect(() => {
+    getAllRoles(params.eventId);
     fetchCurrentEvent(params.eventId);
     fetchActivities(params.eventId);
-  }, []);
+  }, [roleId]);
 
   return (
     <>
-      <Container>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-          onChange={handleChange}
-          style={{ marginTop: "100px" }}
-        >
-          {currentEvent && (
+      {!noVisitorRole && (
+        <Container>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+            onChange={handleChange}
+            style={{ marginTop: "100px" }}
+          >
+            {currentEvent && (
+              <div>
+                <h1>
+                  Register to the event "{currentEvent.name}" organized by{" "}
+                  {currentEvent.admin.name}
+                </h1>
+                <p>
+                  This event will take place in {currentEvent.place}
+                  <br />
+                  From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
+                  {dayjs(currentEvent.end_date).format("DD-MM")}
+                </p>
+              </div>
+            )}
             <div>
-              <h1>
-                Register to the event "{currentEvent.name}" organized by{" "}
-                {currentEvent.admin.name}
-              </h1>
-              <p>
-                This event will take place in {currentEvent.place}
-                <br />
-                From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
-                {dayjs(currentEvent.end_date).format("DD-MM")}
-              </p>
+              <TextField
+                required
+                id="name"
+                label="Name"
+                type="text"
+                name="name"
+              />
+              <TextField
+                required
+                id="surname"
+                label="SurName"
+                type="text"
+                name="surname"
+              />
+              <br />
+              <TextField
+                required
+                id="email"
+                label="Email"
+                type="email"
+                name="email"
+              />
+              <TextField
+                required
+                id="phone"
+                label="Phone"
+                type="text"
+                name="phone"
+              />
+              <br />
+              <FormControl sx={{ m: 1, width: "100%", maxWidth: 300 }}>
+                <InputLabel id="select-Extra Activities-label">
+                  Extra Activities
+                </InputLabel>
+                <Select
+                  labelId="select-Extra Activities-label"
+                  id="select-Extra Activities"
+                  multiple
+                  value={checkedActivities}
+                  onChange={handleActivitiesChange}
+                  input={<OutlinedInput label="Extra Activities" />}
+                  MenuProps={MenuProps}
+                  name="extra_activities"
+                >
+                  {allActivities
+                    .filter((value) => {
+                      return value.event._id === body.event;
+                    })
+                    .filter((value) => {
+                      if (value.role !== null) {
+                        return value.role._id !== roleId;
+                      }
+                    })
+                    .map((value) => {
+                      return (
+                        <MenuItem key={value._id} value={value._id}>
+                          <Checkbox
+                            checked={checkedActivities.indexOf(value._id) > -1}
+                          />
+                          {value.name} {value.price}€
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+              </FormControl>
             </div>
-          )}
-          <div>
-            <TextField
-              required
-              id="name"
-              label="Name"
-              type="text"
-              name="name"
-            />
-            <TextField
-              required
-              id="surname"
-              label="SurName"
-              type="text"
-              name="surname"
-            />
-            <br />
-            <TextField
-              required
-              id="email"
-              label="Email"
-              type="email"
-              name="email"
-            />
-            <TextField
-              required
-              id="phone"
-              label="Phone"
-              type="text"
-              name="phone"
-            />
-            <br />
-            <FormControl sx={{ m: 1, width: "100%", maxWidth: 300 }}>
-              <InputLabel id="select-Extra Activities-label">
-                Extra Activities
-              </InputLabel>
-              <Select
-                labelId="select-Extra Activities-label"
-                id="select-Extra Activities"
-                multiple
-                value={checkedActivities}
-                onChange={handleActivitiesChange}
-                input={<OutlinedInput label="Extra Activities" />}
-                MenuProps={MenuProps}
-                name="extra_activities"
-              >
-                {allActivities
-                  .filter((value) => {
-                    return value.event._id === body.event;
-                  })
-                  .filter((value) => {
-                    if (value.role !== null) {
-                      return value.role._id !== body.role;
-                    }
-                  })
-                  .map((value) => {
-                    return (
-                      <MenuItem key={value._id} value={value._id}>
-                        <Checkbox
-                          checked={checkedActivities.indexOf(value._id) > -1}
-                        />
-                        {value.name} {value.price}€
-                      </MenuItem>
-                    );
-                  })}
-              </Select>
-            </FormControl>
-          </div>
-          <div>Total attendance amount : {total}€</div>
+            <div>Total attendance amount : {total}€</div>
 
-          <Link to="#">
-            <Button variant="contained" onClick={handleSubmit}>
-              Proceed to Checkout
-            </Button>
-          </Link>
-          {/* <RegisterSnackbar body={body}></RegisterSnackbar> */}
-        </Box>
-      </Container>
+            <Link to="#">
+              <Button variant="contained" onClick={handleSubmit}>
+                Proceed to Checkout
+              </Button>
+            </Link>
+          </Box>
+        </Container>
+      )}
+      {noVisitorRole && (
+        <Container>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+            onChange={handleChange}
+            style={{ marginTop: "100px" }}
+          >
+            {currentEvent && (
+              <div>
+                <h1>Public registration for this event is not oppen yet</h1>
+                <p>Please comme back later...</p>
+              </div>
+            )}
+          </Box>
+        </Container>
+      )}
     </>
   );
 }
