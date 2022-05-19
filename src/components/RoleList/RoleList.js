@@ -44,7 +44,7 @@ function RoleList({ roles, fetchAndSet }) {
 
   return (
     <div>
-      <div style={{ height: 400, width: "100%" }}>
+      <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
