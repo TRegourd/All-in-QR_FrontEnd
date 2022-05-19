@@ -233,7 +233,6 @@ export default function Register() {
                 Proceed to Checkout
               </Button>
             </Link>
-            {/* <RegisterSnackbar body={body}></RegisterSnackbar> */}
           </Box>
         </Container>
       )}

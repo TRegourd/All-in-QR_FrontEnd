@@ -170,7 +170,11 @@ export default function EventDetailsAndTab() {
       <TabPanel value={value} index={1}>
         <h2>Roles</h2>
         <AddRoles fetchAndSet={fetchAndSet} />
-        <RoleList roles={roles} fetchAndSet={fetchAndSet} />
+        <RoleList
+          roles={roles}
+          fetchAndSet={fetchAndSet}
+          activities={activities}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <h2>Activities</h2>

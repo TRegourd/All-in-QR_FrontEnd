@@ -13,6 +13,10 @@ const ActivitiesServices = {
     return base.get(`/activities/${id}`);
   },
 
+  listActivitiesByRole(id) {
+    return base.post(`/activities/byRole`, id);
+  },
+
   deleteActivities(body) {
     return base.post(`/activities/delete`, body);
   },
