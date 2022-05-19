@@ -19,11 +19,7 @@ export default function AllEventsHeader() {
           </Button>
         </Link>
         <Link to="contact" smooth>
-          <Button
-            className="btns outlined"
-            onClick={console.log("hey")}
-            variant="outlined"
-          >
+          <Button className="btns outlined" variant="outlined">
             CONTACT US
           </Button>
         </Link>

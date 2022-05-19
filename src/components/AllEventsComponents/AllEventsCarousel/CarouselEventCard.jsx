@@ -4,7 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
-import { BsInfoCircle } from "react-icons/bs";
+import { MdPlace } from "react-icons/md";
+import { FaCalendarAlt } from "react-icons/fa";
 import afterwork from "../../../assets/afterwork.jpg";
 import concert from "../../../assets/concert.jpg";
 import conference from "../../../assets/conference.jpg";
@@ -34,7 +35,7 @@ export default function CarouselEventCard({ event }) {
           component="img"
           image={imgSrc()}
           alt="cover img"
-          sx={{ height: "25vh" }}
+          sx={{ height: "20vh" }}
         />
         <CardContent className="cardContentContainer">
           <Typography gutterBottom variant="h5" component="div">
@@ -42,11 +43,14 @@ export default function CarouselEventCard({ event }) {
           </Typography>
           <div className="cardDescContainer">
             <Typography variant="body3">
-              <b>{event.place}</b>
+              <b>
+                <MdPlace />
+                {event.place}
+              </b>
             </Typography>
             <Typography variant="body3">
-              <span>Du {dayjs(event.start_date).format("DD-MM-YY")}</span>
-              <span> au {dayjs(event.end_date).format("DD-MM-YY")}</span>
+              <FaCalendarAlt />
+              <span>{dayjs(event.start_date).format("DD-MM-YY")}</span>
             </Typography>
           </div>
         </CardContent>
