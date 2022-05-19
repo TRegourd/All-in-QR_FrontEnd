@@ -6,9 +6,6 @@ import ActivitiesServices from "./services/activities";
 export const CheckoutContext = createContext(null);
 
 export default function CheckoutProvider({ children }) {
-  const baseURL = process.env.REACT_APP_API_URL;
-  const base = axios.create({ baseURL });
-
   const [total, setTotal] = useState(0);
 
   const [defaultActivities, setDefaultAcitivites] = useState();

@@ -1,23 +1,23 @@
-import { Button } from "@mui/material";
 import React from "react";
-
-import "./HeaderVideo.css";
-import HomeVideo from "../../../assets/video.mp4";
+import "./AllEventsHeader.css";
+import BgImage from "../../../assets/backgroundEvents.jpeg";
 import Link from "react-scroll/modules/components/Link";
-import { Link as RouterLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
-function HeaderVideo() {
+export default function AllEventsHeader() {
   return (
     <div className="header-container">
-      <video src={HomeVideo} autoPlay loop muted />
+      <img className="bg-image" src={BgImage}></img>
+      {/* <video src={HomeVideo} autoPlay loop muted /> */}
       <h1>All in QR</h1>
-      <p>Make your events management easier</p>
+      <p>Explore the Amazing Featured Events</p>
       <div className="header-btns">
-        <RouterLink to="login">
+        <Button className="btns"></Button>
+        <Link to="events" smooth>
           <Button className="btns contained" variant="contained">
-            GET STARTED
+            Explore
           </Button>
-        </RouterLink>
+        </Link>
         <Link to="contact" smooth>
           <Button className="btns outlined" variant="outlined">
             CONTACT US
@@ -27,5 +27,3 @@ function HeaderVideo() {
     </div>
   );
 }
-
-export default HeaderVideo;

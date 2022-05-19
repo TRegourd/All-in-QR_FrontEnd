@@ -12,6 +12,8 @@ export default function CheckoutForm() {
   const elements = useElements();
   const { total, checkoutBody } = useContext(CheckoutContext);
 
+  console.log(checkoutBody);
+
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 

@@ -73,7 +73,7 @@ function Dashboard() {
             );
         })}
       </EventsContainer>
-      <EventTitle>Events to come</EventTitle>
+      <EventTitle>Upcoming Events</EventTitle>
       <EventsContainer>
         {events.map((event) => {
           if (
@@ -97,7 +97,7 @@ function Dashboard() {
             );
         })}
       </EventsContainer>
-      <EventTitle>Finished events</EventTitle>
+      <EventTitle>Finished Events</EventTitle>
       <EventsContainer>
         {events.map((event) => {
           if (
