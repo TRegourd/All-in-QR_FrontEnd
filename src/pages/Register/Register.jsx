@@ -36,11 +36,17 @@ export default function Register() {
   const navigate = useNavigate();
   const params = useParams();
   const [allRoles, setAllRoles] = useState();
+  let noVisitorRole;
 
   let roleId;
   if (params.roleId === "visitor") {
     if (allRoles) {
-      roleId = allRoles.find((el) => el.name === params.roleId)._id;
+      let isVisitor = allRoles.find((el) => el.name === params.roleId);
+      if (isVisitor) {
+        roleId = isVisitor._id;
+      } else {
+        noVisitorRole = true;
+      }
     }
   } else {
     roleId = params.roleId;
@@ -127,108 +133,131 @@ export default function Register() {
 
   return (
     <>
-      <Container>
-        <Box
-          component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-          onChange={handleChange}
-          style={{ marginTop: "100px" }}
-        >
-          {currentEvent && (
+      {!noVisitorRole && (
+        <Container>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+            onChange={handleChange}
+            style={{ marginTop: "100px" }}
+          >
+            {currentEvent && (
+              <div>
+                <h1>
+                  Register to the event "{currentEvent.name}" organized by{" "}
+                  {currentEvent.admin.name}
+                </h1>
+                <p>
+                  This event will take place in {currentEvent.place}
+                  <br />
+                  From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
+                  {dayjs(currentEvent.end_date).format("DD-MM")}
+                </p>
+              </div>
+            )}
             <div>
-              <h1>
-                Register to the event "{currentEvent.name}" organized by{" "}
-                {currentEvent.admin.name}
-              </h1>
-              <p>
-                This event will take place in {currentEvent.place}
-                <br />
-                From {dayjs(currentEvent.start_date).format("DD-MM")} to{" "}
-                {dayjs(currentEvent.end_date).format("DD-MM")}
-              </p>
+              <TextField
+                required
+                id="name"
+                label="Name"
+                type="text"
+                name="name"
+              />
+              <TextField
+                required
+                id="surname"
+                label="SurName"
+                type="text"
+                name="surname"
+              />
+              <br />
+              <TextField
+                required
+                id="email"
+                label="Email"
+                type="email"
+                name="email"
+              />
+              <TextField
+                required
+                id="phone"
+                label="Phone"
+                type="text"
+                name="phone"
+              />
+              <br />
+              <FormControl sx={{ m: 1, width: "100%", maxWidth: 300 }}>
+                <InputLabel id="select-Extra Activities-label">
+                  Extra Activities
+                </InputLabel>
+                <Select
+                  labelId="select-Extra Activities-label"
+                  id="select-Extra Activities"
+                  multiple
+                  value={checkedActivities}
+                  onChange={handleActivitiesChange}
+                  input={<OutlinedInput label="Extra Activities" />}
+                  MenuProps={MenuProps}
+                  name="extra_activities"
+                >
+                  {allActivities
+                    .filter((value) => {
+                      return value.event._id === body.event;
+                    })
+                    .filter((value) => {
+                      if (value.role !== null) {
+                        return value.role._id !== roleId;
+                      }
+                    })
+                    .map((value) => {
+                      return (
+                        <MenuItem key={value._id} value={value._id}>
+                          <Checkbox
+                            checked={checkedActivities.indexOf(value._id) > -1}
+                          />
+                          {value.name} {value.price}€
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+              </FormControl>
             </div>
-          )}
-          <div>
-            <TextField
-              required
-              id="name"
-              label="Name"
-              type="text"
-              name="name"
-            />
-            <TextField
-              required
-              id="surname"
-              label="SurName"
-              type="text"
-              name="surname"
-            />
-            <br />
-            <TextField
-              required
-              id="email"
-              label="Email"
-              type="email"
-              name="email"
-            />
-            <TextField
-              required
-              id="phone"
-              label="Phone"
-              type="text"
-              name="phone"
-            />
-            <br />
-            <FormControl sx={{ m: 1, width: "100%", maxWidth: 300 }}>
-              <InputLabel id="select-Extra Activities-label">
-                Extra Activities
-              </InputLabel>
-              <Select
-                labelId="select-Extra Activities-label"
-                id="select-Extra Activities"
-                multiple
-                value={checkedActivities}
-                onChange={handleActivitiesChange}
-                input={<OutlinedInput label="Extra Activities" />}
-                MenuProps={MenuProps}
-                name="extra_activities"
-              >
-                {allActivities
-                  .filter((value) => {
-                    return value.event._id === body.event;
-                  })
-                  .filter((value) => {
-                    if (value.role !== null) {
-                      return value.role._id !== roleId;
-                    }
-                  })
-                  .map((value) => {
-                    return (
-                      <MenuItem key={value._id} value={value._id}>
-                        <Checkbox
-                          checked={checkedActivities.indexOf(value._id) > -1}
-                        />
-                        {value.name} {value.price}€
-                      </MenuItem>
-                    );
-                  })}
-              </Select>
-            </FormControl>
-          </div>
-          <div>Total attendance amount : {total}€</div>
+            <div>Total attendance amount : {total}€</div>
 
-          <Link to="#">
-            <Button variant="contained" onClick={handleSubmit}>
-              Proceed to Checkout
-            </Button>
-          </Link>
-          {/* <RegisterSnackbar body={body}></RegisterSnackbar> */}
-        </Box>
-      </Container>
+            <Link to="#">
+              <Button variant="contained" onClick={handleSubmit}>
+                Proceed to Checkout
+              </Button>
+            </Link>
+            {/* <RegisterSnackbar body={body}></RegisterSnackbar> */}
+          </Box>
+        </Container>
+      )}
+      {noVisitorRole && (
+        <Container>
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+            onChange={handleChange}
+            style={{ marginTop: "100px" }}
+          >
+            {currentEvent && (
+              <div>
+                <h1>Public registration for this event is not oppen yet</h1>
+                <p>Please comme back later...</p>
+              </div>
+            )}
+          </Box>
+        </Container>
+      )}
     </>
   );
 }
