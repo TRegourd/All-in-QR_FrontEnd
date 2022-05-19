@@ -121,6 +121,19 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
         }
       },
     },
+    {
+      field: "QRsent",
+      headerName: "QR Code",
+      width: 150,
+      editable: false,
+      valueGetter: (params) => {
+        if (params.row.QRsent === true) {
+          return "Envoyé";
+        } else {
+          return "Non envoyé";
+        }
+      },
+    },
   ];
 
   const rows = attendees.map((attendee) => ({
