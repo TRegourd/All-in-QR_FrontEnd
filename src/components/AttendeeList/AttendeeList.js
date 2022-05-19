@@ -164,10 +164,10 @@ function AttendeeList({ attendees, fetchAndSet, roles }) {
 
   return (
     <div>
-      <div style={{ height: 400, width: "100%" }}>
+      <div style={{ height: "70vh", width: "100%" }}>
         <Box
           sx={{
-            height: 400,
+            height: "100%",
             width: 1,
             "& .true": {
               backgroundColor: "#2ECC71",
