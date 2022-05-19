@@ -14,7 +14,8 @@
   justify-content: center;
 }
 
-p {
+.topCarousel > p,
+.botCarousel > p {
   margin-left: 8px;
   color: rgba(255, 255, 255, 0.8);
   font-size: 20px;
