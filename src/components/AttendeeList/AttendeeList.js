@@ -20,8 +20,7 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  console.log(activities);
-  console.log(editedField);
+  activities;
 
   function SelectEditInputCell(props) {
     const { id, value, field } = props;

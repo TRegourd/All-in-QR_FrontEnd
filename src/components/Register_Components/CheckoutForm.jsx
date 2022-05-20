@@ -13,8 +13,6 @@ export default function CheckoutForm() {
   const elements = useElements();
   const { total, checkoutBody } = useContext(CheckoutContext);
 
-  console.log(checkoutBody);
-
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,14 +57,6 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(true);
-
-    // AttendeesServices.createAttendees(checkoutBody)
-    //   .then(() => {
-    //     console.log("successfully created");
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
 
     const result = await stripe.confirmPayment({
       elements,

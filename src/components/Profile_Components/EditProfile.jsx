@@ -39,7 +39,6 @@ export default function EditProfile({ currentUser, fetchAndSetCurrentUser }) {
     authServices
       .editCurrentUser(form)
       .then(() => {
-        console.log("successfully edited");
         fetchAndSetCurrentUser();
         setOpen(false);
       })
