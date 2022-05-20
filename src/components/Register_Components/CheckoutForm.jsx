@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { CheckoutContext } from "../../CheckoutProvider";
 import AttendeesServices from "../../services/attendees";
+import { Typography } from "@mui/material";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -94,7 +95,9 @@ export default function CheckoutForm() {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <div>Total : {total}€</div>
+      <Typography variant="h5" sx={{ paddingBottom: "10px" }}>
+        Total : {total}€
+      </Typography>
       <PaymentElement id="payment-element" />
       <button
         disabled={isLoading || !stripe || !elements}

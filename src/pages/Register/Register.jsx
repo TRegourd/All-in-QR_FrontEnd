@@ -19,6 +19,7 @@ import dayjs from "dayjs";
 import { CheckoutContext } from "../../CheckoutProvider";
 import RolesServices from "../../services/roles";
 import RegisterEventCard from "./RegisterEventCard";
+import RegisterCard from "./RegisterCard";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -32,8 +33,14 @@ const MenuProps = {
 };
 
 export default function Register() {
-  const { total, setDefaultAcitivites, setExtraActivities, setCheckoutBody } =
-    useContext(CheckoutContext);
+  const {
+    total,
+    defaultActivities,
+    setDefaultAcitivites,
+    extraActivities,
+    setExtraActivities,
+    setCheckoutBody,
+  } = useContext(CheckoutContext);
   const navigate = useNavigate();
   const params = useParams();
   const [allRoles, setAllRoles] = useState();
@@ -118,12 +125,22 @@ export default function Register() {
   }
 
   function handleSubmit() {
-    AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
-      if (!result.data) {
-        setCheckoutBody({ ...body, role: roleId });
-        navigate("/payment");
+    AttendeesServices.getAttendeesList(params.eventId).then((attendeeList) => {
+      if (currentEvent.max_attendees > attendeeList.length) {
+        AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
+          if (!result.data) {
+            if (body.email && body.name && body.surname && body.phone) {
+              setCheckoutBody({ ...body, role: roleId });
+              navigate("/payment");
+            } else {
+              alert("Incorrect Entry");
+            }
+          } else {
+            alert("Attendee Already exists");
+          }
+        });
       } else {
-        alert("Attendee Already exists");
+        alert("Limit Reached");
       }
     });
   }
@@ -143,16 +160,17 @@ export default function Register() {
               <RegisterEventCard event={currentEvent} />
             </EventContainer>
           )}
-          <FormContainer>
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
-              }}
-              noValidate
-              autoComplete="off"
-              onChange={handleChange}
-            >
+
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+            onChange={handleChange}
+          >
+            <FormContainer>
               <div>
                 <TextField
                   required
@@ -222,15 +240,23 @@ export default function Register() {
                   </Select>
                 </FormControl>
               </div>
-              <div>Total attendance amount : {total}€</div>
+              <CardContainer>
+                {defaultActivities && (
+                  <RegisterCard
+                    total={total}
+                    defaultActivities={defaultActivities}
+                    extraActivities={extraActivities}
+                  />
+                )}
+              </CardContainer>
 
               <Link to="#">
                 <Button variant="contained" onClick={handleSubmit}>
                   Proceed to Checkout
                 </Button>
               </Link>
-            </Box>
-          </FormContainer>
+            </FormContainer>
+          </Box>
         </Container>
       )}
       {noVisitorRole && (
@@ -267,14 +293,21 @@ const Container = styled.div`
   align-items: flex-start;
   justify-content: center;
   margin-top: 1rem;
+  margin-left: 1rem;
 `;
 
 const EventContainer = styled.div`
   width: 80vw;
   text-align: center;
-  position: relative;
 `;
 
 const FormContainer = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const CardContainer = styled.div`
+  width: 80%;
 `;

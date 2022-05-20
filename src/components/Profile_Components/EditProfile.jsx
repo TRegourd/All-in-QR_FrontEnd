@@ -62,7 +62,7 @@ export default function EditProfile({ currentUser, fetchAndSetCurrentUser }) {
             autoFocus
             margin="dense"
             label="Company Name"
-            name="companyName"
+            name="name"
             type="text"
             fullWidth
             variant="standard"
