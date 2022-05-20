@@ -127,7 +127,7 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
     {
       field: "present",
       headerName: "Présence",
-      width: 75,
+      width: 80,
       editable: false,
       valueGetter: (params) => {
         if (params.row.present === true) {
