@@ -20,8 +20,6 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
 
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  activities;
-
   function SelectEditInputCell(props) {
     const { id, value, field } = props;
     const apiRef = useGridApiContext();
