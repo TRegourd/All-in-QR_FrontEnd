@@ -169,7 +169,6 @@ export default function EventDetailsAndTab() {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <h2>Roles</h2>
         <AddRoles fetchAndSet={fetchAndSet} />
         <RoleList
           roles={roles}
@@ -178,7 +177,6 @@ export default function EventDetailsAndTab() {
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <h2>Activities</h2>
         <AddACtivities fetchAndSet={fetchAndSet} roles={roles} />
         <ActivitiesList
           activities={activities}
@@ -187,7 +185,6 @@ export default function EventDetailsAndTab() {
         />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <h2>Attendees</h2>
         <AttendeesFormContainer>
           <FormAdd
             fetchAndSet={fetchAndSet}
@@ -196,7 +193,7 @@ export default function EventDetailsAndTab() {
             eventData={eventData}
             attendees={attendees}
           />
-          <p>OR</p>
+
           <AttendeeEmailForm roles={roles} />
         </AttendeesFormContainer>
         <AttendeeList

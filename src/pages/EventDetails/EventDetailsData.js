@@ -47,17 +47,21 @@ export default function EventDetailsData({
         <CardContent
           sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
         >
-          <Typography variant="h4" color="text.secondary" gutterBottom>
-            {eventData.type}
-          </Typography>
-          <Typography variant="h2" component="div">
+          <CardMedia
+            component="img"
+            height="500"
+            image={eventData.background_image}
+            alt="cover img"
+          />
+
+          <Typography variant="h4" component="div">
             {eventData.name}
           </Typography>
-          <Typography variant="h4" component="div">
+          <Typography variant="h5" component="div">
             Code évènement : {eventData.uid}
           </Typography>
 
-          <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="h5">
+          <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="body5">
             {eventData.desc}
           </Typography>
           <Typography variant="body1">
@@ -81,9 +85,9 @@ export default function EventDetailsData({
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           gap: "1rem",
-          justifyContent: "space-evenly",
+          justifyContent: "flex-start",
         }}
       >
         <Card sx={{ minWidth: 275 }}>

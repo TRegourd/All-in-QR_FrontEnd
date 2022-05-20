@@ -41,19 +41,17 @@ function NavbarNew() {
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <Link to="/" className="nav-links" onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link
-                to="/allEvents"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
                 All Events
               </Link>
             </li>
+
+            {/* {logged && (
+              <li className="nav-item">
+                <Link to="/pro" className="nav-links" onClick={closeMobileMenu}>
+                  Pro Home
+                </Link>
+              </li>
+            )} */}
 
             {logged && (
               <li className="nav-item">
@@ -85,13 +83,13 @@ function NavbarNew() {
                   className="nav-links-mobile"
                   onClick={closeMobileMenu}
                 >
-                  Sign Up
+                  Sign Up as Pro
                 </Link>
               </li>
             )}
           </ul>
           {button && !logged && (
-            <Button buttonStyle="btn--outline">SIGN UP</Button>
+            <Button buttonStyle="btn--outline">SIGN UP AS PRO</Button>
           )}
         </div>
       </nav>
