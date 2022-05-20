@@ -109,7 +109,6 @@ export default function AddACtivities({ fetchAndSet, roles }) {
             </div>
             <div>
               <TextField
-                required
                 id="outlined-duration"
                 label="Duration"
                 name="duration"
@@ -125,7 +124,6 @@ export default function AddACtivities({ fetchAndSet, roles }) {
             </div>
             <div>
               <TextField
-                required
                 id="outlined-desc"
                 label="Description"
                 name="desc"

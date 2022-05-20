@@ -84,15 +84,17 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
       editable: true,
       type: "dateTime",
     },
+
     {
-      field: "duration",
-      headerName: "Duration",
+      field: "price",
+      headerName: "Price",
       width: 150,
       editable: true,
     },
     {
-      field: "price",
-      headerName: "Price",
+      field: "roleName",
+      headerName: "Role",
+      renderEditCell: renderSelectEditInputCell,
       width: 150,
       editable: true,
     },
@@ -103,9 +105,8 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
       editable: true,
     },
     {
-      field: "roleName",
-      headerName: "Role",
-      renderEditCell: renderSelectEditInputCell,
+      field: "duration",
+      headerName: "Duration",
       width: 150,
       editable: true,
     },
