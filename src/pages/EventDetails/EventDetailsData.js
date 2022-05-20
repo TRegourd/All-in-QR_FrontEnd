@@ -14,7 +14,13 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import Revenue from "../../components/revenue/Revenue";
 import CardMedia from "@mui/material/CardMedia";
+
 import { FaUsers } from "react-icons/fa";
+
+import afterwork from "../../assets/afterwork.jpg";
+import concert from "../../assets/concert.jpg";
+import conference from "../../assets/conference.jpg";
+
 
 export default function EventDetailsData({
   eventData,
@@ -36,6 +42,24 @@ export default function EventDetailsData({
   }));
 
   const normalise = (attendees.length * 100) / eventData.max_attendees;
+
+  function imgSrc() {
+    if (
+      eventData.background_image === undefined ||
+      eventData.background_image === ""
+    ) {
+      if (eventData.type === "concert") {
+        return concert;
+      } else if (eventData.type === "afterwork") {
+        return afterwork;
+      } else if (eventData.type === "conference") {
+        return conference;
+      }
+    } else {
+      return eventData.background_image;
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -51,7 +75,7 @@ export default function EventDetailsData({
           <CardMedia
             component="img"
             height="500"
-            image={eventData.background_image}
+            image={imgSrc()}
             alt="cover img"
           />
 
