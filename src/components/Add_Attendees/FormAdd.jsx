@@ -17,6 +17,9 @@ import {
 import AttendeesServices from "../../services/attendees";
 import ActivitiesServices from "../../services/activities";
 
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -52,6 +55,10 @@ export default function FormAdd({
     event: params.eventID,
   });
 
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
+
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
     handleBodyChange(event);
@@ -67,10 +74,18 @@ export default function FormAdd({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    AttendeesServices.createAttendees(body).then((result) => {
-      fetchAndSet(params.eventID);
-      setOpen(false);
-    });
+    AttendeesServices.createAttendees(body)
+      .then((result) => {
+        fetchAndSet(params.eventID);
+        setOpen(false);
+        setSnackbar({
+          children: "attendee sucessfully added",
+          severity: "success",
+        });
+      })
+      .catch(() =>
+        setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+      );
   };
 
   const updateBody = (key, value) => {
@@ -201,6 +216,17 @@ export default function FormAdd({
           <Button onClick={handleSubmit}>Envoyer</Button>
         </DialogActions>
       </Dialog>
+
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
+      )}
     </div>
   );
 }

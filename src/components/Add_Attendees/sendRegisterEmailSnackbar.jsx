@@ -61,7 +61,7 @@ export default function SendRegisterEmailSnackbar({ body, handleCloseForm }) {
         </Snackbar>
       )}
       {!signed && (
-        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
             Incorrect Entry !
           </Alert>

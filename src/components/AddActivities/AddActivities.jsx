@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 import { useParams } from "react-router-dom";
 import ActivitiesServices from "../../services/activities";
@@ -22,6 +24,10 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 export default function AddACtivities({ fetchAndSet, roles }) {
   let params = useParams();
+
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   const [open, setOpen] = useState(false);
 
@@ -44,10 +50,18 @@ export default function AddACtivities({ fetchAndSet, roles }) {
   };
 
   const handleSubmit = (e) => {
-    ActivitiesServices.createActivities(body).then((result) => {
-      fetchAndSet(params.eventID);
-      setOpen(false);
-    });
+    ActivitiesServices.createActivities(body)
+      .then((result) => {
+        fetchAndSet(params.eventID);
+        setOpen(false);
+        setSnackbar({
+          children: "activity sucessfully added",
+          severity: "success",
+        });
+      })
+      .catch(() =>
+        setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+      );
   };
 
   const handleRoleChange = (event) => {
@@ -159,6 +173,17 @@ export default function AddACtivities({ fetchAndSet, roles }) {
           <Button onClick={handleSubmit}>Envoyer</Button>
         </DialogActions>
       </Dialog>
+
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
+      )}
     </div>
   );
 }

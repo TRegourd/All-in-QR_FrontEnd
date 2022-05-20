@@ -1,14 +1,19 @@
 import { useParams } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useState } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 import DeleteRole from "../DeleteRole/DeleteRole";
-
 import RolesServices from "../../services/roles";
 
 function RoleList({ roles, fetchAndSet, activities }) {
   let params = useParams();
   const [editedField, setEditedField] = useState({});
+
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   const columns = [
     {
@@ -29,7 +34,7 @@ function RoleList({ roles, fetchAndSet, activities }) {
     ...role,
     id: role._id,
     activities: activities
-      .filter((el) => el.role._id === role._id)
+      .filter((el) => (el.role === null ? "" : el.role._id === role._id))
       .map((activity) => {
         return activity.name;
       }),
@@ -48,8 +53,14 @@ function RoleList({ roles, fetchAndSet, activities }) {
       RolesServices.modifyRoles(editedField.id, body)
         .then(() => {
           fetchAndSet(params.eventID);
+          setSnackbar({
+            children: "role sucessfully modified",
+            severity: "success",
+          });
         })
-        .catch(() => alert("erreur"));
+        .catch(() =>
+          setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+        );
     }
   }
 
@@ -85,6 +96,16 @@ function RoleList({ roles, fetchAndSet, activities }) {
           fetchAndSet={fetchAndSet}
           eventID={params.eventID}
         />
+      )}
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
       )}
     </div>
   );
