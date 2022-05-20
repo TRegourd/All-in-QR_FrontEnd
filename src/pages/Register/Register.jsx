@@ -125,16 +125,22 @@ export default function Register() {
   }
 
   function handleSubmit() {
-    AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
-      if (!result.data) {
-        if (body.email && body.name && body.surname && body.phone) {
-          setCheckoutBody({ ...body, role: roleId });
-          navigate("/payment");
-        } else {
-          alert("Incorrect Entry");
-        }
+    AttendeesServices.getAttendeesList(params.eventId).then((attendeeList) => {
+      if (currentEvent.max_attendees > attendeeList.length) {
+        AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
+          if (!result.data) {
+            if (body.email && body.name && body.surname && body.phone) {
+              setCheckoutBody({ ...body, role: roleId });
+              navigate("/payment");
+            } else {
+              alert("Incorrect Entry");
+            }
+          } else {
+            alert("Attendee Already exists");
+          }
+        });
       } else {
-        alert("Attendee Already exists");
+        alert("Limit Reached");
       }
     });
   }
