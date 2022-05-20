@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import AttendeesServices from "../../services/attendees";
-import ActivitiesServices from "../../services/activities";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { FaMoneyCheckAlt } from "react-icons/fa";
 
 export default function Revenue({ attendees, activities }) {
   const [allActivities, setAllActivities] = useState(activities);
@@ -56,8 +52,18 @@ export default function Revenue({ attendees, activities }) {
   }, [defaultActivities, allExtraActivities]);
 
   return (
-    <Typography variant="body1" component="div">
-      Les revenues possibles sont de : {CA} €
+    <Typography
+      variant="body1"
+      component="div"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: "1rem",
+        justifyContent: "center",
+      }}
+    >
+      <FaMoneyCheckAlt />
+      <span>Forecast Turnover: {CA} €</span>
     </Typography>
   );
 }
