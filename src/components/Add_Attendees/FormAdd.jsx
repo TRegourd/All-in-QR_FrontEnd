@@ -97,7 +97,7 @@ export default function FormAdd({
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        créer un attendee
+        Create Attendee
       </Button>
       <Dialog
         open={open}

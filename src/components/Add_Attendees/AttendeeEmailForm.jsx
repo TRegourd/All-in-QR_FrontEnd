@@ -66,7 +66,7 @@ export default function AttendeeEmailForm({ roles }) {
         style={{ marginTop: "50px" }}
       >
         <DialogTitle>
-          créer une activité
+          Email Register Link
           {/* <pre>{JSON.stringify(body, null, 2)}</pre> */}
           <MultipleEmailsTooltip></MultipleEmailsTooltip>
         </DialogTitle>
