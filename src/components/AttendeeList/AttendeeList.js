@@ -108,7 +108,7 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
       field: "extra_activities",
       headerName: "Extra Activities",
 
-      width: 200,
+      width: 150,
       editable: true,
     },
     {
