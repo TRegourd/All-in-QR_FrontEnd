@@ -39,7 +39,7 @@ export default function DeleteAttendee({
         onClick={handleClick}
         startIcon={<DeleteIcon />}
       >
-        Supprimer
+        DELETE SELECTED ATTENDEES
       </Button>
 
       {snackbar && (

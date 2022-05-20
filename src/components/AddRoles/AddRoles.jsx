@@ -61,7 +61,7 @@ export default function AddRoles({ fetchAndSet }) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        créer un role
+        Create a Role
       </Button>
       <Dialog
         open={open}
@@ -71,7 +71,7 @@ export default function AddRoles({ fetchAndSet }) {
           "& .MuiTextField-root": { m: 1, width: 250 },
         }}
       >
-        <DialogTitle>créer le role</DialogTitle>
+        <DialogTitle>Create Role</DialogTitle>
         <DialogContent>
           <div>
             <TextField
@@ -84,7 +84,9 @@ export default function AddRoles({ fetchAndSet }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Envoyer</Button>
+          <Button onClick={handleSubmit} variant="outlined">
+            Create
+          </Button>
         </DialogActions>
       </Dialog>
 

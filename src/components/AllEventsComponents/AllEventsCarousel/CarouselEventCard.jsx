@@ -32,13 +32,13 @@ export default function CarouselEventCard({ event }) {
     <Card className="cardContainer">
       <CardActionArea>
         <CardMedia
+          className="cardImageContainer"
           component="img"
           image={imgSrc()}
           alt="cover img"
-          sx={{ height: "20vh" }}
         />
         <CardContent className="cardContentContainer">
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="body1" component="div">
             {event.name}
           </Typography>
           <div className="cardDescContainer">

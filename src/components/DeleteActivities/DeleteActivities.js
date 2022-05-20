@@ -35,7 +35,7 @@ export default function DeleteActivities({
         onClick={handleClick}
         startIcon={<DeleteIcon />}
       >
-        Supprimer
+        DELETE SELECTED ACTIVITIES
       </Button>
 
       {snackbar && (

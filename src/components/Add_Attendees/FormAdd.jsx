@@ -213,7 +213,9 @@ export default function FormAdd({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Envoyer</Button>
+          <Button onClick={handleSubmit} variant="outlined">
+            Create
+          </Button>
         </DialogActions>
       </Dialog>
 
