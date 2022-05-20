@@ -6,7 +6,6 @@ const base = axios.create({ baseURL });
 
 const contactServices = {
   createNewMessage(body) {
-    console.log(body);
     return base.post("/contact", body);
   },
 };

@@ -17,8 +17,6 @@ export default function ForgotSnackbar({ body }) {
 
   const navigate = useNavigate();
 
-  console.log(body);
-
   const wait = () => {
     return new Promise((resolve) => {
       setTimeout(() => resolve(true), 1500);

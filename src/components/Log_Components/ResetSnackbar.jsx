@@ -18,8 +18,6 @@ export default function ResetSnackbar({ body }) {
   const navigate = useNavigate();
   const props = useParams();
 
-  console.log(body);
-
   const wait = () => {
     return new Promise((resolve) => {
       setTimeout(() => resolve(true), 1500);

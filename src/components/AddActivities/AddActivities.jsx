@@ -102,6 +102,25 @@ export default function AddACtivities({ fetchAndSet, roles }) {
         <DialogTitle>Create Activity</DialogTitle>
         <DialogContent>
           <div>
+            <FormControl sx={{ m: 1, width: "100%" }}>
+              <InputLabel id="select-role-label">Role</InputLabel>
+              <Select
+                labelId="select-role-label"
+                id="select-role"
+                value={selectedRole}
+                label="Role"
+                onChange={handleRoleChange}
+                name="role"
+              >
+                {allRole.map((value) => {
+                  return (
+                    <MenuItem key={value._id} value={value._id}>
+                      {value.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
             <div>
               <TextField
                 required
@@ -143,26 +162,6 @@ export default function AddACtivities({ fetchAndSet, roles }) {
                 name="desc"
                 variant="outlined"
               />
-
-              <FormControl sx={{ m: 1, width: "100%", maxWidth: 250 }}>
-                <InputLabel id="select-role-label">Role</InputLabel>
-                <Select
-                  labelId="select-role-label"
-                  id="select-role"
-                  value={selectedRole}
-                  label="Role"
-                  onChange={handleRoleChange}
-                  name="role"
-                >
-                  {allRole.map((value) => {
-                    return (
-                      <MenuItem key={value._id} value={value._id}>
-                        {value.name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
             </div>
           </div>
         </DialogContent>

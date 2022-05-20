@@ -61,7 +61,6 @@ export default function NewEvent({ fetchAndSetEvents, currentUser }) {
 
   function handleSubmit(e) {
     const body = { ...form, ["public"]: isPublic };
-    console.log(body);
     e.preventDefault();
     authServices
       .createEvent(body)
