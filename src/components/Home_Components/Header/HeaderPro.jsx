@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-import "./HeaderVideo.css";
+import "./HeaderPro.css";
 import HomeVideo from "../../../assets/video.mp4";
 import Link from "react-scroll/modules/components/Link";
 import { Link as RouterLink } from "react-router-dom";
 
-function HeaderVideo() {
+function HeaderPro() {
   return (
     <div className="header-container">
       <video src={HomeVideo} autoPlay loop muted />
@@ -28,4 +28,4 @@ function HeaderVideo() {
   );
 }
 
-export default HeaderVideo;
+export default HeaderPro;

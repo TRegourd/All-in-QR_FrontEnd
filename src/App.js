@@ -10,7 +10,7 @@ import Signin from "./pages/Signin/Signin";
 import Register from "./pages/Register/Register";
 import EventDetailsAndTab from "./pages/EventDetails/EventDetailsAndTab";
 
-import VideoHome from "./pages/Home/VideoHome";
+import VideoHome from "./pages/Home/ProHome";
 import NavbarNew from "./components/Navbar/NavbarNew";
 import Payment from "./pages/Payment/Payment";
 import PaymentSucceed from "./pages/Payment/PaymentSucceed";
@@ -21,8 +21,8 @@ function App() {
     <>
       <NavbarNew />
       <Routes>
-        <Route element={<VideoHome />} path="/" exact />
-        <Route element={<AllEventsHome />} path="/allEvents" exact />
+        <Route element={<VideoHome />} path="/pro" exact />
+        <Route element={<AllEventsHome />} path="/" exact />
         <Route element={<Dashboard />} path="/dashboard" exact />
         <Route element={<Profile />} path="/profile" exact />
         <Route element={<Login />} path="/login" exact />
