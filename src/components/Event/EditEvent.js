@@ -19,6 +19,7 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
     place: currentEvent.place,
     desc: currentEvent.desc,
     background_image: currentEvent.background_image,
+    max_attendees: currentEvent.max_attendees,
   });
 
   function updateEvent(key, value) {
