@@ -24,7 +24,6 @@ import ActivitiesServices from "../../services/activities";
 import EventDetailsData from "./EventDetailsData";
 import ActivitiesList from "../../components/ActivitiesList/ActivitiesList";
 import AddACtivities from "../../components/AddActivities/AddActivities";
-import AttendeeListCopy from "../../components/AttendeeList/AttendeeList copy";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

@@ -14,6 +14,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import Revenue from "../../components/revenue/Revenue";
 import CardMedia from "@mui/material/CardMedia";
+import { FaUsers } from "react-icons/fa";
 
 export default function EventDetailsData({
   eventData,
@@ -58,7 +59,7 @@ export default function EventDetailsData({
             {eventData.name}
           </Typography>
           <Typography variant="h5" component="div">
-            Code évènement : {eventData.uid}
+            Event Code : {eventData.uid}
           </Typography>
 
           <Typography sx={{ mb: 1.5 }} color="text.secondary" variant="body5">
@@ -85,9 +86,9 @@ export default function EventDetailsData({
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           gap: "1rem",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
         }}
       >
         <Card sx={{ minWidth: 275 }}>
@@ -95,7 +96,7 @@ export default function EventDetailsData({
             <CardContent
               sx={{
                 display: "flex",
-                flexDirection: "column",
+                justifyContent: "center",
               }}
             >
               <Revenue attendees={attendees} activities={activities} />
@@ -104,20 +105,32 @@ export default function EventDetailsData({
         </Card>
 
         <Card sx={{ minWidth: 275 }}>
-          <CardContent sx={{ display: "flex", flexDirection: "column" }}>
-            <Typography variant="body2">
-              There is currently {attendees.length} attendees registered to this
-              event
-            </Typography>
-            <Box width={300}>
-              <BorderLinearProgress variant="determinate" value={normalise} />
-            </Box>
-            <Box sx={{ minWidth: 35 }}>
-              <Typography>
-                {`[${Math.round(normalise)}%]`} Max attendees :{" "}
-                {eventData.max_attendees}
+          <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "colum",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <FaUsers></FaUsers>
+            <Typography>
+              <Typography variant="body2">
+                <span>
+                  There is currently {attendees.length} attendees registered to
+                  this event
+                </span>
               </Typography>
-            </Box>
+              <Box width={300}>
+                <BorderLinearProgress variant="determinate" value={normalise} />
+              </Box>
+              <Box sx={{ minWidth: 35 }}>
+                <Typography>
+                  {`[${Math.round(normalise)}%]`} Max attendees :{" "}
+                  {eventData.max_attendees}
+                </Typography>
+              </Box>
+            </Typography>
           </CardContent>
         </Card>
       </Box>

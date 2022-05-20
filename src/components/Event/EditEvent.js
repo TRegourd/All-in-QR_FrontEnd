@@ -52,7 +52,7 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Modifier
+        Modify Event
       </Button>
       <Dialog open={open} onClose={handleClose} onChange={handleChangeInput}>
         <DialogTitle>Edit My Event</DialogTitle>
