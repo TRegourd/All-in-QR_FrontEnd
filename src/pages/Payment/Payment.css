@@ -130,3 +130,10 @@
     min-width: initial;
   }
 }
+
+@media only screen and (max-height: 500px) {
+  #payment-form {
+    height: 80vh;
+    min-height: initial;
+  }
+}
