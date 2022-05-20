@@ -8,11 +8,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import authServices from "../../services/auth";
 import { BsPlusLg } from "react-icons/bs";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Checkbox,
+  Switch,
+  FormControlLabel,
+} from "@mui/material";
 
 export default function NewEvent({ fetchAndSetEvents, currentUser }) {
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState("concert");
+  const [isPublic, setIsPublic] = React.useState(false);
 
   const [form, setForm] = React.useState({
     name: "",
@@ -27,6 +36,10 @@ export default function NewEvent({ fetchAndSetEvents, currentUser }) {
   function handleChangeSelect(e) {
     setType(e.target.value);
     setForm({ ...form, ["type"]: e.target.value });
+  }
+
+  function handleChangeSwitch(e) {
+    setIsPublic(e.target.checked);
   }
 
   function updateForm(key, value) {
@@ -47,11 +60,14 @@ export default function NewEvent({ fetchAndSetEvents, currentUser }) {
   };
 
   function handleSubmit(e) {
+    const body = { ...form, ["public"]: isPublic };
+    console.log(body);
     e.preventDefault();
     authServices
-      .createEvent(form)
+      .createEvent(body)
       .then(() => {
         fetchAndSetEvents();
+        setIsPublic(false);
         alert("Event created");
       })
       .catch((err) => {
@@ -144,6 +160,13 @@ export default function NewEvent({ fetchAndSetEvents, currentUser }) {
               <MenuItem value={"conference"}>Conference</MenuItem>
             </Select>
           </FormControl>
+          <FormControlLabel
+            control={<Switch />}
+            label="Evènement Public"
+            name="public"
+            onChange={handleChangeSwitch}
+            value={isPublic}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

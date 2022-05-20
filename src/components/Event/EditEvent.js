@@ -8,9 +8,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import eventServices from "../../services/Event";
 import dayjs from "dayjs";
+import { Switch, FormControlLabel } from "@mui/material";
 
 export default function EditEvent({ currentEvent, fetchEvent }) {
   const [open, setOpen] = useState(false);
+  const [isPublic, setIsPublic] = useState(false);
 
   const [body, setBody] = useState({
     name: currentEvent.name,
@@ -21,6 +23,10 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
     background_image: currentEvent.background_image,
     max_attendees: currentEvent.max_attendees,
   });
+
+  function handleChangeSwitch(e) {
+    setIsPublic(e.target.checked);
+  }
 
   function updateEvent(key, value) {
     setBody({ ...body, [key]: value });
@@ -40,8 +46,9 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
   };
 
   const handleSubmit = () => {
+    const updatedBodyAfterPublicUpdate = { ...body, ["public"]: isPublic };
     eventServices
-      .modifyOneEvent(currentEvent._id, body)
+      .modifyOneEvent(currentEvent._id, updatedBodyAfterPublicUpdate)
       .then(() => {
         alert("Event edited");
         setOpen(false);
@@ -129,6 +136,13 @@ export default function EditEvent({ currentEvent, fetchEvent }) {
             defaultValue={body.background_image}
             fullWidth
             focused
+          />
+          <FormControlLabel
+            control={<Switch />}
+            label="Evènement Public"
+            name="public"
+            onChange={handleChangeSwitch}
+            value={isPublic}
           />
         </DialogContent>
         <DialogActions>

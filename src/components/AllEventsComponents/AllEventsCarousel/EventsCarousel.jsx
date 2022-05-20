@@ -42,7 +42,8 @@ const EventCarousel = ({ deviceType }) => {
               dayjs(event.start_date).format("YYYY-MM-DD") <=
                 dayjs().format("YYYY-MM-DD") &&
               dayjs().format("YYYY-MM-DD") <=
-                dayjs(event.end_date).format("YYYY-MM-DD")
+                dayjs(event.end_date).format("YYYY-MM-DD") &&
+              event.public === true
             )
               return (
                 <div
@@ -72,7 +73,8 @@ const EventCarousel = ({ deviceType }) => {
           {events.map((event) => {
             if (
               dayjs(event.start_date).format("YYYY-MM-DD") >
-              dayjs().format("YYYY-MM-DD")
+                dayjs().format("YYYY-MM-DD") &&
+              event.public === true
             )
               return (
                 <div
