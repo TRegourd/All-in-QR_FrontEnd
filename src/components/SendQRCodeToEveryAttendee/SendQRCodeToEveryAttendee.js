@@ -34,7 +34,7 @@ export default function SendQRCodeToAll({ attendeesQR }) {
         onClick={handleClick}
         startIcon={<EmailIcon />}
       >
-        Envoyer le QR Code aux utilisateurs sélectionnés.
+        SEND QR CODE TO SELECTED ATTENDEES
       </Button>
 
       {snackbar && (

@@ -3,6 +3,7 @@
   max-width: 30vw;
   height: 100%;
   display: flex;
+
   flex-direction: column;
   align-items: center;
   background: rgb(0, 0, 0, 0.5) !important;
@@ -28,4 +29,23 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
+}
+
+.cardImageContainer {
+  height: 20vh;
+}
+
+@media screen and (max-width: 1024px) {
+  .cardImageContainer {
+    height: 15vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cardImageContainer {
+    height: 10vh;
+  }
+  .cardContentContainer {
+    font-size: 10px !important;
+  }
 }
