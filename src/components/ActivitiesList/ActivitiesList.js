@@ -6,12 +6,18 @@ import PropTypes from "prop-types";
 import Select from "@mui/material/Select";
 import { useGridApiContext } from "@mui/x-data-grid";
 import dayjs from "dayjs";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import DeleteActivities from "../DeleteActivities/DeleteActivities";
 
 export default function ActivitiesList({ activities, fetchAndSet, roles }) {
   let params = useParams();
 
   const [editedField, setEditedField] = useState({});
+
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   function SelectEditInputCell(props) {
     const { id, value, field } = props;
@@ -28,8 +34,14 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
       ActivitiesServices.modifyActivities(id, body)
         .then(() => {
           fetchAndSet(params.eventID);
+          setSnackbar({
+            children: "activity sucessfully modified",
+            severity: "success",
+          });
         })
-        .catch(() => alert("erreur"));
+        .catch(() =>
+          setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+        );
     };
 
     return (
@@ -128,12 +140,17 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
         id: editedField.id,
         [editedField.field]: event.target.value,
       };
-      console.log(body);
       ActivitiesServices.modifyActivities(editedField.id, body)
         .then(() => {
           fetchAndSet(params.eventID);
+          setSnackbar({
+            children: "activity sucessfully modified",
+            severity: "success",
+          });
         })
-        .catch(() => alert("erreur"));
+        .catch(() =>
+          setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+        );
     }
   }
 
@@ -169,6 +186,16 @@ export default function ActivitiesList({ activities, fetchAndSet, roles }) {
           fetchAndSet={fetchAndSet}
           eventID={params.eventID}
         />
+      )}
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
       )}
     </div>
   );

@@ -27,7 +27,9 @@ export default function Revenue({ attendees, activities }) {
     setDefaultActivities(
       allActivities.filter((activity) => {
         return attendees.some((attendee) => {
-          return activity.role._id === attendee.role._id;
+          return activity.role === null
+            ? ""
+            : activity.role._id === attendee.role._id;
         });
       })
     );
