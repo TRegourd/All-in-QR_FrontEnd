@@ -9,9 +9,15 @@ import {
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import RolesServices from "../../services/roles";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 export default function AddRoles({ fetchAndSet }) {
   let params = useParams();
+
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   const [open, setOpen] = useState(false);
 
@@ -30,10 +36,18 @@ export default function AddRoles({ fetchAndSet }) {
   };
 
   const handleSubmit = (e) => {
-    RolesServices.createRoles(body).then(() => {
-      fetchAndSet(params.eventID);
-      setOpen(false);
-    });
+    RolesServices.createRoles(body)
+      .then(() => {
+        fetchAndSet(params.eventID);
+        setOpen(false);
+        setSnackbar({
+          children: "role sucessfully added",
+          severity: "success",
+        });
+      })
+      .catch(() =>
+        setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+      );
   };
 
   const handleClickOpen = () => {
@@ -73,6 +87,17 @@ export default function AddRoles({ fetchAndSet }) {
           <Button onClick={handleSubmit}>Envoyer</Button>
         </DialogActions>
       </Dialog>
+
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
+      )}
     </div>
   );
 }

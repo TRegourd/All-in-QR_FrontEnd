@@ -3,16 +3,28 @@ import EmailIcon from "@mui/icons-material/Email";
 import AttendeesServices from "../../services/attendees";
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 export default function SendQRCodeToAll({ attendeesQR }) {
   const params = useParams();
 
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
+
   const handleClick = () => {
     AttendeesServices.sendQrCodeEmailToEveryone(attendeesQR)
       .then((response) => {
-        alert("Emails envoyé");
+        setSnackbar({
+          children: "QR code sent to all",
+          severity: "success",
+        });
       })
-      .catch(() => alert("erreur"));
+      .catch(() =>
+        setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+      );
   };
 
   return (
@@ -22,8 +34,19 @@ export default function SendQRCodeToAll({ attendeesQR }) {
         onClick={handleClick}
         startIcon={<EmailIcon />}
       >
-        Envoyer le QR Code à tous.
+        Envoyer le QR Code aux utilisateurs sélectionnés.
       </Button>
+
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
+      )}
     </div>
   );
 }

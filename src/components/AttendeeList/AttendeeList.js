@@ -9,10 +9,16 @@ import SendQRCodeToAll from "../SendQRCodeToEveryAttendee/SendQRCodeToEveryAtten
 import AttendeesServices from "../../services/attendees";
 import { Box } from "@mui/material";
 import { GridCellParams } from "@mui/x-data-grid";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
   let params = useParams();
   const [editedField, setEditedFiled] = useState({});
+
+  const [snackbar, setSnackbar] = useState(null);
+
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   console.log(activities);
   console.log(editedField);
@@ -30,8 +36,15 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
       const selectedRole = roles.find((e) => e.name === event.target.value);
       const body = { role: selectedRole._id };
       AttendeesServices.modifyAttendee(id, body)
-        .then(() => {})
-        .catch(() => alert("erreur"));
+        .then(() => {
+          setSnackbar({
+            children: "attendee sucessfully modified",
+            severity: "success",
+          });
+        })
+        .catch(() =>
+          setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+        );
     };
 
     return (
@@ -160,8 +173,14 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
       AttendeesServices.modifyAttendee(editedField.id, body)
         .then(() => {
           fetchAndSet(params.eventID);
+          setSnackbar({
+            children: "attendee sucessfully modified",
+            severity: "success",
+          });
         })
-        .catch(() => alert("erreur"));
+        .catch(() =>
+          setSnackbar({ children: "il y a eu une erreur", severity: "error" })
+        );
     }
   }
 
@@ -221,6 +240,17 @@ function AttendeeList({ attendees, fetchAndSet, roles, activities }) {
         />
       )}
       <SendQRCodeToAll attendeesQR={selectionModel} />
+
+      {snackbar && (
+        <Snackbar
+          open
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          onClose={handleCloseSnackbar}
+          autoHideDuration={6000}
+        >
+          <Alert {...snackbar} onClose={handleCloseSnackbar} />
+        </Snackbar>
+      )}
     </div>
   );
 }
