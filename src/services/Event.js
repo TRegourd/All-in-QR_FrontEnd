@@ -19,7 +19,12 @@ const eventServices = {
   },
 
   getOneEvent(id) {
-    return base.get("/events/" + id).then((res) => res.data);
+    const token = localStorage.getItem("jwt");
+    return base
+      .get("/events/" + id, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => res.data);
   },
 
   modifyOneEvent(id, body) {
