@@ -6,22 +6,38 @@ const base = axios.create({ baseURL });
 
 const ActivitiesServices = {
   createActivities(body) {
-    return base.post("/activities", body);
+    const token = localStorage.getItem("jwt");
+    return (
+      base.post("/activities", body),
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
   },
 
   listActivities(id) {
-    return base.get(`/activities/${id}`);
+    const token = localStorage.getItem("jwt");
+    return base.get(`/activities/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 
   listActivitiesByRole(id) {
-    return base.post(`/activities/byRole`, id);
+    const token = localStorage.getItem("jwt");
+    return base.post(`/activities/byRole`, id, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 
   deleteActivities(body) {
-    return base.post(`/activities/delete`, body);
+    const token = localStorage.getItem("jwt");
+    return base.post(`/activities/delete`, body, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
   modifyActivities(id, body) {
-    return base.put(`/activities/${id}`, body);
+    const token = localStorage.getItem("jwt");
+    return base.put(`/activities/${id}`, body, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   },
 };
 
