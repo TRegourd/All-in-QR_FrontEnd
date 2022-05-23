@@ -24,6 +24,10 @@ const eventServices = {
     return base.put(`/events/${id}`, body);
   },
 
+  addTurnover(id, body) {
+    return base.put(`/events/${id}/sum`, body);
+  },
+
   deleteOneEvent(id) {
     return base.delete("/events/" + id).then((res) => console.log(res));
   },

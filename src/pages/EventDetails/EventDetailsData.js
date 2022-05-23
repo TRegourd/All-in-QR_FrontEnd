@@ -21,7 +21,6 @@ import afterwork from "../../assets/afterwork.jpg";
 import concert from "../../assets/concert.jpg";
 import conference from "../../assets/conference.jpg";
 
-
 export default function EventDetailsData({
   eventData,
   attendees,
@@ -123,7 +122,11 @@ export default function EventDetailsData({
                 justifyContent: "center",
               }}
             >
-              <Revenue attendees={attendees} activities={activities} />
+              <Revenue
+                attendees={attendees}
+                activities={activities}
+                eventData={eventData}
+              />
             </CardContent>
           )}
         </Card>
@@ -137,7 +140,7 @@ export default function EventDetailsData({
               gap: "1rem",
             }}
           >
-            <FaUsers></FaUsers>
+            <FaUsers size={"30px"}></FaUsers>
             <Typography>
               <Typography variant="body2">
                 <span>

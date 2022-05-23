@@ -7,6 +7,7 @@ import {
 import { CheckoutContext } from "../../CheckoutProvider";
 import AttendeesServices from "../../services/attendees";
 import { Typography } from "@mui/material";
+import eventServices from "../../services/Event";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -15,6 +16,8 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(checkoutBody.event, { total: total });
 
   useEffect(() => {
     if (!stripe) {
@@ -68,6 +71,7 @@ export default function CheckoutForm() {
 
     function getReturnURL() {
       AttendeesServices.createAttendees(checkoutBody);
+      eventServices.addTurnover(checkoutBody.event, { total: total });
       return "http://localhost:3000/payment/succeed";
     }
 
