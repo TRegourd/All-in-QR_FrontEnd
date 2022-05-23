@@ -6,30 +6,18 @@ const base = axios.create({ baseURL });
 
 const RolesServices = {
   createRoles(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post("/roles", body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post("/roles", body);
   },
 
   listRoles(id) {
-    const token = localStorage.getItem("jwt");
-    return base.get(`/roles/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.get(`/roles/${id}`);
   },
 
   modifyRoles(id, body) {
-    const token = localStorage.getItem("jwt");
-    return base.put(`/roles/${id}`, body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.put(`/roles/${id}`, body);
   },
   deleteRole(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post("/roles/delete", body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post("/roles/delete", body);
   },
 };
 
