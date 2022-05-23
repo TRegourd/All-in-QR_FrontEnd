@@ -157,7 +157,6 @@ export default function Register() {
 
   return (
     <>
-      <pre>{JSON.stringify(body, null, 2)}</pre>
       {!noVisitorRole && (
         <Container>
           {currentEvent && (
