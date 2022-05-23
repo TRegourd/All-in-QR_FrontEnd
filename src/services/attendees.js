@@ -6,73 +6,41 @@ const base = axios.create({ baseURL });
 
 const AttendeesServices = {
   createAttendees(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post("/attendees", body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post("/attendees", body);
   },
 
   getAttendeesList(id) {
-    const token = localStorage.getItem("jwt");
-    return base
-      .get("/attendees/event/" + id, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => res.data);
+    return base.get("/attendees/event/" + id).then((res) => res.data);
   },
 
   getOneAttendee(id) {
-    const token = localStorage.getItem("jwt");
-    return base.get(`/attendees/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.get(`/attendees/${id}`);
   },
 
   getOneAttendeeByEmail(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post(`/attendees/email`, body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post(`/attendees/email`, body);
   },
 
   modifyAttendee(id, body) {
-    const token = localStorage.getItem("jwt");
-    return base.put(`/attendees/${id}`, body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.put(`/attendees/${id}`, body);
   },
   deleteAttendee(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post(`/attendees/delete`, body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post(`/attendees/delete`, body);
   },
 
   deleteRole(id) {
-    const token = localStorage.getItem("jwt");
-    return base.delete(`/roles/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.delete(`/roles/${id}`);
   },
   sendQrCodeEmail(id) {
-    const token = localStorage.getItem("jwt");
-    return base.post(`/qrcode/${id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post(`/qrcode/${id}`);
   },
 
   sendQrCodeEmailToEveryone(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post(`/qrcode/many/`, body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post(`/qrcode/many/`, body);
   },
 
   sendRegisterEmail(body) {
-    const token = localStorage.getItem("jwt");
-    return base.post(`/register`, body, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return base.post(`/register`, body);
   },
 };
 
