@@ -67,7 +67,6 @@ export default function Register() {
     surname: "",
     email: "",
     phone: "",
-    extra_activities: [],
     event: params.eventId,
   });
   const [currentEvent, setCurrentEvent] = useState("");
@@ -80,6 +79,7 @@ export default function Register() {
       return event.target.value.find((item) => item === el._id);
     });
     setExtraActivities(array);
+    setBody({ ...body, ["extra_activities"]: array });
     handleChange(event);
   };
 
@@ -130,7 +130,11 @@ export default function Register() {
         AttendeesServices.getOneAttendeeByEmail(body).then((result) => {
           if (!result.data) {
             if (body.email && body.name && body.surname && body.phone) {
-              setCheckoutBody({ ...body, role: roleId });
+              setCheckoutBody({
+                ...body,
+                role: roleId,
+                extra_activities: extraActivities,
+              });
               navigate("/payment");
             } else {
               alert("Incorrect Entry");
@@ -153,6 +157,7 @@ export default function Register() {
 
   return (
     <>
+      <pre>{JSON.stringify(body, null, 2)}</pre>
       {!noVisitorRole && (
         <Container>
           {currentEvent && (

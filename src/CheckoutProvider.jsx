@@ -1,7 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import ActivitiesServices from "./services/activities";
 
 export const CheckoutContext = createContext(null);
 

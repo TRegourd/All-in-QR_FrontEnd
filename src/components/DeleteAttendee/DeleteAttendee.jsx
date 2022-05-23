@@ -20,7 +20,6 @@ export default function DeleteAttendee({
 
     AttendeesServices.deleteAttendee(attendeesToDelete)
       .then((response) => {
-        console.log(response.data);
         fetchAndSet(eventID);
         setSnackbar({
           children: "attendee sucessfully deleted",
